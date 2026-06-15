@@ -361,49 +361,57 @@ body {
 .footer a { color: var(--gray-light); text-decoration: none; transition: var(--transition); }
 .footer a:hover { color: var(--emerald); }
 
-/* ===== Photography Showcase ===== */
-.photo-showcase { position: relative; }
-.photo-panel {
-  height: 100vh; width: 100%;
-  background-size: cover; background-position: center;
-  background-attachment: fixed;
-  position: relative;
-  display: flex; align-items: flex-end;
-  cursor: none;
+/* ===== Photography Gallery ===== */
+.photo-section { padding: 100px 0 60px; background: #fafafa; }
+.photo-gallery {
+  display: flex; gap: 20px; overflow-x: auto;
+  padding: 20px 60px 40px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  cursor: grab;
 }
-.photo-panel::after {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(0deg, rgba(0,0,0,0.45) 0%, transparent 40%, transparent 70%, rgba(0,0,0,0.1) 100%);
-  pointer-events: none;
-  transition: opacity 0.6s;
+.photo-gallery:active { cursor: grabbing; }
+.photo-gallery::-webkit-scrollbar { height: 6px; }
+.photo-gallery::-webkit-scrollbar-track { background: transparent; }
+.photo-gallery::-webkit-scrollbar-thumb { background: #d0d0d0; border-radius: 3px; }
+.photo-gallery::-webkit-scrollbar-thumb:hover { background: var(--emerald); }
+
+.photo-card {
+  flex-shrink: 0; width: 340px;
+  scroll-snap-align: start;
+  transition: transform 0.35s ease;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.photo-caption {
-  position: relative; z-index: 2;
-  padding: 0 60px 60px;
-  color: #fff; font-size: 13px; letter-spacing: 0.12em;
-  opacity: 0; transform: translateY(20px);
-  transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
-  font-weight: 300;
+.photo-card:hover { transform: translateY(-6px); }
+.photo-card-image {
+  width: 100%; height: 480px; overflow: hidden;
+  background: #e8e8e8;
 }
-.photo-caption .en-quote {
-  display: block; font-family: "Playfair Display", Georgia, serif;
-  font-size: 28px; font-style: italic; letter-spacing: 0.04em; margin-bottom: 8px;
+.photo-card-image img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.5s ease;
 }
-.photo-panel.visible .photo-caption {
-  opacity: 1; transform: translateY(0);
+.photo-card:hover .photo-card-image img { transform: scale(1.04); }
+.photo-card-label {
+  font-size: 11px; letter-spacing: 0.06em; color: var(--gray-light);
+  padding: 0 4px;
 }
-/* Custom cursor */
-.photo-cursor {
-  position: fixed; pointer-events: none; z-index: 9999;
-  width: 80px; height: 80px; border-radius: 50%;
-  border: 1.5px solid rgba(255,255,255,0.7);
-  transform: translate(-50%, -50%);
-  display: flex; align-items: center; justify-content: center;
-  color: #fff; font-size: 10px; letter-spacing: 0.1em;
-  opacity: 0; transition: opacity 0.3s;
-  mix-blend-mode: difference;
+/* Gallery drag hint */
+.photo-gallery-hint {
+  text-align: center; font-size: 11px; letter-spacing: 0.08em;
+  color: var(--gray-light); margin-top: 8px;
+  animation: hintPulse 2s ease-in-out infinite;
 }
-.photo-cursor.active { opacity: 1; }
+@keyframes hintPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  .photo-card { width: 260px; }
+  .photo-card-image { height: 360px; }
+  .photo-gallery { padding: 16px 24px 32px; }
+}
 
 /* ===== Fade-in Animation ===== */
 .fade-in {
@@ -566,56 +574,6 @@ body {
   </div>
 </section>
 
-<!-- ==================== PHOTOGRAPHY SHOWCASE ==================== -->
-<section class="photo-showcase" id="photography">
-  <div class="photo-cursor" id="photoCursor">VIEW</div>
-
-  <div class="photo-intro fade-in" style="height:60vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0 24px;">
-    <div class="section-label" style="color:var(--emerald);">Photography</div>
-    <h2 style="font-size:clamp(28px,4vw,42px); font-weight:700; margin:16px 0; color:var(--black);">用镜头记录光影</h2>
-    <p style="font-size:16px; color:var(--gray); max-width:480px; line-height:1.8;">
-      摄影于我，是对时间的凝固——捕捉那些转瞬即逝的真实与美。
-    </p>
-  </div>
-
-  <div class="photo-panel fade-in" style="background-image: url('images/photo-compressed/微信图片_20260615154549_22_11.jpg');">
-    <div class="photo-caption">
-      <span class="en-quote">"Light makes photography. Embrace light."</span>
-      光影是摄影的靈魂
-    </div>
-  </div>
-  <div class="photo-panel fade-in" style="background-image: url('images/photo-compressed/微信图片_20260615155533_25_11.jpg');">
-    <div class="photo-caption">
-      <span class="en-quote">"A photograph is a secret about a secret."</span>
-      每張照片，都是時間的切片
-    </div>
-  </div>
-  <div class="photo-panel fade-in" style="background-image: url('images/photo-compressed/微信图片_20260615154447_18_11.jpg');">
-    <div class="photo-caption">
-      <span class="en-quote">"The eye should learn to listen."</span>
-      鏡頭之下，萬物有靈
-    </div>
-  </div>
-  <div class="photo-panel fade-in" style="background-image: url('images/photo-compressed/微信图片_20260615155536_26_11.jpg');">
-    <div class="photo-caption">
-      <span class="en-quote">"To me, photography is the art of observation."</span>
-      捕捉光影，也捕捉故事
-    </div>
-  </div>
-  <div class="photo-panel fade-in" style="background-image: url('images/photo-compressed/微信图片_20260615155539_28_11.jpg');">
-    <div class="photo-caption">
-      <span class="en-quote">"What I like about photographs is the truth."</span>
-      真實，是攝影最動人的語言
-    </div>
-  </div>
-  <div class="photo-panel fade-in" style="background-image: url('images/photo-compressed/微信图片_20260615155541_30_11.jpg');">
-    <div class="photo-caption">
-      <span class="en-quote">"Photography is the story I fail to put into words."</span>
-      用鏡頭，寫下未盡之言
-    </div>
-  </div>
-</section>
-
 <!-- ==================== ABOUT ==================== -->
 <section class="section about" id="about">
   <div class="section-label fade-in">About Me</div>
@@ -702,6 +660,37 @@ body {
   </div>
 </section>
 
+<!-- ==================== PHOTOGRAPHY GALLERY ==================== -->
+<section class="photo-section" id="photography">
+  <div class="section-label fade-in" style="padding-left:60px;">Photography</div>
+  <h2 class="section-title fade-in" style="padding-left:60px;">用镜头记录光影</h2>
+  <p class="section-desc fade-in" style="padding-left:60px;">
+    摄影于我，是对时间的凝固——捕捉那些转瞬即逝的真实与美。
+  </p>
+
+  <div class="photo-gallery fade-in" id="photoGallery">
+    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615154549_22_11.jpg" alt="Photo"></div><div class="photo-card-label">01</div></div>
+    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615155533_25_11.jpg" alt="Photo"></div><div class="photo-card-label">02</div></div>
+    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615154447_18_11.jpg" alt="Photo"></div><div class="photo-card-label">03</div></div>
+    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615155536_26_11.jpg" alt="Photo"></div><div class="photo-card-label">04</div></div>
+    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615155539_28_11.jpg" alt="Photo"></div><div class="photo-card-label">05</div></div>
+    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615155541_30_11.jpg" alt="Photo"></div><div class="photo-card-label">06</div></div>
+    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615154435_13_11.jpg" alt="Photo"></div><div class="photo-card-label">07</div></div>
+    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615154438_14_11.jpg" alt="Photo"></div><div class="photo-card-label">08</div></div>
+    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615154441_15_11.jpg" alt="Photo"></div><div class="photo-card-label">09</div></div>
+    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615154443_16_11.jpg" alt="Photo"></div><div class="photo-card-label">10</div></div>
+    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615154444_17_11.jpg" alt="Photo"></div><div class="photo-card-label">11</div></div>
+    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615154448_19_11.jpg" alt="Photo"></div><div class="photo-card-label">12</div></div>
+    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615154449_20_11.jpg" alt="Photo"></div><div class="photo-card-label">13</div></div>
+    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615154450_21_11.jpg" alt="Photo"></div><div class="photo-card-label">14</div></div>
+    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615155528_23_11.jpg" alt="Photo"></div><div class="photo-card-label">15</div></div>
+    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615155530_24_11.jpg" alt="Photo"></div><div class="photo-card-label">16</div></div>
+    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615155537_27_11.jpg" alt="Photo"></div><div class="photo-card-label">17</div></div>
+    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615155540_29_11.jpg" alt="Photo"></div><div class="photo-card-label">18</div></div>
+  </div>
+  <div class="photo-gallery-hint">← 左右滑动浏览 →</div>
+</section>
+
 <!-- ==================== CONTACT ==================== -->
 <section class="contact-section" id="contact">
   <div class="section-label fade-in">Contact</div>
@@ -766,17 +755,21 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-// Custom cursor for photography section
-const showcase = document.querySelector('.photo-showcase');
-const cursor = document.getElementById('photoCursor');
-
-if (showcase && cursor) {
-  showcase.addEventListener('mousemove', (e) => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
+// Drag-to-scroll for photo gallery
+const gallery = document.getElementById('photoGallery');
+if (gallery) {
+  let isDown = false, startX, scrollLeft;
+  gallery.addEventListener('mousedown', (e) => {
+    isDown = true; startX = e.pageX - gallery.offsetLeft; scrollLeft = gallery.scrollLeft;
   });
-  showcase.addEventListener('mouseenter', () => cursor.classList.add('active'));
-  showcase.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+  gallery.addEventListener('mouseleave', () => isDown = false);
+  gallery.addEventListener('mouseup', () => isDown = false);
+  gallery.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - gallery.offsetLeft;
+    gallery.scrollLeft = scrollLeft - (x - startX) * 1.5;
+  });
 }
 
 // Nav active indicator
