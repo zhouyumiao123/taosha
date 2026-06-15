@@ -54,78 +54,97 @@ body {
 /* ===== Nav ===== */
 .nav {
   position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-  padding: 20px 40px;
+  padding: 18px 48px;
   display: flex; justify-content: space-between; align-items: center;
   transition: background 0.4s, padding 0.4s, box-shadow 0.4s;
-  mix-blend-mode: difference;
 }
 .nav.scrolled {
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(20px);
-  padding: 14px 40px;
-  box-shadow: 0 1px 0 rgba(0,0,0,0.06);
-  mix-blend-mode: normal;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(24px) saturate(1.5);
+  -webkit-backdrop-filter: blur(24px) saturate(1.5);
+  padding: 12px 48px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.05), 0 4px 24px rgba(0,0,0,0.04);
 }
 .nav.scrolled .nav-links a { color: var(--gray); }
 .nav.scrolled .nav-links a:hover { color: var(--emerald); }
 .nav.scrolled .nav-logo { color: var(--emerald); }
 .nav-logo {
-  font-size: 16px; font-weight: 700; letter-spacing: 0.06em;
-  text-decoration: none; color: #fff;
+  font-family: "Inter", sans-serif;
+  font-size: 15px; font-weight: 700; letter-spacing: 0.08em;
+  text-decoration: none; color: rgba(255,255,255,0.9);
+  transition: color 0.4s;
 }
-.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
 .nav-links a {
-  font-size: 13px; text-decoration: none; color: rgba(255,255,255,0.85);
-  letter-spacing: 0.04em; transition: var(--transition);
+  font-family: "Inter", sans-serif;
+  font-size: 12px; font-weight: 500; text-decoration: none;
+  color: rgba(255,255,255,0.75);
+  letter-spacing: 0.06em; transition: color 0.3s;
+  position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%);
+  width: 0; height: 1.5px; background: var(--emerald);
+  transition: width 0.3s ease;
 }
 .nav-links a:hover { color: #fff; }
+.nav-links a:hover::after { width: 14px; }
+.nav.scrolled .nav-links a:hover::after { background: var(--emerald); }
+.nav.scrolled .nav-links a.active::after { width: 14px; background: var(--emerald); }
 
 /* ===== Hero ===== */
 .hero {
   min-height: 100vh; display: flex; align-items: center;
   scroll-snap-align: start;
-  background: var(--black);
   color: #fff; position: relative; overflow: hidden;
   padding: 120px 60px 80px;
   cursor: default;
+  background: #0a0a0a;
 }
 
-/* Aurora background */
-.hero-aurora {
-  position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  overflow: hidden;
+/* Ken Burns photo background */
+.hero-bg {
+  position: absolute; inset: -10%;
+  background: url('images/hero-bg.jpg') center/cover no-repeat;
+  animation: kenBurns 30s ease-in-out infinite alternate;
+  z-index: 0;
 }
-.hero-aurora .orb-drift {
-  position: absolute; border-radius: 50%;
-  animation: auroraDrift var(--dur) ease-in-out infinite alternate;
+.hero-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(160deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 40%, rgba(0,0,0,0.45) 100%);
 }
-.orb-drift-1 { width: 800px; height: 800px; top: -25%; right: -20%; --dur: 18s; }
-.orb-drift-2 { width: 600px; height: 600px; bottom: -30%; left: -15%; --dur: 24s; }
-.orb-drift-3 { width: 500px; height: 500px; top: 40%; left: 55%; --dur: 30s; }
+@keyframes kenBurns {
+  0%   { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.08) translate(-1%, -0.5%); }
+}
 
-.hero-aurora .orb {
-  width: 100%; height: 100%; border-radius: 50%;
-  filter: blur(100px); opacity: 0.45;
-  transition: transform 0.15s ease-out;
+/* Floating spring particles */
+.hero-particles {
+  position: absolute; inset: 0; pointer-events: none; z-index: 1;
 }
-.orb-drift-1 .orb {
-  background: radial-gradient(circle, rgba(13,200,160,0.9) 0%, rgba(13,124,107,0.5) 40%, transparent 70%);
+.hero-particle {
+  position: absolute; width: 3px; height: 3px;
+  background: rgba(255,255,255,0.6); border-radius: 50%;
+  animation: floatUp var(--dur) var(--delay) ease-in infinite;
+  box-shadow: 0 0 6px rgba(255,255,255,0.3);
 }
-.orb-drift-2 .orb {
-  background: radial-gradient(circle, rgba(10,160,130,0.8) 0%, rgba(6,95,82,0.4) 40%, transparent 70%);
+@keyframes floatUp {
+  0%   { opacity: 0; transform: translateY(110vh) translateX(0) rotate(0deg); }
+  10%  { opacity: 0.7; }
+  80%  { opacity: 0.3; }
+  100% { opacity: 0; transform: translateY(-10vh) translateX(var(--drift)) rotate(360deg); }
 }
-.orb-drift-3 .orb {
-  background: radial-gradient(circle, rgba(20,180,145,0.75) 0%, rgba(26,150,130,0.35) 40%, transparent 70%);
-}
-@keyframes auroraDrift {
-  0%   { transform: translate(0, 0) scale(1); }
-  33%  { transform: translate(40px, -30px) scale(1.08); }
-  66%  { transform: translate(-25px, 20px) scale(0.95); }
-  100% { transform: translate(10px, -15px) scale(1.04); }
+
+/* Subtle emerald light wash over photo */
+.hero-wash {
+  position: absolute; inset: 0; pointer-events: none; z-index: 1;
+  background: radial-gradient(ellipse at 70% 30%, rgba(13,124,107,0.12) 0%, transparent 60%),
+              radial-gradient(ellipse at 30% 70%, rgba(10,160,120,0.06) 0%, transparent 50%);
 }
 
 /* Hero content */
-.hero-content { max-width: 820px; position: relative; z-index: 1; }
+.hero-content { max-width: 820px; position: relative; z-index: 2; }
 
 /* Eyebrow */
 .hero-eyebrow {
@@ -470,11 +489,9 @@ body {
 
 <!-- ==================== HERO ==================== -->
 <section class="hero" id="home">
-  <div class="hero-aurora" id="heroAurora">
-    <div class="orb-drift orb-drift-1"><div class="orb"></div></div>
-    <div class="orb-drift orb-drift-2"><div class="orb"></div></div>
-    <div class="orb-drift orb-drift-3"><div class="orb"></div></div>
-  </div>
+  <div class="hero-bg"></div>
+  <div class="hero-particles" id="heroParticles"></div>
+  <div class="hero-wash"></div>
   <div class="hero-content">
     <div class="hero-eyebrow">Brand Strategist &amp; Creative</div>
     <h1>
@@ -792,18 +809,20 @@ window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 60);
 });
 
-// Mouse-move parallax on aurora orbs
-const aurora = document.getElementById('heroAurora');
-if (aurora) {
-  const hero = document.querySelector('.hero');
-  hero.addEventListener('mousemove', (e) => {
-    const x = (e.clientX / window.innerWidth - 0.5) * 2;
-    const y = (e.clientY / window.innerHeight - 0.5) * 2;
-    const orbs = aurora.querySelectorAll('.orb');
-    orbs[0].style.transform = `translate(${x * 60}px, ${y * 50}px)`;
-    orbs[1].style.transform = `translate(${-x * 40}px, ${-y * 35}px)`;
-    orbs[2].style.transform = `translate(${x * 30}px, ${-y * 25}px)`;
-  });
+// Generate floating spring particles
+const particlesContainer = document.getElementById('heroParticles');
+if (particlesContainer) {
+  for (let i = 0; i < 40; i++) {
+    const p = document.createElement('div');
+    p.classList.add('hero-particle');
+    p.style.left = Math.random() * 100 + '%';
+    p.style.setProperty('--dur', (8 + Math.random() * 14) + 's');
+    p.style.setProperty('--delay', Math.random() * 8 + 's');
+    p.style.setProperty('--drift', (Math.random() - 0.5) * 60 + 'px');
+    p.style.width = (1.5 + Math.random() * 3) + 'px';
+    p.style.height = p.style.width;
+    particlesContainer.appendChild(p);
+  }
 }
 
 // Fade-in observer
