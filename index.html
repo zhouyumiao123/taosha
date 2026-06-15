@@ -657,7 +657,6 @@ body {
   </p>
 
   <div class="photo-gallery fade-in" id="photoGallery">
-    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615154549_22_11.jpg" alt="Photo"></div><div class="photo-card-label">01</div></div>
     <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615155533_25_11.jpg" alt="Photo"></div><div class="photo-card-label">02</div></div>
     <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615154447_18_11.jpg" alt="Photo"></div><div class="photo-card-label">03</div></div>
     <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615155536_26_11.jpg" alt="Photo"></div><div class="photo-card-label">04</div></div>
@@ -743,20 +742,27 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-// Drag-to-scroll for photo gallery
+// Gallery: wheel scroll → horizontal + drag to scroll
 const gallery = document.getElementById('photoGallery');
 if (gallery) {
+  // Wheel → horizontal scroll
+  gallery.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    gallery.scrollBy({ left: e.deltaY * 1.8, behavior: 'smooth' });
+  }, { passive: false });
+
+  // Drag to scroll
   let isDown = false, startX, scrollLeft;
   gallery.addEventListener('mousedown', (e) => {
     isDown = true; startX = e.pageX - gallery.offsetLeft; scrollLeft = gallery.scrollLeft;
+    gallery.style.scrollBehavior = 'auto';
   });
-  gallery.addEventListener('mouseleave', () => isDown = false);
-  gallery.addEventListener('mouseup', () => isDown = false);
+  gallery.addEventListener('mouseleave', () => { isDown = false; gallery.style.scrollBehavior = 'smooth'; });
+  gallery.addEventListener('mouseup', () => { isDown = false; gallery.style.scrollBehavior = 'smooth'; });
   gallery.addEventListener('mousemove', (e) => {
     if (!isDown) return;
     e.preventDefault();
-    const x = e.pageX - gallery.offsetLeft;
-    gallery.scrollLeft = scrollLeft - (x - startX) * 1.5;
+    gallery.scrollLeft = scrollLeft - (e.pageX - gallery.offsetLeft - startX) * 1.8;
   });
 }
 
