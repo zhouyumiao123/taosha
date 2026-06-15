@@ -140,20 +140,27 @@ body {
 }
 
 /* ===== Work ===== */
-.work-list { display:flex; flex-direction:column; gap:100px; max-width:1100px; margin:0 auto; }
+.work-list { display:flex; flex-direction:column; gap:120px; max-width:1100px; margin:0 auto; }
 .work-item { display:grid; grid-template-columns:1fr 340px; gap:60px; align-items:start; }
 .work-item:nth-child(even) { direction:rtl; }
 .work-item:nth-child(even) .work-info { direction:ltr; }
+.work-card {
+  transition:all 0.4s ease; cursor:pointer;
+  position:relative;
+}
+.work-card:hover {
+  transform:translateY(-4px);
+}
+.work-card:hover .work-visual { box-shadow:0 12px 40px rgba(0,0,0,0.12); }
 .work-visual {
   aspect-ratio:4/3; background:var(--warm);
   background-size:cover; background-position:center;
-  transition:transform 0.5s;
+  transition:all 0.4s ease; position:relative; overflow:hidden;
 }
 .work-visual.contain {
   background-size:contain; background-repeat:no-repeat;
   background-color:var(--warm);
 }
-.work-visual:hover { transform:scale(1.02); }
 .work-tag {
   font-family:"Inter",sans-serif;
   font-size:10px; letter-spacing:0.1em; text-transform:uppercase;
@@ -164,14 +171,66 @@ body {
 .work-metrics { display:flex; gap:32px; }
 .work-metrics .num { font-size:28px; font-weight:700; color:var(--ink); line-height:1; }
 .work-metrics .lbl { font-size:11px; color:var(--muted); margin-top:4px; }
+.work-link {
+  display:inline-flex; align-items:center; gap:6px;
+  font-family:"Inter",sans-serif; font-size:12px; font-weight:600;
+  color:var(--gold); text-decoration:none;
+  letter-spacing:0.04em; transition:gap 0.3s; cursor:pointer;
+  border:none; background:none; padding:0; margin-top:8px;
+}
+.work-link:hover { gap:10px; }
+
+/* ===== Modal ===== */
+.modal-overlay {
+  position:fixed; inset:0; z-index:9999;
+  background:rgba(0,0,0,0.6); backdrop-filter:blur(4px);
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; pointer-events:none; transition:opacity 0.35s;
+}
+.modal-overlay.open { opacity:1; pointer-events:auto; }
+.modal {
+  background:var(--paper); max-width:720px; width:90%;
+  max-height:85vh; overflow-y:auto; padding:48px;
+  position:relative;
+  transform:translateY(20px); transition:transform 0.35s;
+}
+.modal-overlay.open .modal { transform:translateY(0); }
+.modal-close {
+  position:absolute; top:20px; right:24px;
+  background:none; border:none; font-size:24px; cursor:pointer;
+  color:var(--muted); transition:color 0.3s;
+}
+.modal-close:hover { color:var(--ink); }
+.modal-hero {
+  width:100%; height:240px; background:var(--warm);
+  background-size:cover; background-position:center;
+  margin-bottom:32px;
+}
+.modal-tag {
+  font-family:"Inter",sans-serif; font-size:10px; font-weight:600;
+  letter-spacing:0.1em; text-transform:uppercase;
+  color:var(--gold); margin-bottom:12px;
+}
+.modal h3 { font-size:28px; font-weight:700; margin-bottom:20px; }
+.modal .star-block { margin-bottom:28px; }
+.modal .star-block h4 {
+  font-family:"Inter",sans-serif; font-size:11px; font-weight:700;
+  letter-spacing:0.1em; text-transform:uppercase;
+  color:var(--gold); margin-bottom:8px;
+}
+.modal .star-block p { font-size:16px; color:var(--muted); line-height:1.8; }
+.modal .star-metrics { display:flex; gap:40px; margin:32px 0; }
+.modal .star-metrics .num { font-size:36px; font-weight:700; color:var(--ink); line-height:1; }
+.modal .star-metrics .lbl { font-size:12px; color:var(--muted); margin-top:4px; }
 
 @media (max-width:768px) {
   .work-item,.work-item:nth-child(even) { grid-template-columns:1fr; gap:24px; direction:ltr; }
-  .work-list { gap:64px; }
+  .work-list { gap:80px; }
   .section { padding:80px 24px; }
   .hero { padding:100px 24px 60px; }
   .nav { padding:16px 24px; }
   .nav-links { gap:16px; }
+  .modal { padding:32px 24px; }
 }
 
 /* ===== Photo Gallery ===== */
@@ -285,7 +344,8 @@ body {
   <p class="section-title-cn">精选作品</p>
   <div class="work-list">
 
-    <div class="work-item fade-in">
+    <!-- Case 1 -->
+    <div class="work-item fade-in work-card" onclick="openModal('modal-1')">
       <div class="work-info">
         <div class="work-tag">Brand Strategy</div>
         <h3>「微光计划」营销企划</h3>
@@ -294,11 +354,13 @@ body {
           <div><div class="num">3,000<span style="font-size:14px;">万</span></div><div class="lbl">预计营收增长</div></div>
           <div><div class="num">10+</div><div class="lbl">达人推广渠道</div></div>
         </div>
+        <button class="work-link">查看完整案例 <span>→</span></button>
       </div>
       <div class="work-visual" style="background-image:url('images/work-micsig.png')"></div>
     </div>
 
-    <div class="work-item fade-in">
+    <!-- Case 2 -->
+    <div class="work-item fade-in work-card" onclick="openModal('modal-2')">
       <div class="work-info">
         <div class="work-tag">Integrated Campaign</div>
         <h3>视频号矩阵 &amp; 故事化传播</h3>
@@ -307,11 +369,13 @@ body {
           <div><div class="num">5,000<span style="font-size:14px;">+</span></div><div class="lbl">粉丝（从300起）</div></div>
           <div><div class="num">80<span style="font-size:14px;">+/周</span></div><div class="lbl">精准客户引流</div></div>
         </div>
+        <button class="work-link">查看完整案例 <span>→</span></button>
       </div>
       <div class="work-visual" style="background-image:url('images/work-video.png')"></div>
     </div>
 
-    <div class="work-item fade-in">
+    <!-- Case 3 -->
+    <div class="work-item fade-in work-card" onclick="openModal('modal-3')">
       <div class="work-info">
         <div class="work-tag">Content &amp; Creative</div>
         <h3>NOMI 原创IP孵化</h3>
@@ -320,11 +384,13 @@ body {
           <div><div class="num">111</div><div class="lbl">问卷调研样本</div></div>
           <div><div class="num">16+</div><div class="lbl">表情包 &amp; 延展</div></div>
         </div>
+        <button class="work-link">查看完整案例 <span>→</span></button>
       </div>
       <div class="work-visual contain" style="background-image:url('images/nomi/nomi-3.png')"></div>
     </div>
 
-    <div class="work-item fade-in">
+    <!-- Case 4 -->
+    <div class="work-item fade-in work-card" onclick="openModal('modal-4')">
       <div class="work-info">
         <div class="work-tag">Innovation &amp; AI</div>
         <h3>AI创意工作流 &amp; Vibe Coding</h3>
@@ -333,6 +399,7 @@ body {
           <div><div class="num">3+</div><div class="lbl">AI项目落地</div></div>
           <div><div class="num">&lt;/&gt;</div><div class="lbl">Vibe Coding</div></div>
         </div>
+        <button class="work-link">查看完整案例 <span>→</span></button>
       </div>
       <div class="work-visual" style="background-image:url('images/work-ai.png')"></div>
     </div>
@@ -340,6 +407,63 @@ body {
   </div>
   </div>
 </section>
+
+<!-- Case Study Modals -->
+<div class="modal-overlay" id="modal-1" onclick="closeModal('modal-1')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal('modal-1')">&times;</button>
+    <div class="modal-hero" style="background-image:url('images/work-micsig.png')"></div>
+    <div class="modal-tag">Brand Strategy</div>
+    <h3>「微光计划」营销企划</h3>
+    <div class="star-block"><h4>Situation 背景</h4><p>麦科信科技（Micsig）拳头产品「光隔离探头」在B2B电子测试测量领域面临品牌认知不足的困境。产品技术领先，但目标客户对其价值感知薄弱，亟需一次大规模的市场破圈行动。</p></div>
+    <div class="star-block"><h4>Task 目标</h4><p>打开B2B科技产品品牌声量，建立行业影响力，通过营销活动直接驱动产品销量增长。核心指标：品牌曝光量、销售线索转化、渠道合作拓展。</p></div>
+    <div class="star-block"><h4>Action 策略与执行</h4><p>策划「千万补贴 微光计划」大型营销企划——以补贴为钩子降低试用门槛；搭建B站/抖音/YouTube达人矩阵（10+渠道）实现圈层渗透；线上直播+线下行业展会双线并行，打造立体传播网络；收集市场产品反馈，数据驱动策略迭代。</p></div>
+    <div class="star-block"><h4>Result 成果</h4><p>活动预计直接带动<strong>3,000万元</strong>产品营收增长；新开拓<strong>10个</strong>达人推广渠道，显著扩大目标用户触达；品牌行业影响力显著提升，为后续产品推广建立可复用方法论。</p></div>
+    <div class="star-metrics"><div><div class="num">3,000<span style="font-size:16px;">万</span></div><div class="lbl">预计营收增长</div></div><div><div class="num">10+</div><div class="lbl">达人渠道</div></div></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-2" onclick="closeModal('modal-2')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal('modal-2')">&times;</button>
+    <div class="modal-hero" style="background-image:url('images/work-video.png')"></div>
+    <div class="modal-tag">Integrated Campaign</div>
+    <h3>视频号矩阵 &amp; 故事化传播</h3>
+    <div class="star-block"><h4>Situation 背景</h4><p>诺瓦物流作为ToB物流服务商，在行业内缺乏品牌声量和差异化认知。传统物流行业营销方式单一，难以在目标客户群中建立情感连接。</p></div>
+    <div class="star-block"><h4>Task 目标</h4><p>从0搭建企业新媒体矩阵，通过差异化内容策略实现品牌破圈，建立行业影响力并驱动精准客户引流。</p></div>
+    <div class="star-block"><h4>Action 策略与执行</h4><p>以「故事化传播」为核心策略，摒弃传统ToB企业宣传语态；从0搭建微信视频号+抖音矩阵，策划内容日历；首创老板及部门负责人个人IP矩阵，全流程脚本撰写、拍摄、发布；统筹10+场海内外展会全周期营销；运用甘特图标准化视频制作流程，将制作周期缩短45%。</p></div>
+    <div class="star-block"><h4>Result 成果</h4><p>视频号粉丝从<strong>300→5,000+</strong>，增长<strong>16倍</strong>；每月产出6+创意视频，每周精准引流<strong>80+</strong>客户；抖音差异化矩阵同步搭建，品牌线上声量显著增强。</p></div>
+    <div class="star-metrics"><div><div class="num">5,000<span style="font-size:16px;">+</span></div><div class="lbl">视频号粉丝</div></div><div><div class="num">80<span style="font-size:16px;">+/周</span></div><div class="lbl">精准引流</div></div></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-3" onclick="closeModal('modal-3')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal('modal-3')">&times;</button>
+    <div class="modal-hero" style="background-image:url('images/nomi/nomi-3.png');background-size:contain;background-repeat:no-repeat;background-color:var(--warm);"></div>
+    <div class="modal-tag">Content &amp; Creative</div>
+    <h3>NOMI 原创IP孵化</h3>
+    <div class="star-block"><h4>Situation 背景</h4><p>诺瓦物流作为成长中的物流企业，品牌识别度弱，缺少能与客户建立情感连接的文化符号。需要通过IP形象增强品牌辨识度与亲和力。</p></div>
+    <div class="star-block"><h4>Task 目标</h4><p>从0到1打造企业吉祥物IP，使其成为品牌文化的载体，增强内部凝聚力与外部品牌认知。</p></div>
+    <div class="star-block"><h4>Action 策略与执行</h4><p>发起<strong>111人</strong>内部问卷调研，覆盖IP类型、性格、风格、场景等多维度；基于数据结论，确定「科幻+可爱」风格的3D小熊形象；独立设计NOMI吉祥物，开发四季延展动作、<strong>16款</strong>表情包及文创周边；完成商标与专利注册，建立IP资产保护。</p></div>
+    <div class="star-block"><h4>Result 成果</h4><p>NOMI成功落地为诺瓦物流官方IP形象；16款表情包投入内部与外部使用；商标专利注册完成，IP资产得到法律保护；品牌年轻化形象与用户情感连接显著增强。</p></div>
+    <div class="star-metrics"><div><div class="num">111</div><div class="lbl">调研样本量</div></div><div><div class="num">16+</div><div class="lbl">表情包&延展</div></div></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-4" onclick="closeModal('modal-4')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal('modal-4')">&times;</button>
+    <div class="modal-hero" style="background-image:url('images/work-ai.png')"></div>
+    <div class="modal-tag">Innovation &amp; AI</div>
+    <h3>AI创意工作流 &amp; Vibe Coding</h3>
+    <div class="star-block"><h4>Situation 背景</h4><p>在品牌内容生产过程中，传统工作流效率存在瓶颈——从创意选题到内容产出的链路冗长，团队需要更高效的工具和方法来提升产出质量和速度。</p></div>
+    <div class="star-block"><h4>Task 目标</h4><p>引入AI工具重构内容生产流程，探索AI辅助创意的方法论，并将AI能力转化为可直接使用的产品工具。</p></div>
+    <div class="star-block"><h4>Action 策略与执行</h4><p>熟练运用Claude Code搭建AI自动化内容工作流，覆盖创意选题→文案产出→视觉排版全链路；发展Vibe Coding能力——通过自然语言驱动AI完成创意工具的开发与落地；独立开发「淘沙」AI相册一键排版美化工具；搭建个人品牌网站及品牌官网，全程AI辅助。</p></div>
+    <div class="star-block"><h4>Result 成果</h4><p>成功落地<strong>3个以上</strong>AI驱动项目；「淘沙」AI相册工具可一键完成照片排版美化；个人网站从设计到部署全程AI辅助，验证了Vibe Coding的实战价值。</p></div>
+    <div class="star-metrics"><div><div class="num">3+</div><div class="lbl">AI项目落地</div></div><div><div class="num">&lt;/&gt;</div><div class="lbl">Vibe Coding</div></div></div>
+  </div>
+</div>
 
 <!-- About -->
 <section class="section" id="about" style="min-height:100vh;display:flex;align-items:center;">
@@ -472,6 +596,24 @@ if (spotlight && hero) {
   });
   hero.addEventListener('mouseleave', () => { spotlight.style.opacity = '0'; });
 }
+
+// Modal open/close
+function openModal(id) {
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal-overlay.open').forEach(m => {
+      m.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  }
+});
 
 // Nav hide on scroll
 const nav = document.getElementById('nav');
