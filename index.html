@@ -65,29 +65,17 @@ body {
   pointer-events: none;
 }
 .nav-logo {
-  display: flex; align-items: center; gap: 10px;
+  display: flex; align-items: center; gap: 8px;
   text-decoration: none; color: var(--carbon);
+  font-family: "Inter", sans-serif;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.12em;
   transition: color 0.4s;
 }
 .nav-logo-mark {
-  width: 8px; height: 22px;
+  width: 6px; height: 6px;
   background: var(--accent);
-  border-radius: 2px;
+  border-radius: 50%;
   flex-shrink: 0;
-  transition: background 0.4s;
-}
-.nav-logo-text {
-  display: flex; flex-direction: column;
-}
-.nav-logo-cn {
-  font-size: 16px; font-weight: 700; letter-spacing: 0.12em;
-  color: inherit; line-height: 1.2;
-  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
-}
-.nav-logo-en {
-  font-family: "Inter", sans-serif;
-  font-size: 9px; font-weight: 500; letter-spacing: 0.14em;
-  color: inherit; opacity: 0.6; text-transform: uppercase;
 }
 .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
 .nav-links a {
@@ -487,10 +475,7 @@ body {
 <nav class="nav" id="nav">
   <a href="#" class="nav-logo">
     <span class="nav-logo-mark"></span>
-    <span class="nav-logo-text">
-      <span class="nav-logo-cn">周　蕾</span>
-      <span class="nav-logo-en">Joyce Chow</span>
-    </span>
+    JOYCE CHOW
   </a>
   <ul class="nav-links">
     <li><a href="#work">Work</a></li>
