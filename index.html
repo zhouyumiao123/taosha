@@ -1,1165 +1,377 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>淘沙 - AI 相册一键出片</title>
-<style>
-/* ================================================================
-   淘沙 — 治愈动画风格 • 完整单页
-   ================================================================ */
-:root {
-  --pink:      #FF8FA3;
-  --pink-lt:   #FFB3C6;
-  --pink-pale: #FFF0F3;
-  --lavender:  #C4B5FD;
-  --mint:      #A7F3D0;
-  --peach:     #FFD4B8;
-  --cream:     #FFFBF5;
-  --sky:       #BAE6FD;
-  --text:      #4A3F4F;
-  --text-lt:   #9A8FA0;
-  --card-bg:   #FFFFFF;
-  --radius:    24px;
-  --radius-sm: 14px;
-  --shadow:    0 4px 24px rgba(255,143,163,0.12);
-  --shadow-hv: 0 8px 32px rgba(255,143,163,0.20);
-}
-
-* { box-sizing:border-box; margin:0; padding:0; }
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-  background: linear-gradient(180deg, #FFF5F7 0%, #FFFBF5 30%, #F5F0FF 60%, #FFF5F7 100%);
-  background-attachment: fixed;
-  color: var(--text);
-  min-height: 100vh;
-  overflow-x: hidden;
-  position: relative;
-}
-
-/* ===== 浮动背景粒子 ===== */
-.bg-particles {
-  position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
-  pointer-events: none; z-index: 0;
-  overflow: hidden;
-}
-.bg-particle {
-  position: absolute;
-  opacity: 0;
-  animation: floatUp var(--dur) var(--delay) infinite ease-in;
-  font-size: var(--size);
-}
-@keyframes floatUp {
-  0%   { opacity:0; transform: translateY(105vh) rotate(0deg) scale(0.5); }
-  10%  { opacity:0.6; }
-  90%  { opacity:0.4; }
-  100% { opacity:0; transform: translateY(-10vh) rotate(360deg) scale(1.2); }
-}
-
-/* ===== 装饰性浮动元素 ===== */
-.floating-deco {
-  position: fixed; pointer-events: none; z-index: 0;
-  animation: gentleFloat var(--fdur) ease-in-out infinite;
-  opacity: 0.35;
-  font-size: var(--fsize, 40px);
-}
-@keyframes gentleFloat {
-  0%, 100% { transform: translate(var(--fx,0), var(--fy,0)) rotate(0deg); }
-  33%      { transform: translate(calc(var(--fx,0) + 12px), calc(var(--fy,0) - 18px)) rotate(5deg); }
-  66%      { transform: translate(calc(var(--fx,0) - 8px), calc(var(--fy,0) + 14px)) rotate(-3deg); }
-}
-
-/* ===== 主容器 ===== */
-main {
-  position: relative; z-index: 1;
-  max-width: 680px; margin: 0 auto;
-  padding: 0 20px 40px;
-}
-
-/* ===== Header ===== */
-.taosha-header {
-  text-align: center; padding: 32px 0 20px;
-  position: relative; z-index: 1;
-}
-.taosha-logo {
-  display: inline-block;
-  width: 72px; height: 72px;
-  background: linear-gradient(135deg, var(--pink), var(--lavender));
-  border-radius: 22px;
-  box-shadow: 0 8px 28px rgba(255,143,163,0.35);
-  animation: logoPop 0.6s cubic-bezier(0.17,0.89,0.32,1.27);
-  margin-bottom: 12px;
-  font-size: 34px; line-height: 72px; color: #fff;
-  user-select: none;
-}
-@keyframes logoPop {
-  0% { transform: scale(0) rotate(-20deg); }
-  100%{ transform: scale(1) rotate(0deg); }
-}
-.taosha-title {
-  font-size: 28px; font-weight: 800;
-  background: linear-gradient(135deg, var(--pink), #C084FC);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 4px;
-}
-.taosha-slogan {
-  font-size: 13px; color: var(--text-lt); letter-spacing: 2px;
-}
-
-/* ===== 步骤标签 ===== */
-.step-badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  margin-bottom: 14px;
-}
-.step-num {
-  width: 28px; height: 28px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--pink), var(--pink-lt));
-  color: #fff; font-size: 13px; font-weight: 700;
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 3px 10px rgba(255,143,163,0.3);
-}
-.step-title {
-  font-size: 17px; font-weight: 700; color: var(--text);
-}
-
-/* ===== Section 卡片 ===== */
-.section-card {
-  background: var(--card-bg);
-  border-radius: var(--radius);
-  padding: 28px 24px;
-  box-shadow: var(--shadow);
-  border: 1.5px solid #FFE4E9;
-  margin-bottom: 28px;
-  position: relative;
-  transition: box-shadow 0.3s, transform 0.3s;
-}
-.section-card:hover {
-  box-shadow: var(--shadow-hv);
-  transform: translateY(-1px);
-}
-
-/* ===== 上传区 ===== */
-.upload-zone {
-  border: 2.5px dashed #FFD4E0;
-  border-radius: var(--radius);
-  padding: 36px 24px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.3s;
-  background: linear-gradient(135deg, #FFFBFD, #FFF5FA);
-  position: relative; overflow: hidden;
-}
-.upload-zone::before {
-  content: '';
-  position: absolute; inset: -50%;
-  background: radial-gradient(circle at 30% 40%, rgba(255,143,163,0.06) 0%, transparent 60%),
-              radial-gradient(circle at 70% 60%, rgba(196,181,253,0.06) 0%, transparent 60%);
-  transition: opacity 0.3s; opacity: 0;
-}
-.upload-zone:hover::before { opacity: 1; }
-.upload-zone.drag-over {
-  border-color: var(--pink) !important;
-  background: #FFF0F5 !important;
-  transform: scale(1.02);
-}
-.upload-icon-wrap {
-  width: 64px; height: 64px; margin: 0 auto 12px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #FFE4EC, #F3E8FF);
-  display: flex; align-items: center; justify-content: center;
-  animation: uploadBounce 2s ease-in-out infinite;
-}
-@keyframes uploadBounce {
-  0%,100% { transform: translateY(0); }
-  50%     { transform: translateY(-6px); }
-}
-.upload-icon-wrap svg { color: var(--pink); width: 30px; height: 30px; }
-.upload-text { font-size: 15px; color: var(--text); font-weight: 600; margin-bottom: 4px; }
-.upload-text span { color: var(--pink); cursor: pointer; }
-.upload-sub  { font-size: 12px; color: var(--text-lt); }
-
-/* ===== 缩略图网格 ===== */
-.photo-grid {
-  display: flex; flex-wrap: wrap; gap: 10px;
-  margin-top: 16px; min-height: 1px;
-}
-.photo-item {
-  width: calc((100% - 40px) / 5); min-width: 72px; max-width: 120px;
-  aspect-ratio: 1; border-radius: var(--radius-sm);
-  overflow: hidden; background: #F5F0F5;
-  border: 2px solid transparent;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-  transition: all 0.2s; cursor: grab; position: relative;
-  animation: photoIn 0.35s ease-out both;
-}
-@keyframes photoIn {
-  0% { opacity:0; transform: scale(0.7) rotate(4deg); }
-  100%{ opacity:1; transform: scale(1) rotate(0); }
-}
-.photo-item:hover {
-  border-color: var(--pink-lt);
-  box-shadow: 0 6px 20px rgba(255,143,163,0.2);
-  transform: translateY(-2px);
-}
-.photo-item:active { cursor: grabbing; }
-.photo-item.dragging { opacity: 0.4; transform: scale(0.9); }
-.photo-item img { width:100%; height:100%; object-fit:cover; display:block; }
-.photo-item .del-btn {
-  position: absolute; top: 4px; right: 4px;
-  width: 22px; height: 22px;
-  background: rgba(255,80,110,0.85); color: #fff;
-  border: none; border-radius: 50%;
-  font-size: 12px; cursor: pointer;
-  opacity: 0; transition: opacity 0.2s;
-  display: flex; align-items: center; justify-content: center;
-}
-.photo-item:hover .del-btn { opacity: 1; }
-.photo-item .idx-badge {
-  position: absolute; bottom: 4px; left: 4px;
-  background: rgba(255,143,163,0.75); color: #fff;
-  font-size: 10px; padding: 1px 6px; border-radius: 8px;
-  font-weight: 600;
-}
-.empty-hint {
-  text-align: center; font-size: 12px; color: var(--text-lt); margin-top: 10px;
-}
-
-/* ===== 表单 ===== */
-.form-label {
-  display: block; font-size: 13px; font-weight: 600;
-  color: var(--text); margin-bottom: 8px;
-}
-.form-input {
-  width: 100%; padding: 12px 16px;
-  border: 1.5px solid #F0E0E8; border-radius: var(--radius-sm);
-  font-size: 14px; color: var(--text); outline: none;
-  background: #FFFBFD;
-  transition: all 0.25s;
-}
-.form-input:focus {
-  border-color: var(--pink);
-  box-shadow: 0 0 0 4px rgba(255,143,163,0.10);
-}
-.form-input::placeholder { color: #C8BCC8; }
-
-/* ===== 标签按钮 ===== */
-.tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-.tag-btn {
-  padding: 6px 16px; border-radius: 20px; border: 1.5px solid #F0E0E8;
-  background: #FFFBFC; color: var(--text-lt);
-  font-size: 13px; cursor: pointer; transition: all 0.2s;
-  white-space: nowrap;
-}
-.tag-btn:hover {
-  background: #FFF0F5; border-color: var(--pink-lt);
-  color: var(--pink); transform: translateY(-1px);
-}
-
-/* ===== 风格 / 模板 按钮 ===== */
-.option-group { display: flex; gap: 10px; }
-.opt-btn {
-  flex: 1; padding: 10px 8px;
-  border: 1.5px solid #F0E0E8; border-radius: var(--radius-sm);
-  background: #FFFBFC; color: var(--text-lt);
-  font-size: 13px; cursor: pointer; transition: all 0.2s;
-  text-align: center; font-weight: 500;
-}
-.opt-btn:hover { border-color: var(--pink-lt); background: #FFF5FA; }
-.opt-btn.active {
-  background: linear-gradient(135deg, var(--pink), #FF7098);
-  color: #fff; border-color: transparent;
-  box-shadow: 0 4px 14px rgba(255,143,163,0.3);
-}
-
-/* ===== 配文预览框 ===== */
-.caption-box {
-  min-height: 90px; background: linear-gradient(135deg, #FFFBFD, #F8F4FF);
-  border-radius: var(--radius-sm); padding: 16px;
-  font-size: 14px; line-height: 1.8; color: var(--text-lt);
-  border: 1.5px solid #F5ECF2;
-  white-space: pre-line; transition: color 0.3s;
-}
-.caption-box.filled { color: var(--text); }
-
-/* ===== 主按钮 ===== */
-.btn-primary {
-  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  width: 100%; padding: 14px 24px;
-  border: none; border-radius: var(--radius-sm);
-  background: linear-gradient(135deg, var(--pink), #FF7098);
-  color: #fff; font-size: 16px; font-weight: 700; cursor: pointer;
-  box-shadow: 0 6px 20px rgba(255,143,163,0.35);
-  transition: all 0.25s; margin-top: 16px;
-  position: relative; overflow: hidden;
-}
-.btn-primary::after {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
-  opacity: 0; transition: opacity 0.2s;
-}
-.btn-primary:hover::after { opacity: 1; }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(255,143,163,0.45); }
-.btn-primary:active { transform: scale(0.97); }
-.btn-primary:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
-.btn-primary svg { width: 20px; height: 20px; }
-
-.btn-download {
-  padding: 10px 22px; border: none; border-radius: var(--radius-sm);
-  background: linear-gradient(135deg, var(--lavender), #A78BFA);
-  color: #fff; font-size: 14px; font-weight: 600; cursor: pointer;
-  box-shadow: 0 4px 14px rgba(196,181,253,0.35);
-  display: inline-flex; align-items: center; gap: 6px;
-  transition: all 0.25s;
-}
-.btn-download:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(196,181,253,0.45); }
-.btn-download:active { transform: scale(0.97); }
-.btn-download:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
-
-/* ===== 预览区 ===== */
-.preview-wrap {
-  background: var(--card-bg);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  border: 1.5px solid #FFE4E9;
-  overflow: hidden;
-  position: relative;
-}
-.preview-wrap canvas { display: block; max-width: 100%; margin: 0 auto; }
-
-/* ===== 加载动画 ===== */
-.spinner-wrap { text-align: center; padding: 40px 0; }
-.spinner-dots { display: flex; gap: 8px; justify-content: center; align-items: center; }
-.spinner-dots span {
-  width: 12px; height: 12px; border-radius: 50%;
-  background: var(--pink);
-  animation: dotBounce 1.4s ease-in-out infinite both;
-}
-.spinner-dots span:nth-child(1) { animation-delay: -0.32s; background: var(--pink); }
-.spinner-dots span:nth-child(2) { animation-delay: -0.16s; background: var(--lavender); }
-.spinner-dots span:nth-child(3) { animation-delay: 0s; background: var(--mint); }
-@keyframes dotBounce {
-  0%,80%,100% { transform: scale(0.6); opacity: 0.3; }
-  40% { transform: scale(1.3); opacity: 1; }
-}
-
-/* ===== Toast ===== */
-.toast {
-  position: fixed; top: 28px; left: 50%; transform: translateX(-50%);
-  background: linear-gradient(135deg, #5C4A63, #4A3F4F);
-  color: #fff; padding: 12px 28px; border-radius: 30px;
-  font-size: 14px; z-index: 9999; opacity: 0; transition: opacity 0.3s;
-  pointer-events: none; box-shadow: 0 8px 24px rgba(74,63,79,0.3);
-  letter-spacing: 1px;
-}
-.toast.show { opacity: 1; }
-
-/* ===== Footer ===== */
-.taosha-footer {
-  text-align: center; padding: 24px 0;
-  font-size: 12px; color: var(--text-lt); letter-spacing: 1px;
-  position: relative; z-index: 1;
-}
-
-/* ===== 预览区 Header ===== */
-.preview-header {
-  display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 14px;
-}
-
-/* ===== 网格 ===== */
-.input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-
-/* ===== 响应式 ===== */
-@media (max-width: 640px) {
-  .input-grid { grid-template-columns: 1fr; }
-  .photo-item { width: calc((100% - 30px) / 4); min-width: 60px; }
-  .taosha-title { font-size: 24px; }
-  main { padding: 0 14px 30px; }
-  .section-card { padding: 20px 16px; }
-  .option-group { flex-wrap: wrap; }
-  .opt-btn { flex: 1 1 calc(50% - 6px); }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>周蕾 Joyce Chow | 创意作品集</title>
+    <meta name="description" content="周蕾 (Joyce Chow) 的个人作品集——文案策划、摄影、视频制作，用创意讲述有温度的故事。">
+    <meta property="og:title" content="周蕾 Joyce Chow | 创意作品集">
+    <meta property="og:description" content="文案 × 摄影 × 视频 · 用创意连接世界">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 
-<!-- ========== 背景浮动粒子 ========== -->
-<div class="bg-particles" id="bgParticles"></div>
-
-<!-- ========== 装饰浮动元素（固定位置） ========== -->
-<div class="floating-deco" style="top:8%; left:5%; --fdur:7s; --fsize:42px; --fx:0; --fy:0;">🌸</div>
-<div class="floating-deco" style="top:30%; right:6%; --fdur:8.5s; --fsize:36px; --fx:0; --fy:0;">✨</div>
-<div class="floating-deco" style="top:55%; left:3%; --fdur:6.5s; --fsize:30px; --fx:0; --fy:0;">💫</div>
-<div class="floating-deco" style="top:75%; right:4%; --fdur:9s; --fsize:38px; --fx:0; --fy:0;">🌷</div>
-<div class="floating-deco" style="top:20%; left:88%; --fdur:7.8s; --fsize:28px; --fx:0; --fy:0;">🫧</div>
-<div class="floating-deco" style="top:65%; left:92%; --fdur:8.2s; --fsize:34px; --fx:0; --fy:0;">⭐</div>
-
-<!-- ========== Toast ========== -->
-<div class="toast" id="toast"></div>
-
-<!-- ========== Header ========== -->
-<header class="taosha-header">
-  <div class="taosha-logo">🌊</div>
-  <h1 class="taosha-title">淘 沙</h1>
-  <p class="taosha-slogan">潮起潮落，留下每一刻珍贵的自我</p>
-</header>
-
-<main>
-
-  <!-- ========== 1. 上传区 ========== -->
-  <section class="section-card">
-    <div class="step-badge">
-      <span class="step-num">1</span><span class="step-title">上传照片</span>
-    </div>
-
-    <div class="upload-zone" id="uploadZone">
-      <div class="upload-icon-wrap">
-        <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v12m0 0l-3-3m3 3l3-3M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"/>
-        </svg>
-      </div>
-      <p class="upload-text">拖拽照片到此处，或 <span>点击上传</span></p>
-      <p class="upload-sub">支持 JPG / PNG / WebP · 最多 9 张</p>
-    </div>
-    <input type="file" id="fileInput" accept="image/*" multiple hidden>
-
-    <div class="photo-grid" id="photoList"></div>
-    <p class="empty-hint" id="emptyHint">📸 还没有照片，快来上传吧～</p>
-  </section>
-
-  <!-- ========== 2. 编辑区 ========== -->
-  <section class="section-card" id="editSection" style="display:none;">
-    <div class="step-badge">
-      <span class="step-num">2</span><span class="step-title">编辑 & 灵感</span>
-    </div>
-
-    <div class="input-grid">
-      <!-- 左 -->
-      <div style="display:flex; flex-direction:column; gap:18px;">
-        <div>
-          <label class="form-label">🏷️ 关键词（可选）</label>
-          <input class="form-input" id="keywordInput" placeholder="如：海边、生日、开心、治愈…">
-          <div class="tag-row">
-            <span class="tag-btn">🌊 海边</span>
-            <span class="tag-btn">🎂 生日</span>
-            <span class="tag-btn">😊 开心</span>
-            <span class="tag-btn">🫶 治愈</span>
-            <span class="tag-btn">✈️ 旅行</span>
-            <span class="tag-btn">🌅 日落</span>
-          </div>
+<!-- ==================== 导航栏 ==================== -->
+<nav class="navbar">
+    <div class="container">
+        <div class="nav-brand">Joyce Chow</div>
+        <ul class="nav-menu">
+            <li><a href="#home">首页</a></li>
+            <li><a href="#about">关于我</a></li>
+            <li><a href="#skills">技能</a></li>
+            <li><a href="#experience">经历</a></li>
+            <li><a href="#portfolio">作品集</a></li>
+            <li><a href="#education">教育</a></li>
+            <li><a href="#contact">联系</a></li>
+        </ul>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
-        <div>
-          <label class="form-label">✍️ 文案风格</label>
-          <div class="option-group" id="styleGroup">
-            <button class="opt-btn active" data-style="极简">极简</button>
-            <button class="opt-btn" data-style="文艺">文艺</button>
-            <button class="opt-btn" data-style="氛围感">氛围感</button>
-          </div>
+    </div>
+</nav>
+
+<!-- ==================== 英雄区 ==================== -->
+<section id="home" class="hero">
+    <div class="hero-content">
+        <div class="hero-text">
+            <h1>周蕾 <span style="font-size:1.2rem;font-weight:400;">Joyce Chow</span></h1>
+            <p class="tagline">文案策划 · 摄影 · 视频制作</p>
+            <p class="subtitle">用文字雕刻思想，用镜头凝固时间，用影像讲述故事</p>
+            <div class="cta-buttons">
+                <a href="#portfolio" class="btn btn-primary">查看作品集</a>
+                <a href="#contact" class="btn btn-secondary">联系我</a>
+            </div>
         </div>
-        <div>
-          <label class="form-label">🖼️ 排版模板</label>
-          <div class="option-group" id="tmplGroup">
-            <button class="opt-btn active" data-template="0">📸 拍立得拼贴</button>
-            <button class="opt-btn" data-template="1">📔 手账 Plog</button>
-            <button class="opt-btn" data-template="2">🎬 电影胶片</button>
-          </div>
+        <div class="hero-image">
+            <div class="profile-circle" style="background: url('images/profile-id.jpg') center/cover no-repeat; border: 4px solid white;"></div>
         </div>
-      </div>
-      <!-- 右 -->
-      <div style="display:flex; flex-direction:column;">
-        <label class="form-label">💬 生成的配文</label>
-        <div class="caption-box" id="captionDisplay">点击下方按钮，AI 为你生成专属配文 ✨</div>
-        <button class="btn-primary" id="generateBtn">
-          <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/>
-          </svg>
-          一键生成
-        </button>
-      </div>
     </div>
-  </section>
-
-  <!-- ========== 3. 生成区 ========== -->
-  <section class="section-card" id="previewSection" style="display:none;">
-    <div class="preview-header">
-      <div class="step-badge" style="margin-bottom:0;">
-        <span class="step-num">3</span><span class="step-title">排版预览</span>
-      </div>
-      <button class="btn-download" id="downloadBtn" disabled>
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v12m0 0l-3-3m3 3l3-3M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"/>
-        </svg>
-        下载图片
-      </button>
+    <div class="scroll-indicator">
+        <i class="fas fa-chevron-down"></i>
     </div>
-    <div class="preview-wrap" id="previewContainer">
-      <p style="text-align:center;color:var(--text-lt);padding:50px 0;font-size:14px;">点击「一键生成」查看排版效果 👀</p>
+</section>
+
+<!-- ==================== 关于我 ==================== -->
+<section id="about" class="about">
+    <div class="container">
+        <h2>关于我</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>
+                    我是周蕾，一个相信「创意可以连接世界」的内容创作者。
+                    毕业于厦门大学，拥有文案策划、摄影和视频制作三重技能，
+                    致力于用多元的创意形式为品牌和产品赋予打动人心的力量。
+                </p>
+                <p>
+                    摄影于我，是对时间的凝固——正如我在随笔中写的：「摄影来源于生活，而生活本身就是一种艺术」。
+                    文案于我，是与受众的对话——曾经为利郎男装创作的广告文案获得了学院奖优秀类奖项。
+                    视频于我，是故事的延展——从微电影到纪录片，从宣传片到创意短片，每一种形式都是全新的探索。
+                </p>
+                <ul>
+                    <li>学院奖广告文案优秀类获得者</li>
+                    <li>福建省第六届大学生艺术节艺术作品类二等奖</li>
+                    <li>作品发表于《听潮》杂志等媒体</li>
+                    <li>拥有丰富的约拍和商业摄影经验</li>
+                </ul>
+            </div>
+            <div class="stats">
+                <div class="stat">
+                    <h3>3+</h3>
+                    <p>创意领域深耕</p>
+                </div>
+                <div class="stat">
+                    <h3>10+</h3>
+                    <p>视频作品</p>
+                </div>
+                <div class="stat">
+                    <h3>50+</h3>
+                    <p>摄影约拍</p>
+                </div>
+                <div class="stat">
+                    <h3>2</h3>
+                    <p>创意类奖项</p>
+                </div>
+            </div>
+        </div>
     </div>
-  </section>
-
-  <!-- ========== Footer ========== -->
-  <div class="taosha-footer">
-    🫧 淘沙 · 潮起潮落，留下每一刻珍贵的自我
-  </div>
-
-</main>
-
-<script>
-// ================================================================
-//  背景粒子生成
-// ================================================================
-(function initParticles() {
-  const el = document.getElementById('bgParticles');
-  const emojis = ['✨','⭐','🌟','💖','🩷','🌸','🫧','🌷','💐','🍃','🌿','💫','🦋','🌈','☁️'];
-  let html = '';
-  for (let i = 0; i < 22; i++) {
-    const e = emojis[Math.floor(Math.random() * emojis.length)];
-    const left = Math.random() * 100;
-    const dur  = 12 + Math.random() * 18;
-    const delay = Math.random() * 15;
-    const size = 16 + Math.random() * 24;
-    html += `<span class="bg-particle" style="left:${left}%;--dur:${dur}s;--delay:${delay}s;--size:${size}px;">${e}</span>`;
-  }
-  el.innerHTML = html;
-})();
-
-// ================================================================
-//  状态
-// ================================================================
-const state = {
-  photos: [],           // { id, dataUrl }
-  selectedStyle: '极简',
-  selectedTemplate: 0,  // 0=Plog 1=长图 2=九宫格
-  caption: '',
-};
-
-const $ = id => document.getElementById(id);
-const uploadZone = $('uploadZone');
-const fileInput = $('fileInput');
-const photoList = $('photoList');
-const emptyHint = $('emptyHint');
-const editSection = $('editSection');
-const keywordInput = $('keywordInput');
-const captionDisplay = $('captionDisplay');
-const generateBtn = $('generateBtn');
-const previewSection = $('previewSection');
-const previewContainer = $('previewContainer');
-const downloadBtn = $('downloadBtn');
-
-// ================================================================
-//  Toast
-// ================================================================
-let toastTimer;
-function showToast(msg) {
-  const el = $('toast');
-  el.textContent = msg;
-  el.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => el.classList.remove('show'), 2200);
-}
-
-// ================================================================
-//  图片上传
-// ================================================================
-uploadZone.addEventListener('click', () => fileInput.click());
-uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag-over'); });
-uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
-uploadZone.addEventListener('drop', e => {
-  e.preventDefault();
-  uploadZone.classList.remove('drag-over');
-  handleFiles(e.dataTransfer.files);
-});
-fileInput.addEventListener('change', () => { handleFiles(fileInput.files); fileInput.value = ''; });
-
-function handleFiles(files) {
-  const remaining = 9 - state.photos.length;
-  if (remaining <= 0) return showToast('最多上传 9 张照片哦～');
-  const list = Array.from(files).slice(0, remaining);
-  let loaded = 0, totalValid = 0;
-  list.forEach(file => {
-    if (!file.type.startsWith('image/')) return;
-    totalValid++;
-    const reader = new FileReader();
-    reader.onload = e => {
-      state.photos.push({
-        id: Date.now() + '_' + Math.random().toString(36).slice(2, 6),
-        dataUrl: e.target.result,
-      });
-      loaded++;
-      if (loaded === totalValid) { renderPhotos(); updateUI(); }
-    };
-    reader.readAsDataURL(file);
-  });
-  if (totalValid === 0) showToast('请选择图片格式的文件');
-}
-
-// ================================================================
-//  渲染缩略图
-// ================================================================
-function renderPhotos() {
-  if (state.photos.length === 0) {
-    photoList.innerHTML = '';
-    emptyHint.style.display = '';
-    return;
-  }
-  emptyHint.style.display = 'none';
-  photoList.innerHTML = state.photos.map((p, i) =>
-    `<div class="photo-item" data-id="${p.id}" draggable="true" style="animation-delay:${i*0.04}s;">
-      <img src="${p.dataUrl}" alt="">
-      <button class="del-btn" data-id="${p.id}">✕</button>
-      <span class="idx-badge">${i+1}</span>
-    </div>`
-  ).join('');
-
-  // 删除
-  photoList.querySelectorAll('.del-btn').forEach(btn => {
-    btn.addEventListener('click', e => {
-      e.stopPropagation();
-      state.photos = state.photos.filter(p => p.id !== btn.dataset.id);
-      renderPhotos();
-      updateUI();
-      if (state.photos.length === 0) {
-        editSection.style.display = 'none';
-        previewSection.style.display = 'none';
-      }
-    });
-  });
-
-  // 拖拽排序
-  let dragEl = null;
-  photoList.querySelectorAll('.photo-item').forEach(el => {
-    el.addEventListener('dragstart', e => {
-      dragEl = el;
-      el.classList.add('dragging');
-      e.dataTransfer.effectAllowed = 'move';
-    });
-    el.addEventListener('dragend', () => {
-      el.classList.remove('dragging');
-      dragEl = null;
-      photoList.querySelectorAll('.photo-item').forEach(x => x.style.borderColor = '');
-    });
-    el.addEventListener('dragover', e => {
-      e.preventDefault();
-      if (dragEl === el) return;
-      photoList.querySelectorAll('.photo-item').forEach(x => x.style.borderColor = '');
-      el.style.borderColor = 'var(--pink)';
-    });
-    el.addEventListener('dragleave', () => { el.style.borderColor = ''; });
-    el.addEventListener('drop', e => {
-      e.preventDefault();
-      el.style.borderColor = '';
-      if (dragEl && dragEl !== el) {
-        const fromIdx = state.photos.findIndex(p => p.id === dragEl.dataset.id);
-        const toIdx = state.photos.findIndex(p => p.id === el.dataset.id);
-        if (fromIdx > -1 && toIdx > -1) {
-          const [moved] = state.photos.splice(fromIdx, 1);
-          state.photos.splice(fromIdx < toIdx ? toIdx : toIdx, 0, moved);
-          renderPhotos();
-        }
-      }
-    });
-  });
-}
-
-function updateUI() {
-  editSection.style.display = state.photos.length > 0 ? '' : 'none';
-}
-
-// ================================================================
-//  风格 / 模板选择
-// ================================================================
-$('styleGroup').addEventListener('click', e => {
-  const btn = e.target.closest('.opt-btn');
-  if (!btn) return;
-  $('styleGroup').querySelectorAll('.opt-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  state.selectedStyle = btn.dataset.style;
-});
-
-$('tmplGroup').addEventListener('click', e => {
-  const btn = e.target.closest('.opt-btn');
-  if (!btn) return;
-  $('tmplGroup').querySelectorAll('.opt-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  state.selectedTemplate = parseInt(btn.dataset.template);
-  if (state.caption) renderTemplate();
-});
-
-// 快捷标签
-document.querySelectorAll('.tag-btn').forEach(tag => {
-  tag.addEventListener('click', () => {
-    keywordInput.value = tag.textContent.replace(/^[^\s]+\s/, '');
-  });
-});
-
-// ================================================================
-//  文案生成（模拟 AI）
-// ================================================================
-const CAPTION_MAP = {
-  '海边': ['🌊 海风掠过，把温柔留在镜头里', '潮汐带走了烦恼，留下了蔚蓝', '海与天之间，是夏日最温柔的底色'],
-  '生日': ['🎂 又长大一岁，快乐万岁', '许个愿吧，今天你最闪耀', '岁岁年年，共赴美好'],
-  '开心': ['😊 普通日子里的小快乐', '笑容是最好的滤镜', '记录每一个值得微笑的瞬间'],
-  '治愈': ['🫶 被温柔治愈的一天', '慢下来，感受生活的温度', '一切都在变好，只是需要时间'],
-  '旅行': ['✈️ 在路上，遇见不一样的自己', '把风景装进口袋，把回忆留在心底', '脚步丈量的每一寸，都是故事'],
-  '日落': ['🌅 日落尤其温柔，人间皆是浪漫', '黄昏把白天的故事写成诗', '落日归山海，山海藏深意'],
-};
-
-function generateCaption(keyword, style) {
-  const kw = keyword.trim();
-  let lines;
-  if (kw && CAPTION_MAP[kw]) {
-    lines = [...CAPTION_MAP[kw]];
-  } else if (kw) {
-    const match = Object.entries(CAPTION_MAP).find(([k]) => kw.includes(k) || k.includes(kw));
-    lines = match ? [...match[1]] : [`${kw} · 记录生活的小美好`, '每一刻都值得被珍藏'];
-  } else {
-    lines = ['📸 生活碎片，记录此刻美好', '把日常过成诗'];
-  }
-  if (style === '文艺') {
-    lines = lines.map(l => '「' + l.replace(/^[^\s]+\s/, '') + '」');
-  }
-  return [...lines, '', '#淘沙 #记录美好'].join('\n');
-}
-
-// ================================================================
-//  Canvas 排版渲染 — 3 套精品模板
-// ================================================================
-const SCALE = 2; // 高清输出
-
-// 预加载所有图片
-function preloadImages(dataUrls) {
-  return Promise.all(dataUrls.map(url => new Promise((resolve) => {
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.onload = () => resolve(img);
-    img.onerror = () => {
-      const c = document.createElement('canvas'); c.width = 100; c.height = 100;
-      const cx = c.getContext('2d');
-      cx.fillStyle = '#F5ECF2'; cx.fillRect(0, 0, 100, 100);
-      cx.fillStyle = '#D4C4D8'; cx.font = '12px sans-serif'; cx.textAlign = 'center';
-      cx.fillText('📷', 50, 55);
-      const fb = new Image(); fb.src = c.toDataURL();
-      fb.onload = () => resolve(fb);
-      fb.onerror = () => resolve(fb);
-    };
-    img.src = url;
-    if (img.complete && img.naturalWidth > 0) resolve(img);
-  })));
-}
-
-// ---- 绘图工具 ----
-
-/** 绘制圆角矩形路径 */
-function roundedPath(ctx, x, y, w, h, r) {
-  ctx.beginPath();
-  if (ctx.roundRect) { ctx.roundRect(x, y, w, h, r); return; }
-  r = Math.min(r, w / 2, h / 2);
-  ctx.moveTo(x + r, y); ctx.lineTo(x + w - r, y);
-  ctx.quadraticCurveTo(x + w, y, x + w, y + r); ctx.lineTo(x + w, y + h - r);
-  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h); ctx.lineTo(x + r, y + h);
-  ctx.quadraticCurveTo(x, y + h, x, y + h - r); ctx.lineTo(x, y + r);
-  ctx.quadraticCurveTo(x, y, x + r, y); ctx.closePath();
-}
-
-/** 图片 cover 填充绘制 */
-function drawCover(ctx, img, x, y, w, h, r) {
-  ctx.save();
-  if (r) { roundedPath(ctx, x, y, w, h, r); ctx.clip(); }
-  const iw = img.naturalWidth || img.width || w;
-  const ih = img.naturalHeight || img.height || h;
-  const s = Math.max(w / iw, h / ih);
-  const sw = iw * s, sh = ih * s;
-  ctx.drawImage(img, x - (sw - w) / 2, y - (sh - h) / 2, sw, sh);
-  ctx.restore();
-}
-
-/** 绘制实心圆角矩形 */
-function fillRoundRect(ctx, x, y, w, h, r, color) {
-  ctx.save(); ctx.fillStyle = color;
-  roundedPath(ctx, x, y, w, h, r); ctx.fill(); ctx.restore();
-}
-
-/** 阴影 */
-function setShadow(ctx, blur, offsetY, alpha) {
-  ctx.shadowColor = `rgba(0,0,0,${alpha})`;
-  ctx.shadowBlur = blur; ctx.shadowOffsetY = offsetY;
-}
-function clearShadow(ctx) {
-  ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;
-}
-
-/** 绘制虚线 */
-function drawDashed(ctx, x1, y1, x2, y2, color) {
-  ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = 1;
-  ctx.setLineDash([4, 4]); ctx.beginPath();
-  ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
-  ctx.setLineDash([]); ctx.restore();
-}
-
-/** 绘制纸胶带 */
-function drawWashiTape(ctx, x, y, w, color, angle) {
-  ctx.save(); ctx.globalAlpha = 0.65;
-  ctx.translate(x + w / 2, y); ctx.rotate((angle || -3) * Math.PI / 180);
-  ctx.fillStyle = color; roundedPath(ctx, -w / 2, -4, w, 16, 6); ctx.fill();
-  // 胶带锯齿边
-  for (let i = -w / 2 + 6; i < w / 2; i += 12) {
-    ctx.fillStyle = color; ctx.fillRect(i, -5, 4, 2);
-    ctx.fillRect(i + 2, 12, 4, 2);
-  }
-  ctx.restore();
-}
-
-/** 绘制虚线边框框 */
-function drawDoodleFrame(ctx, x, y, w, h, color, lineW) {
-  ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = lineW || 2;
-  ctx.lineJoin = 'round';
-  // 每边画 3 段，模拟手绘感
-  const segW = w / 3, segH = h / 3;
-  // top
-  for (let i = 0; i < 3; i++) {
-    ctx.beginPath(); ctx.moveTo(x + i * segW + 2, y); ctx.lineTo(x + (i + 1) * segW - 2, y); ctx.stroke();
-  }
-  // bottom
-  for (let i = 0; i < 3; i++) {
-    ctx.beginPath(); ctx.moveTo(x + i * segW + 2, y + h); ctx.lineTo(x + (i + 1) * segW - 2, y + h); ctx.stroke();
-  }
-  // left
-  for (let i = 0; i < 3; i++) {
-    ctx.beginPath(); ctx.moveTo(x, y + i * segH + 2); ctx.lineTo(x, y + (i + 1) * segH - 2); ctx.stroke();
-  }
-  // right
-  for (let i = 0; i < 3; i++) {
-    ctx.beginPath(); ctx.moveTo(x + w, y + i * segH + 2); ctx.lineTo(x + w, y + (i + 1) * segH - 2); ctx.stroke();
-  }
-  ctx.restore();
-}
-
-/** 画拍立得（带边框 + 底部留白 + 文字） */
-function drawPolaroid(ctx, img, cx, cy, pw, ph, caption, rotation) {
-  const FRAME = 12;        // 白边宽度
-  const BOTTOM_MARGIN = 36; // 底部留白
-  const photoW = pw - FRAME * 2;
-  const photoH = ph - FRAME * 2 - BOTTOM_MARGIN;
-  const totalW = pw, totalH = ph;
-
-  ctx.save();
-  // 旋转
-  ctx.translate(cx, cy);
-  ctx.rotate((rotation || 0) * Math.PI / 180);
-
-  // 阴影
-  setShadow(ctx, 12, 4, 0.15);
-
-  // 白框背景
-  fillRoundRect(ctx, -totalW / 2, -totalH / 2, totalW, totalH, 3, '#FFFFFF');
-  ctx.fillStyle = '#FFFFFF';
-  roundedPath(ctx, -totalW / 2, -totalH / 2, totalW, totalH, 3);
-  ctx.fill();
-
-  clearShadow(ctx);
-
-  // 照片
-  const px = -photoW / 2, py = -totalH / 2 + FRAME;
-  drawCover(ctx, img, px, py, photoW, photoH, 2);
-
-  // 底部文字
-  if (caption) {
-    ctx.fillStyle = '#5C4A63';
-    ctx.font = 'italic 10px "Georgia", serif';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    const textY = py + photoH + BOTTOM_MARGIN / 2;
-    // 截断过长文字
-    const maxW = photoW - 12;
-    let txt = caption;
-    if (ctx.measureText(txt).width > maxW) {
-      while (txt.length > 0 && ctx.measureText(txt + '…').width > maxW) txt = txt.slice(0, -1);
-      txt += '…';
-    }
-    ctx.fillText(txt, 0, textY);
-  }
-
-  ctx.restore();
-  return { x: cx - totalW / 2, y: cy - totalH / 2, w: totalW, h: totalH };
-}
-
-// ================================================================
-//  模板 0：拍立得拼贴 (Polaroid Collage)
-// ================================================================
-function renderPolaroid(ctx, W, H, imgs, caption) {
-  // 背景
-  const bgGrad = ctx.createLinearGradient(0, 0, W, H);
-  bgGrad.addColorStop(0, '#FFFBF8'); bgGrad.addColorStop(0.5, '#FFF5F0'); bgGrad.addColorStop(1, '#FFF0ED');
-  ctx.fillStyle = bgGrad; ctx.fillRect(0, 0, W, H);
-
-  // 装饰背景：散射小点
-  ctx.fillStyle = '#FFE4D6';
-  for (let i = 0; i < 40; i++) {
-    ctx.beginPath();
-    ctx.arc(Math.random() * W, Math.random() * H, 1 + Math.random() * 2, 0, Math.PI * 2);
-    ctx.fill();
-  }
-
-  const n = imgs.length;
-  const PAD = 30;
-  const POLA_W = (W - PAD * 3) / 2;
-  const POLA_H = POLA_W * 1.25; // 拍立得比例
-  const captionLines = caption.split('\n').filter(l => l.trim() && !l.startsWith('#'));
-
-  // 每张照片分配不同的 caption 和旋转
-  const positions = [];
-  for (let i = 0; i < n; i++) {
-    const col = i % 2;
-    let row = Math.floor(i / 2);
-    const rot = (i % 3 - 1) * 2.5; // -2.5, 0, 2.5
-    const cx = PAD + POLA_W / 2 + col * (POLA_W + PAD);
-    const cy = PAD + 30 + POLA_H / 2 + row * (POLA_H + PAD);
-    const cap = captionLines[i % captionLines.length] || '';
-    positions.push({ cx, cy, rot, cap });
-  }
-
-  // 画拍立得
-  positions.forEach((pos, i) => {
-    drawPolaroid(ctx, imgs[i], pos.cx, pos.cy, POLA_W, POLA_H, pos.cap, pos.rot);
-  });
-
-  // 底部装饰文字
-  const lastY = positions[positions.length - 1].cy + POLA_H / 2;
-  const footerY = Math.min(lastY + 60, H - 30);
-  ctx.fillStyle = '#C4A89C';
-  ctx.font = '12px sans-serif';
-  ctx.textAlign = 'center';
-  const tags = caption.split('\n').filter(l => l.startsWith('#'));
-  ctx.fillText(tags.join('  ') || '#淘沙 #记录美好', W / 2, footerY);
-
-  // 右上角装饰
-  ctx.fillStyle = '#FFE4D6';
-  ctx.font = '22px serif';
-  ctx.textAlign = 'right';
-  ctx.fillText('✦', W - 32, 40);
-}
-
-// ================================================================
-//  模板 1：手账 Plog 竖版长图 (Scrapbook Long)
-// ================================================================
-function renderScrapbook(ctx, W, H, imgs, caption) {
-  // 柔和背景
-  ctx.fillStyle = '#FFFEFB'; ctx.fillRect(0, 0, W, H);
-  // 点缀纹理
-  ctx.fillStyle = '#FDF5F0';
-  for (let i = 0; i < 30; i++) {
-    ctx.fillRect(4 + Math.random() * (W - 8), 4 + Math.random() * (H - 8), 12 + Math.random() * 30, 1);
-  }
-
-  const M = 36;
-  const imgW = W - M * 2;
-  let curY = M + 10;
-
-  // 顶部标题
-  ctx.fillStyle = '#4A3F4F';
-  ctx.font = 'bold 20px "Georgia", serif';
-  ctx.textAlign = 'left';
-  ctx.fillText('My Days', M, curY + 16);
-  drawDashed(ctx, M, curY + 26, W - M, curY + 26, '#D4C4D8');
-  curY += 44;
-
-  const tapeColors = ['#FFB3C6', '#C4B5FD', '#A7F3D0', '#FFD4B8', '#BAE6FD'];
-  const captionLines = caption.split('\n').filter(l => l.trim() && !l.startsWith('#'));
-
-  const displayCount = Math.min(imgs.length, 6);
-  for (let i = 0; i < displayCount; i++) {
-    const imgH = 180 + Math.floor(Math.random() * 40); // 变化高度
-
-    // 虚线边框
-    drawDoodleFrame(ctx, M, curY, imgW, imgH, '#E8D5E0', 1.5);
-
-    // 照片
-    drawCover(ctx, imgs[i], M + 3, curY + 3, imgW - 6, imgH - 6, 4);
-
-    // 纸胶带（随机颜色和角度）
-    const tapeColor = tapeColors[i % tapeColors.length];
-    const tapeAngle = (i % 3 - 1) * 4;
-    // 顶部胶带
-    drawWashiTape(ctx, M + 14, curY - 2, 50 + Math.random() * 30, tapeColor, tapeAngle);
-    // 底部胶带
-    drawWashiTape(ctx, W - M - 70 - Math.random() * 20, curY + imgH - 12, 45 + Math.random() * 25, tapeColor, tapeAngle + 2);
-
-    curY += imgH + 10;
-
-    // 照片间装饰 + 日期
-    if (i < displayCount - 1 && captionLines[i % captionLines.length]) {
-      curY += 8;
-      ctx.fillStyle = '#8A7A90';
-      ctx.font = '11px sans-serif';
-      ctx.textAlign = 'left';
-      ctx.fillText(captionLines[i % captionLines.length], M + 4, curY);
-
-      // 日期戳
-      const now = new Date();
-      const dateStr = `${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')}`;
-      ctx.fillStyle = '#B8A8BE';
-      ctx.font = '10px "Georgia", serif';
-      ctx.textAlign = 'right';
-      ctx.fillText(dateStr, W - M, curY);
-
-      // 装饰点
-      ctx.fillStyle = '#FFB3C6';
-      ctx.beginPath(); ctx.arc(M + 20, curY + 8, 3, 0, Math.PI * 2); ctx.fill();
-      ctx.beginPath(); ctx.arc(M + 34, curY + 8, 2, 0, Math.PI * 2); ctx.fill();
-
-      curY += 26;
-    }
-  }
-
-  // 底部 tag
-  const footerY = Math.max(curY + 20, H - 50);
-  ctx.fillStyle = '#C4B5C8';
-  ctx.font = '12px sans-serif';
-  ctx.textAlign = 'center';
-  const tags = caption.split('\n').filter(l => l.startsWith('#'));
-  ctx.fillText(tags.join('  ') || '#淘沙 #记录美好', W / 2, footerY + 16);
-}
-
-// ================================================================
-//  模板 2：电影胶片 (Film Strip)
-// ================================================================
-function renderFilmstrip(ctx, W, H, imgs, caption) {
-  // 黑色背景
-  ctx.fillStyle = '#1A1A1F'; ctx.fillRect(0, 0, W, H);
-
-  const SPROCKET_SIZE = 10;
-  const SPROCKET_GAP = 28;
-  const FRAME_PAD = 40; // 上下胶片边距
-
-  // 胶片底色
-  ctx.fillStyle = '#2A2A30'; ctx.fillRect(0, FRAME_PAD, W, H - FRAME_PAD * 2);
-
-  // 齿孔（上下两排）
-  for (let side = 0; side < 2; side++) {
-    const sy = side === 0 ? FRAME_PAD - SPROCKET_SIZE / 2 : H - FRAME_PAD + SPROCKET_SIZE / 2;
-    for (let x = SPROCKET_GAP / 2; x < W; x += SPROCKET_GAP) {
-      fillRoundRect(ctx, x - SPROCKET_SIZE / 2, sy - SPROCKET_SIZE / 2, SPROCKET_SIZE, SPROCKET_SIZE * 1.2, 2, '#0D0D12');
-    }
-  }
-
-  // 照片排列
-  const n = Math.min(imgs.length, 5);
-  const imgAreaW = W - 60;
-  const gap = 12;
-  const cellW = (imgAreaW - gap * (n - 1)) / n;
-  const cellH = H - FRAME_PAD * 2 - 30;
-  const startX = (W - (cellW * n + gap * (n - 1))) / 2;
-  const imgY = FRAME_PAD + 10;
-
-  for (let i = 0; i < n; i++) {
-    const ix = startX + i * (cellW + gap);
-    // 暖色调叠加
-    drawCover(ctx, imgs[i], ix, imgY, cellW, cellH, 4);
-    // 微弱暖色遮罩
-    ctx.fillStyle = 'rgba(255,180,120,0.06)';
-    roundedPath(ctx, ix, imgY, cellW, cellH, 4);
-    ctx.fill();
-
-    // 帧编号
-    ctx.fillStyle = '#FF8A60';
-    ctx.font = '9px monospace';
-    ctx.textAlign = 'right';
-    ctx.fillText(`FR-${String(i+1).padStart(2,'0')}`, ix + cellW - 6, imgY + cellH - 8);
-  }
-
-  // 底部字幕
-  const subtitle = caption.split('\n').find(l => l.trim() && !l.startsWith('#')) || '生活碎片';
-  ctx.fillStyle = '#E8D5C0';
-  ctx.font = '13px "Georgia", serif';
-  ctx.textAlign = 'center';
-  ctx.fillText(subtitle, W / 2, H - 12);
-}
-
-// ================================================================
-//  主渲染调度
-// ================================================================
-function renderTemplateSync(imgs) {
-  const idx = state.selectedTemplate;
-  let W, H;
-  if (idx === 0) {
-    // 拍立得：自适应高度
-    const cols = 2;
-    const rows = Math.ceil(imgs.length / cols);
-    const POLA_W = 240, POLA_H = 300, PAD = 30;
-    W = PAD * 3 + POLA_W * 2;
-    H = Math.max(600, PAD * 2 + 60 + rows * (POLA_H + PAD) + 50);
-  } else if (idx === 1) {
-    // 手账长图
-    W = 480; H = Math.max(800, 200 + Math.min(imgs.length, 6) * 280 + 100);
-  } else {
-    // 电影胶片：宽屏
-    W = 700; H = 460;
-  }
-
-  const canvas = document.createElement('canvas');
-  canvas.width = W * SCALE;
-  canvas.height = H * SCALE;
-  const ctx = canvas.getContext('2d');
-  ctx.scale(SCALE, SCALE);
-
-  if (idx === 0) {
-    renderPolaroid(ctx, W, H, imgs, state.caption);
-  } else if (idx === 1) {
-    renderScrapbook(ctx, W, H, imgs, state.caption);
-  } else {
-    renderFilmstrip(ctx, W, H, imgs, state.caption);
-  }
-
-  // 显示（限制最大宽度）
-  canvas.style.maxWidth = '100%';
-  canvas.style.height = 'auto';
-  canvas.style.width = Math.min(W, 500) + 'px';
-  previewContainer.innerHTML = '';
-  previewContainer.appendChild(canvas);
-  downloadBtn.disabled = false;
-}
-
-async function renderTemplate() {
-  if (state.photos.length === 0) return;
-  previewContainer.innerHTML = '<div class="spinner-wrap"><div class="spinner-dots"><span></span><span></span><span></span></div></div>';
-  try {
-    const imgs = await preloadImages(state.photos.map(p => p.dataUrl));
-    renderTemplateSync(imgs);
-  } catch (e) {
-    console.error(e);
-    previewContainer.innerHTML = '<p style="text-align:center;color:var(--text-lt);padding:40px;">渲染失败，请重试～</p>';
-  }
-}
-
-// ================================================================
-//  生成 & 下载
-// ================================================================
-generateBtn.addEventListener('click', () => {
-  if (state.photos.length === 0) return showToast('请先上传照片 📸');
-  state.caption = generateCaption(keywordInput.value, state.selectedStyle);
-  captionDisplay.textContent = state.caption;
-  captionDisplay.classList.add('filled');
-  previewSection.style.display = '';
-  renderTemplate();
-  showToast('生成成功 🎉');
-});
-
-downloadBtn.addEventListener('click', () => {
-  const canvas = previewContainer.querySelector('canvas');
-  if (!canvas) return showToast('请先生成排版');
-  const a = document.createElement('a');
-  a.download = '淘沙_' + Date.now() + '.png';
-  a.href = canvas.toDataURL('image/png');
-  a.click();
-  showToast('下载成功 💾');
-});
-
-downloadBtn.disabled = true;
-</script>
+</section>
+
+<!-- ==================== 专业技能 ==================== -->
+<section id="skills" class="skills">
+    <div class="container">
+        <h2>专业技能</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3>✍️ 文案策划</h3>
+                <ul>
+                    <li>广告文案创意与撰写</li>
+                    <li>品牌营销主题策划</li>
+                    <li>微信公众号内容运营</li>
+                    <li>长文案 / 短文案 / 热点文案</li>
+                    <li>纪录片策划与脚本写作</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3>📷 摄影</h3>
+                <ul>
+                    <li>人像写真与约拍</li>
+                    <li>静物产品摄影</li>
+                    <li>风景与纪实摄影</li>
+                    <li>后期修图与调色</li>
+                    <li>新闻摄影</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3>🎬 视频制作</h3>
+                <ul>
+                    <li>微电影拍摄与导演</li>
+                    <li>纪录片策划与制作</li>
+                    <li>宣传片拍摄</li>
+                    <li>视频剪辑与后期</li>
+                    <li>创意短片制作</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3>🛠️ 工具掌握</h3>
+                <ul>
+                    <li>Adobe Photoshop / Lightroom</li>
+                    <li>Adobe Premiere Pro</li>
+                    <li>Canva / 设计工具</li>
+                    <li>微信公众号后台运营</li>
+                    <li>Office 办公套件</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== 工作经历 ==================== -->
+<section id="experience" class="experience">
+    <div class="container">
+        <h2>工作经历</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <h3>内容运营 / 文案策划</h3>
+                    <div class="company">大象商机 · 微信公众号</div>
+                    <p><strong>实习期间</strong></p>
+                    <ul>
+                        <li>负责公众号日常内容策划、文案撰写与排版发布</li>
+                        <li>结合热点话题进行创意内容输出，提升粉丝互动率</li>
+                        <li>参与视频内容选题与脚本创作</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <h3>广告文案策划（参赛）</h3>
+                    <div class="company">学院奖 · 利郎男装命题</div>
+                    <p><strong>获奖作品：《欢迎来到，"利"体宇宙》</strong></p>
+                    <ul>
+                        <li>针对利郎「人生第一套职场装」主题创作系列广告文案</li>
+                        <li>以职场新人的成长历程为主线，唤起目标受众情感共鸣</li>
+                        <li>作品获得学院奖广告文案优秀类奖项</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <h3>自由摄影师</h3>
+                    <div class="company">个人摄影业务</div>
+                    <p><strong>持续运营中</strong></p>
+                    <ul>
+                        <li>承接人像写真、活动记录等约拍项目，累计服务 50+ 客户</li>
+                        <li>擅长捕捉有故事感的画面，注重自然光与情感表达</li>
+                        <li>涵盖人像、静物、风景等多种摄影类型</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== 作品集 ==================== -->
+<section id="portfolio" class="portfolio">
+    <div class="container">
+        <h2>精选作品</h2>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <div class="portfolio-image">
+                    <i class="fas fa-pen-fancy"></i>
+                </div>
+                <h3>利郎男装 · 广告文案</h3>
+                <p>为利郎「人生第一套职场装」营销主题创作的系列广告文案。以职场新人从校园到职场的成长故事为主线，包含平面短文案、长文案和春节热点文案，将品牌自然融入消费者的人生重要时刻。</p>
+                <ul class="results">
+                    <li>🏆 学院奖广告文案优秀类</li>
+                    <li>🏆 涵盖短文案/长文案/热点文案</li>
+                    <li>🏆 线上+线下多渠道投放策略</li>
+                </ul>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-image">
+                    <i class="fas fa-camera-retro"></i>
+                </div>
+                <h3>人像摄影作品</h3>
+                <p>持续接拍人像写真、情侣照、个人形象照等约拍项目。注重自然光线运用和真实情感的捕捉，每张照片都力求讲述一个独特的故事，而非简单的摆拍。</p>
+                <ul class="results">
+                    <li>📸 累计服务 50+ 客户</li>
+                    <li>📸 擅长自然光与氛围感人像</li>
+                    <li>📸 涵盖多种风格与场景</li>
+                </ul>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-image">
+                    <i class="fas fa-video"></i>
+                </div>
+                <h3>《你好沙坡尾》纪录片</h3>
+                <p>以厦门沙坡尾为背景创作的纪录短片，记录了这个老渔港在城市变迁中的面貌与人文故事。通过镜头语言展现传统与现代的交融，留住城市记忆中即将消逝的片段。</p>
+                <ul class="results">
+                    <li>🎬 独立策划/拍摄/剪辑</li>
+                    <li>🎬 人文纪录片类型</li>
+                    <li>🎬 厦门城市文化主题</li>
+                </ul>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-image">
+                    <i class="fas fa-film"></i>
+                </div>
+                <h3>《算不算》微电影</h3>
+                <p>原创微电影作品，从编剧到拍摄到后期全程参与。通过精心设计的情节和镜头语言，探索人与人之间微妙的情感关系，展现了扎实的叙事能力和视觉表达。</p>
+                <ul class="results">
+                    <li>🎬 原创编剧/导演作品</li>
+                    <li>🎬 完整微电影制作流程</li>
+                    <li>🎬 叙事与视觉双重探索</li>
+                </ul>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-image">
+                    <i class="fas fa-newspaper"></i>
+                </div>
+                <h3>《听潮》杂志发表</h3>
+                <p>文章发表于《听潮》杂志，内容聚焦于社会观察与文化思考。此外还撰写了多篇深度随笔，涵盖摄影艺术、科幻文学中的哲学思考、新闻伦理等多元主题。</p>
+                <ul class="results">
+                    <li>✍️ 杂志发表作品</li>
+                    <li>✍️ 多主题深度写作</li>
+                    <li>✍️ 文化观察与评论</li>
+                </ul>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-image">
+                    <i class="fas fa-bullhorn"></i>
+                </div>
+                <h3>金柄村拍胸舞宣传片</h3>
+                <p>为闽南传统民俗「拍胸舞」制作的文化宣传短片。深入金柄村，用镜头记录这一非物质文化遗产的独特魅力，助力传统文化在新时代的传播与传承。</p>
+                <ul class="results">
+                    <li>🎬 非遗文化宣传片</li>
+                    <li>🎬 实地采风拍摄</li>
+                    <li>🎬 传统文化传播</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== 教育背景 ==================== -->
+<section id="education" class="education">
+    <div class="container">
+        <h2>教育背景</h2>
+        <div class="education-list">
+            <div class="education-item">
+                <h3>厦门大学</h3>
+                <div class="school">Xiamen University</div>
+                <div class="year">本科</div>
+                <p>新闻传播相关专业，主修新闻摄影、广告文案、纪录片策划等课程</p>
+            </div>
+            <div class="education-item">
+                <h3>学院奖 · 广告文案</h3>
+                <div class="cert">中国大学生广告艺术节</div>
+                <div class="year">获奖</div>
+                <p>作品《欢迎来到，"利"体宇宙》获广告文案优秀类奖项</p>
+            </div>
+            <div class="education-item">
+                <h3>福建省大学生艺术节</h3>
+                <div class="cert">第六届艺术作品类</div>
+                <div class="year">二等奖</div>
+                <p>艺术作品获得省级二等奖荣誉</p>
+            </div>
+            <div class="education-item">
+                <h3>英语能力</h3>
+                <div class="cert">CET-4</div>
+                <div class="year">已获证书</div>
+                <p>具备良好的英语阅读与书面表达能力</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== 联系方式 ==================== -->
+<section id="contact" class="contact">
+    <div class="container">
+        <h2>联系我</h2>
+        <p class="contact-intro">
+            如果你对我的作品感兴趣，或者有文案策划、摄影、视频制作方面的合作需求，
+            欢迎通过以下方式与我联系。期待与你一起创造打动人心的作品！
+        </p>
+        <div class="contact-methods">
+            <a href="mailto:joyce.chow@email.com" class="contact-method">
+                <i class="fas fa-envelope"></i>
+                <span>joyce.chow@email.com</span>
+            </a>
+            <a href="#" class="contact-method">
+                <i class="fab fa-weixin"></i>
+                <span>微信联系</span>
+            </a>
+            <a href="#" class="contact-method" target="_blank" rel="noopener">
+                <i class="fas fa-cloud"></i>
+                <span>百度网盘作品集</span>
+            </a>
+            <a href="#" class="contact-method">
+                <i class="fas fa-camera"></i>
+                <span>约拍咨询</span>
+            </a>
+        </div>
+        <form class="contact-form">
+            <div class="form-group">
+                <input type="text" placeholder="您的姓名" required>
+            </div>
+            <div class="form-group">
+                <input type="email" placeholder="您的邮箱" required>
+            </div>
+            <div class="form-group">
+                <input type="text" placeholder="合作类型（文案/摄影/视频/其他）">
+            </div>
+            <div class="form-group">
+                <textarea rows="5" placeholder="请描述您的需求..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">发送信息</button>
+        </form>
+    </div>
+</section>
+
+<!-- ==================== 页脚 ==================== -->
+<footer class="footer">
+    <div class="container">
+        <p>&copy; 2024 周蕾 Joyce Chow. All Rights Reserved.</p>
+        <div class="social-links">
+            <a href="mailto:joyce.chow@email.com" title="邮箱">
+                <i class="fas fa-envelope"></i>
+            </a>
+            <a href="#" title="微信">
+                <i class="fab fa-weixin"></i>
+            </a>
+            <a href="#" title="百度网盘">
+                <i class="fas fa-cloud"></i>
+            </a>
+        </div>
+    </div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>

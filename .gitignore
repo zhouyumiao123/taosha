@@ -1,0 +1,32 @@
+# 个人隐私文件
+resume.html
+简历-可编辑版.html
+images/profile-id.jpg
+
+# 开发文档
+CLAUDE.md
+*.md
+
+# 临时文件
+_temp_docx/
+_extract_docx.js
+server.js
+
+# 测试/杂项
+hello.py
+import openai.py
+Untitled-1.txt
+zym
+
+# OCR数据
+*.traineddata
+
+# Claude配置
+.claude/
+
+# 淘沙素材
+淘沙/
+简历
+
+# 大文件素材
+849aa5f36d8969a05255ae08b21cab0a.jpg
