@@ -8,6 +8,7 @@
 <meta property="og:title" content="周蕾 Joyce Chow | Portfolio">
 <meta property="og:description" content="品牌策略 · 整合营销 · 内容创意">
 <meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230d7c6b'/><text x='50' y='68' font-size='56' text-anchor='middle' fill='white' font-family='Georgia,serif' font-weight='bold'>J</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
@@ -466,6 +467,7 @@ body {
   <div class="hero-scroll">
     <span class="scroll-arrow">↓</span> SCROLL
   </div>
+  <div class="hero-bridge"></div>
 </section>
 
 <!-- ==================== FEATURED WORK ==================== -->
@@ -480,9 +482,8 @@ body {
 
     <!-- Case 1: 微光计划 -->
     <div class="work-item fade-in">
-      <div class="work-visual">
+      <div class="work-visual" style="background: url('images/work-micsig.png') center/cover no-repeat;">
         <span class="work-tag">Brand Strategy</span>
-        <div class="work-icon">✦</div>
       </div>
       <div class="work-info">
         <div class="work-number">01</div>
@@ -569,37 +570,45 @@ body {
 <section class="photo-showcase" id="photography">
   <div class="photo-cursor" id="photoCursor">VIEW</div>
 
-  <div class="photo-panel fade-in" style="background-image: url('images/photography/微信图片_20260615154549_22_11.jpg');">
+  <div class="photo-intro fade-in" style="height:60vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0 24px;">
+    <div class="section-label" style="color:var(--emerald);">Photography</div>
+    <h2 style="font-size:clamp(28px,4vw,42px); font-weight:700; margin:16px 0; color:var(--black);">用镜头记录光影</h2>
+    <p style="font-size:16px; color:var(--gray); max-width:480px; line-height:1.8;">
+      摄影于我，是对时间的凝固——捕捉那些转瞬即逝的真实与美。
+    </p>
+  </div>
+
+  <div class="photo-panel fade-in" style="background-image: url('images/photo-compressed/微信图片_20260615154549_22_11.jpg');">
     <div class="photo-caption">
       <span class="en-quote">"Light makes photography. Embrace light."</span>
       光影是摄影的靈魂
     </div>
   </div>
-  <div class="photo-panel fade-in" style="background-image: url('images/photography/微信图片_20260615155533_25_11.jpg');">
+  <div class="photo-panel fade-in" style="background-image: url('images/photo-compressed/微信图片_20260615155533_25_11.jpg');">
     <div class="photo-caption">
       <span class="en-quote">"A photograph is a secret about a secret."</span>
       每張照片，都是時間的切片
     </div>
   </div>
-  <div class="photo-panel fade-in" style="background-image: url('images/photography/微信图片_20260615154447_18_11.jpg');">
+  <div class="photo-panel fade-in" style="background-image: url('images/photo-compressed/微信图片_20260615154447_18_11.jpg');">
     <div class="photo-caption">
       <span class="en-quote">"The eye should learn to listen."</span>
       鏡頭之下，萬物有靈
     </div>
   </div>
-  <div class="photo-panel fade-in" style="background-image: url('images/photography/微信图片_20260615155536_26_11.jpg');">
+  <div class="photo-panel fade-in" style="background-image: url('images/photo-compressed/微信图片_20260615155536_26_11.jpg');">
     <div class="photo-caption">
       <span class="en-quote">"To me, photography is the art of observation."</span>
       捕捉光影，也捕捉故事
     </div>
   </div>
-  <div class="photo-panel fade-in" style="background-image: url('images/photography/微信图片_20260615155539_28_11.jpg');">
+  <div class="photo-panel fade-in" style="background-image: url('images/photo-compressed/微信图片_20260615155539_28_11.jpg');">
     <div class="photo-caption">
       <span class="en-quote">"What I like about photographs is the truth."</span>
       真實，是攝影最動人的語言
     </div>
   </div>
-  <div class="photo-panel fade-in" style="background-image: url('images/photography/微信图片_20260615155541_30_11.jpg');">
+  <div class="photo-panel fade-in" style="background-image: url('images/photo-compressed/微信图片_20260615155541_30_11.jpg');">
     <div class="photo-caption">
       <span class="en-quote">"Photography is the story I fail to put into words."</span>
       用鏡頭，寫下未盡之言
@@ -769,6 +778,21 @@ if (showcase && cursor) {
   showcase.addEventListener('mouseenter', () => cursor.classList.add('active'));
   showcase.addEventListener('mouseleave', () => cursor.classList.remove('active'));
 }
+
+// Nav active indicator
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    if (window.scrollY >= section.offsetTop - 120) {
+      current = section.getAttribute('id');
+    }
+  });
+  navLinks.forEach(link => {
+    link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+  });
+});
 
 // Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(link => {
