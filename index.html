@@ -425,7 +425,7 @@ body {
   </p>
   <div class="contact-links">
     <a href="mailto:joyzho@foxmail.com" class="contact-link">Email</a>
-    <a href="#" class="contact-link">WeChat</a>
+    <a href="#" class="contact-link" id="wechatBtn">WeChat</a>
     <a href="https://pan.baidu.com/s/10uioa5ouSXhdVuF6-z8yog?pwd=nmsy" target="_blank" rel="noopener" class="contact-link">Portfolio</a>
     <a href="简历-可编辑版.html" class="contact-link" target="_blank" rel="noopener">Resume</a>
   </div>
@@ -446,6 +446,27 @@ const obs = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold:0.1, rootMargin:'0px 0px -30px 0px' });
 document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+// WeChat copy
+const wechatBtn = document.getElementById('wechatBtn');
+if (wechatBtn) {
+  wechatBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    navigator.clipboard.writeText('15071690127').then(() => {
+      const orig = wechatBtn.textContent;
+      wechatBtn.textContent = '已复制 ✓';
+      wechatBtn.style.color = '#fff';
+      wechatBtn.style.background = 'var(--ink)';
+      wechatBtn.style.borderColor = 'var(--ink)';
+      setTimeout(() => {
+        wechatBtn.textContent = orig;
+        wechatBtn.style.color = '';
+        wechatBtn.style.background = '';
+        wechatBtn.style.borderColor = '';
+      }, 2000);
+    });
+  });
+}
 
 // Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(link => {
