@@ -132,6 +132,10 @@ body {
   background-size:cover; background-position:center;
   transition:transform 0.5s;
 }
+.work-visual.contain {
+  background-size:contain; background-repeat:no-repeat;
+  background-color:var(--warm);
+}
 .work-visual:hover { transform:scale(1.02); }
 .work-tag {
   font-family:"Inter",sans-serif;
@@ -295,7 +299,7 @@ body {
           <div><div class="num">16+</div><div class="lbl">表情包 &amp; 延展</div></div>
         </div>
       </div>
-      <div class="work-visual" style="background-image:url('images/nomi/nomi-3.png')"></div>
+      <div class="work-visual contain" style="background-image:url('images/nomi/nomi-3.png')"></div>
     </div>
 
     <div class="work-item fade-in">
