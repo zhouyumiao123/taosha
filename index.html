@@ -87,25 +87,27 @@ body {
   position: absolute; inset: 0; pointer-events: none; z-index: 0;
   overflow: hidden;
 }
-.hero-aurora .orb {
+.hero-aurora .orb-drift {
   position: absolute; border-radius: 50%;
-  filter: blur(100px); opacity: 0.45;
   animation: auroraDrift var(--dur) ease-in-out infinite alternate;
 }
-.hero-aurora .orb-1 {
-  width: 800px; height: 800px;
+.orb-drift-1 { width: 800px; height: 800px; top: -25%; right: -20%; --dur: 18s; }
+.orb-drift-2 { width: 600px; height: 600px; bottom: -30%; left: -15%; --dur: 24s; }
+.orb-drift-3 { width: 500px; height: 500px; top: 40%; left: 55%; --dur: 30s; }
+
+.hero-aurora .orb {
+  width: 100%; height: 100%; border-radius: 50%;
+  filter: blur(100px); opacity: 0.45;
+  transition: transform 0.15s ease-out;
+}
+.orb-drift-1 .orb {
   background: radial-gradient(circle, rgba(13,200,160,0.9) 0%, rgba(13,124,107,0.5) 40%, transparent 70%);
-  top: -25%; right: -20%; --dur: 18s;
 }
-.hero-aurora .orb-2 {
-  width: 600px; height: 600px;
+.orb-drift-2 .orb {
   background: radial-gradient(circle, rgba(10,160,130,0.8) 0%, rgba(6,95,82,0.4) 40%, transparent 70%);
-  bottom: -30%; left: -15%; --dur: 24s;
 }
-.hero-aurora .orb-3 {
-  width: 500px; height: 500px;
+.orb-drift-3 .orb {
   background: radial-gradient(circle, rgba(20,180,145,0.75) 0%, rgba(26,150,130,0.35) 40%, transparent 70%);
-  top: 40%; left: 55%; --dur: 30s;
 }
 @keyframes auroraDrift {
   0%   { transform: translate(0, 0) scale(1); }
@@ -444,9 +446,9 @@ body {
 <!-- ==================== HERO ==================== -->
 <section class="hero" id="home">
   <div class="hero-aurora" id="heroAurora">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
+    <div class="orb-drift orb-drift-1"><div class="orb"></div></div>
+    <div class="orb-drift orb-drift-2"><div class="orb"></div></div>
+    <div class="orb-drift orb-drift-3"><div class="orb"></div></div>
   </div>
   <div class="hero-content">
     <div class="hero-eyebrow">Brand Strategist &amp; Creative</div>
@@ -735,13 +737,14 @@ window.addEventListener('scroll', () => {
 // Mouse-move parallax on aurora orbs
 const aurora = document.getElementById('heroAurora');
 if (aurora) {
-  document.addEventListener('mousemove', (e) => {
+  const hero = document.querySelector('.hero');
+  hero.addEventListener('mousemove', (e) => {
     const x = (e.clientX / window.innerWidth - 0.5) * 2;
     const y = (e.clientY / window.innerHeight - 0.5) * 2;
     const orbs = aurora.querySelectorAll('.orb');
-    orbs[0].style.transform = `translate(${x * 30}px, ${y * 25}px) scale(1)`;
-    orbs[1].style.transform = `translate(${-x * 20}px, ${-y * 18}px) scale(1)`;
-    orbs[2].style.transform = `translate(${x * 15}px, ${-y * 12}px) scale(1)`;
+    orbs[0].style.transform = `translate(${x * 60}px, ${y * 50}px)`;
+    orbs[1].style.transform = `translate(${-x * 40}px, ${-y * 35}px)`;
+    orbs[2].style.transform = `translate(${x * 30}px, ${-y * 25}px)`;
   });
 }
 
