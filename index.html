@@ -247,6 +247,26 @@ body {
 .photo-frame img { width:100%; height:480px; object-fit:cover; display:block; transition:transform 0.5s; }
 .photo-frame:hover img { transform:scale(1.03); }
 
+/* ===== AI Native ===== */
+.ai-card {
+  display:flex; align-items:center; gap:10px; padding:16px 20px;
+  border:1px solid var(--warm-dark); font-size:14px; font-weight:500;
+  color:var(--ink); transition:all 0.35s;
+}
+.ai-card:hover { border-color:var(--gold); transform:translateY(-2px); }
+.ai-card-icon { color:var(--gold); font-size:8px; }
+.ai-metric { text-align:center; padding:24px 16px; border:1px solid var(--warm-dark); transition:all 0.35s; }
+.ai-metric:hover { border-color:var(--gold); }
+.am-num { font-size:28px; font-weight:700; color:var(--ink); line-height:1; }
+.am-lbl { font-size:11px; color:var(--muted); margin-top:6px; font-family:"Inter",sans-serif; letter-spacing:0.04em; }
+.ai-step { text-align:center; }
+.ai-year { font-family:"Inter",sans-serif; font-size:13px; font-weight:600; color:var(--ink); }
+.ai-label { font-size:11px; color:var(--muted); margin-top:2px; }
+@media (max-width:768px) {
+  .ai-grid { grid-template-columns:repeat(2,1fr) !important; }
+  .ai-metrics { grid-template-columns:repeat(2,1fr) !important; }
+}
+
 /* ===== About ===== */
 .about-grid { max-width:1000px; margin:0 auto; }
 .about-top { display:flex; align-items:start; gap:64px; margin-bottom:40px; }
@@ -319,6 +339,7 @@ body {
     <li><a href="#work">Work</a></li>
     <li><a href="#photography">Photography</a></li>
     <li><a href="#about">About</a></li>
+    <li><a href="#ai-native">AI Native</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -498,10 +519,61 @@ body {
   </div>
 </section>
 
+<!-- AI Native Marketer -->
+<section class="section" id="ai-native">
+  <div class="section-inner">
+  <div class="section-num en">—</div>
+  <h2 class="section-title">AI Native Marketer</h2>
+  <p class="section-title-cn">AI原生营销人</p>
+  <p style="text-align:center;color:var(--muted);font-size:17px;max-width:600px;margin:0 auto 56px;line-height:1.8;">
+    Combining brand strategy, storytelling and AI collaboration to explore the future of marketing.
+  </p>
+
+  <!-- Capability Grid -->
+  <div class="ai-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:900px;margin:0 auto 64px;">
+    <div class="ai-card fade-in"><span class="ai-card-icon">&#9670;</span><span>Brand Strategy</span></div>
+    <div class="ai-card fade-in"><span class="ai-card-icon">&#9670;</span><span>Content Systems</span></div>
+    <div class="ai-card fade-in"><span class="ai-card-icon">&#9670;</span><span>AI Workflow</span></div>
+    <div class="ai-card fade-in"><span class="ai-card-icon">&#9670;</span><span>Vibe Coding</span></div>
+    <div class="ai-card fade-in"><span class="ai-card-icon">&#9670;</span><span>Automation</span></div>
+    <div class="ai-card fade-in"><span class="ai-card-icon">&#9670;</span><span>Creative Production</span></div>
+  </div>
+
+  <!-- Metrics Grid -->
+  <div class="ai-metrics" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:900px;margin:0 auto 64px;">
+    <div class="ai-metric fade-in"><div class="am-num">100+</div><div class="am-lbl">Prompt Library</div></div>
+    <div class="ai-metric fade-in"><div class="am-num">10+</div><div class="am-lbl">Marketing Workflows</div></div>
+    <div class="ai-metric fade-in"><div class="am-num">4</div><div class="am-lbl">AI Models Used Daily</div></div>
+    <div class="ai-metric fade-in"><div class="am-num">0 &rarr; 1</div><div class="am-lbl">AI-built Website</div></div>
+  </div>
+
+  <!-- Journey -->
+  <div class="ai-journey" style="display:flex;justify-content:center;gap:32px;flex-wrap:wrap;max-width:900px;margin:0 auto 64px;">
+    <div class="ai-step fade-in"><div class="ai-year">2024</div><div class="ai-label">GPT</div></div>
+    <div class="ai-divider" style="color:var(--gold);">→</div>
+    <div class="ai-step fade-in"><div class="ai-year">2025</div><div class="ai-label">Workflow</div></div>
+    <div class="ai-divider" style="color:var(--gold);">→</div>
+    <div class="ai-step fade-in"><div class="ai-year">2025</div><div class="ai-label">Claude Code</div></div>
+    <div class="ai-divider" style="color:var(--gold);">→</div>
+    <div class="ai-step fade-in"><div class="ai-year">2026</div><div class="ai-label">Personal Website</div></div>
+    <div class="ai-divider" style="color:var(--gold);">→</div>
+    <div class="ai-step fade-in"><div class="ai-year">Now</div><div class="ai-label">AI Native Marketing</div></div>
+  </div>
+
+  <!-- Quote -->
+  <div class="ai-quote fade-in" style="text-align:center;max-width:620px;margin:0 auto;">
+    <p style="font-size:20px;font-weight:500;line-height:1.7;color:var(--ink);font-style:italic;">
+      "AI won't replace marketers.<br>Marketers who use AI will replace those who don't."
+    </p>
+  </div>
+
+  </div>
+</section>
+
 <!-- Experience -->
 <section class="section" id="experience">
   <div class="section-inner">
-  <div class="section-num en">03</div>
+  <div class="section-num en">04</div>
   <h2 class="section-title">Experience</h2>
   <p class="section-title-cn">经历</p>
   <div class="timeline">
@@ -544,7 +616,7 @@ body {
 <!-- Photography -->
 <section class="section" id="photography">
   <div class="section-inner">
-  <div class="section-num en">04</div>
+  <div class="section-num en">05</div>
   <h2 class="section-title">Photography</h2>
   <p class="section-title-cn">摄影作品 · 光影秩序</p>
   <p style="text-align:center;color:var(--muted);font-size:16px;line-height:1.9;max-width:560px;margin:0 auto 40px;">
@@ -574,7 +646,7 @@ body {
 
 <!-- Contact -->
 <section class="contact-section" id="contact">
-  <div class="section-num en">05</div>
+  <div class="section-num en">06</div>
   <h2 class="section-title">Contact</h2>
   <p class="section-title-cn" style="margin-bottom:32px;">联系</p>
   <p style="color:var(--muted);max-width:480px;margin:0 auto 0;font-size:16px;line-height:1.9;">
