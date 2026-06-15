@@ -3,888 +3,426 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>周蕾 Joyce Chow | 链接技术与市场，构建有温度的品牌叙事</title>
-<meta name="description" content="周蕾 (Joyce Chow) — 品牌策划与市场推广。3年B2B/B2C经验，链接技术与市场，构建有温度的品牌叙事。">
-<meta property="og:title" content="周蕾 Joyce Chow | Portfolio">
-<meta property="og:description" content="品牌策略 · 整合营销 · 内容创意">
-<meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230d7c6b'/><text x='50' y='68' font-size='56' text-anchor='middle' fill='white' font-family='Georgia,serif' font-weight='bold'>J</text></svg>">
+<title>JOYCE CHOW | Brand Strategist & Creative</title>
+<meta name="description" content="JOYCE CHOW — Brand Strategist & Creative. 以内容连接技术与用户，让复杂价值被理解，让品牌被记住。">
+<meta property="og:title" content="JOYCE CHOW | Brand Strategist & Creative">
+<meta property="og:description" content="Brand Marketing • Content Strategy • Storytelling">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='8' fill='%23111111'/><text x='50' y='72' font-size='60' text-anchor='middle' fill='%23D4AF37' font-family='serif' font-weight='bold'>J</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   Joyce Chow Portfolio — Emerald Edition
-   配色：白 + 深灰/黑 + 祖母绿 #0d7c6b
+   JOYCE CHOW — Editorial Edition
+   黑白暖灰 • 香槟金 • 杂志感 • 克制
    ============================================================ */
-
 :root {
-  --emerald: #0d7c6b;
-  --emerald-dark: #095a4e;
-  --emerald-light: #e8f5f1;
-  --accent: #F7F5F2;
-  --accent-dark: #E8E5E0;
-  --carbon: #111111;
-  --black: #1a1a1a;
-  --gray: #666;
-  --gray-light: #999;
-  --white: #ffffff;
-  --transition: 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ink: #111111;
+  --paper: #ffffff;
+  --warm: #F7F5F2;
+  --warm-dark: #D8D3CB;
+  --muted: #8A8A8A;
+  --gold: #D4AF37;
+  --gold-dim: rgba(212,175,55,0.15);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* { margin:0; padding:0; box-sizing:border-box; }
 
-html {
-  scroll-behavior: smooth;
-  scroll-snap-type: y proximity;
-  scroll-padding-top: 60px;
-}
+html { scroll-behavior:smooth; }
 
 body {
-  font-family: "Inter", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", -apple-system, sans-serif;
-  color: var(--black);
-  background: var(--white);
-  line-height: 1.7;
-  -webkit-font-smoothing: antialiased;
+  font-family:"Noto Sans SC","Inter","PingFang SC","Microsoft YaHei",sans-serif;
+  color:var(--ink); background:var(--paper);
+  line-height:1.7; -webkit-font-smoothing:antialiased;
 }
 
 /* ===== Typography ===== */
-.en { font-family: "Inter", "PingFang SC", sans-serif; }
-.en-serif { font-family: "Playfair Display", Georgia, serif; font-style: italic; }
-.mono { font-family: "JetBrains Mono", "SF Mono", "Consolas", monospace; font-size: 0.92em; }
+.en { font-family:"Inter",sans-serif; }
 
 /* ===== Nav ===== */
 .nav {
-  position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-  padding: 18px 48px;
-  display: flex; justify-content: space-between; align-items: center;
-  transition: opacity 0.5s, transform 0.5s;
+  position:fixed; top:0; left:0; width:100%; z-index:100;
+  padding:20px 48px;
+  display:flex; justify-content:space-between; align-items:center;
+  mix-blend-mode:difference; color:#fff;
+  transition:opacity 0.6s,transform 0.6s;
 }
-.nav.hidden {
-  opacity: 0; transform: translateY(-100%);
-  pointer-events: none;
-}
+.nav.hidden { opacity:0; transform:translateY(-100%); pointer-events:none; }
 .nav-logo {
-  display: flex; align-items: center; gap: 8px;
-  text-decoration: none; color: var(--carbon);
-  font-family: "Inter", sans-serif;
-  font-size: 12px; font-weight: 600; letter-spacing: 0.12em;
-  transition: color 0.4s;
+  font-family:"Inter",sans-serif;
+  font-size:13px; font-weight:600; letter-spacing:0.1em;
+  text-decoration:none; color:inherit;
 }
-.nav-logo-mark {
-  width: 6px; height: 6px;
-  background: var(--accent);
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-.nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
+.nav-links { display:flex; gap:32px; list-style:none; }
 .nav-links a {
-  font-family: "Inter", sans-serif;
-  font-size: 12px; font-weight: 500; text-decoration: none;
-  color: var(--carbon);
-  letter-spacing: 0.06em; transition: color 0.3s;
-  position: relative;
+  font-family:"Inter",sans-serif;
+  font-size:12px; font-weight:500; text-decoration:none; color:inherit;
+  letter-spacing:0.06em; transition:opacity 0.3s; position:relative;
 }
 .nav-links a::after {
-  content: ''; position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%);
-  width: 0; height: 1.5px; background: var(--accent);
-  transition: width 0.3s ease;
+  content:''; position:absolute; bottom:-4px; left:0; width:0; height:1px;
+  background:var(--gold); transition:width 0.3s ease;
 }
-.nav-links a:hover { color: #000; }
-.nav-links a:hover::after { width: 14px; }
-.nav-links a.active::after { width: 14px; }
+.nav-links a:hover::after { width:100%; }
 
 /* ===== Hero ===== */
 .hero {
-  min-height: 100vh; display: flex; align-items: center;
-  scroll-snap-align: start;
-  color: #fff; position: relative; overflow: hidden;
-  padding: 120px 60px 80px;
-  cursor: default;
-  background: #0a0a0a;
+  min-height:100vh; display:flex; align-items:center;
+  background:var(--ink); color:#fff; position:relative;
+  padding:120px 60px 80px;
 }
-
-/* Ken Burns photo background */
-.hero-bg {
-  position: absolute; inset: -10%;
-  background: url('images/hero-bg.jpg') center/cover no-repeat;
-  animation: kenBurns 30s ease-in-out infinite alternate;
-  z-index: 0;
-}
-.hero-bg::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(160deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 40%, rgba(0,0,0,0.45) 100%);
-}
-@keyframes kenBurns {
-  0%   { transform: scale(1) translate(0, 0); }
-  100% { transform: scale(1.08) translate(-1%, -0.5%); }
-}
-
-/* Floating spring particles */
-.hero-particles {
-  position: absolute; inset: 0; pointer-events: none; z-index: 1;
-}
-.hero-particle {
-  position: absolute; width: 3px; height: 3px;
-  background: rgba(255,255,255,0.6); border-radius: 50%;
-  animation: floatUp var(--dur) var(--delay) ease-in infinite;
-  box-shadow: 0 0 6px rgba(255,255,255,0.3);
-}
-@keyframes floatUp {
-  0%   { opacity: 0; transform: translateY(110vh) translateX(0) rotate(0deg); }
-  10%  { opacity: 0.7; }
-  80%  { opacity: 0.3; }
-  100% { opacity: 0; transform: translateY(-10vh) translateX(var(--drift)) rotate(360deg); }
-}
-
-/* Subtle warm wash over photo */
-.hero-wash {
-  position: absolute; inset: 0; pointer-events: none; z-index: 1;
-  background: radial-gradient(ellipse at 70% 30%, rgba(247,245,242,0.1) 0%, transparent 60%),
-              radial-gradient(ellipse at 30% 80%, rgba(0,0,0,0.15) 0%, transparent 50%);
-}
-
-/* Hero content */
-.hero-content { max-width: 820px; position: relative; z-index: 2; }
-
-/* Eyebrow */
+.hero-content { max-width:900px; }
 .hero-eyebrow {
-  font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--accent); margin-bottom: 28px; font-weight: 600;
-  opacity: 0; transform: translateY(12px);
-  animation: heroFadeIn 0.7s ease 0.1s forwards;
-}
-
-/* Main heading */
-.hero h1 {
-  font-size: clamp(36px, 5vw, 60px); font-weight: 800;
-  line-height: 1.2; letter-spacing: 0.03em; margin-bottom: 20px;
-  opacity: 0; transform: translateY(16px);
-  animation: heroFadeIn 0.8s ease 0.25s forwards;
-}
-.hero h1 .highlight {
-  position: relative; display: inline-block;
-  color: var(--accent); padding: 0 2px;
-}
-.hero h1 .highlight::after {
-  content: '';
-  position: absolute; left: 0; bottom: 2px;
-  width: 0%; height: 1.5px;
-  background: var(--accent);
-  animation: highlighterSwipe 1s ease 0.7s forwards;
-}
-@keyframes highlighterSwipe {
-  0%   { width: 0%; left: 0; }
-  100% { width: 100%; left: 0; }
+  font-family:"Inter",sans-serif;
+  font-size:11px; letter-spacing:0.16em; text-transform:uppercase;
+  color:var(--gold); margin-bottom:32px; font-weight:500;
 }
 .hero h1 {
-  text-shadow: 0 2px 12px rgba(0,0,0,0.18);
+  font-size:clamp(52px,8vw,100px); font-weight:800;
+  line-height:1.05; letter-spacing:-0.04em;
+  margin-bottom:28px; color:#fff;
 }
-
-/* Subtitle */
 .hero .subtitle {
-  font-size: clamp(15px, 1.8vw, 18px); color: var(--carbon);
-  line-height: 1.9; margin-bottom: 44px; max-width: 540px; font-weight: 400;
-  opacity: 0; transform: translateY(12px);
-  animation: heroFadeIn 0.8s ease 0.45s forwards;
-  text-shadow: 0 1px 2px rgba(255,255,255,0.3);
+  font-size:18px; line-height:1.8; color:var(--warm-dark);
+  max-width:580px; margin-bottom:48px; font-weight:400;
 }
-
-/* CTA button — artistic */
+.hero .subtitle .tags {
+  font-family:"Inter",sans-serif;
+  font-size:13px; letter-spacing:0.08em; color:var(--gold);
+  display:block; margin-bottom:20px;
+}
 .hero .cta {
-  display: inline-flex; align-items: center; gap: 12px;
-  padding: 15px 36px;
-  background: var(--carbon); border: none;
-  color: #fff; text-decoration: none; font-size: 14px; letter-spacing: 0.07em;
-  transition: all 0.35s ease; cursor: pointer;
-  opacity: 0; transform: translateY(12px);
-  animation: heroFadeIn 0.8s ease 0.6s forwards;
+  display:inline-flex; align-items:center; gap:10px;
+  padding:16px 36px; background:#fff; color:var(--ink);
+  text-decoration:none; font-size:14px; font-weight:600;
+  letter-spacing:0.04em; transition:all 0.35s;
 }
-.hero .cta:hover {
-  background: #000;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-}
-.hero .cta .arrow {
-  display: inline-block; transition: transform 0.35s ease;
-  color: var(--accent);
-}
-.hero .cta:hover .arrow { transform: translateX(5px); }
+.hero .cta:hover { background:var(--gold); color:#fff; }
+.hero .cta .arrow { transition:transform 0.3s; }
+.hero .cta:hover .arrow { transform:translateX(4px); }
 
-/* Staggered fade-in keyframes */
-@keyframes heroFadeIn {
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Scroll indicator */
-.hero-scroll {
-  position: absolute; bottom: 40px; left: 60px;
-  font-size: 11px; letter-spacing: 0.12em; color: var(--carbon);
-  display: flex; align-items: center; gap: 8px;
-  cursor: default;
-  opacity: 0.6;
-}
-.hero-scroll .scroll-arrow {
-  display: inline-block;
-  animation: breatheArrow 2.4s ease-in-out infinite;
-}
-@keyframes breatheArrow {
-  0%, 100% { opacity: 0.25; transform: translateY(0); }
-  50%      { opacity: 0.9; transform: translateY(10px); }
-}
-
-/* ===== Section Common ===== */
-.section { padding: 120px 60px; scroll-snap-align: start; }
-.section-label {
-  font-family: "Inter", sans-serif;
-  font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--emerald); margin-bottom: 20px; font-weight: 600;
+/* ===== Section ===== */
+.section { padding:120px 60px; }
+.section-num {
+  font-family:"Inter",sans-serif;
+  font-size:11px; letter-spacing:0.12em; color:var(--muted);
+  margin-bottom:16px;
 }
 .section-title {
-  font-size: clamp(28px, 4vw, 42px); font-weight: 700;
-  letter-spacing: 0.02em; margin-bottom: 16px; color: var(--black);
-}
-.section-desc {
-  font-size: 16px; color: var(--gray); max-width: 520px; line-height: 1.8; margin-bottom: 60px;
+  font-size:clamp(32px,5vw,48px); font-weight:700;
+  letter-spacing:-0.02em; margin-bottom:64px; color:var(--ink);
 }
 
-/* ===== Featured Work ===== */
-.works-grid { display: flex; flex-direction: column; gap: 120px; }
-.work-item {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
-}
-.work-item:nth-child(even) { direction: rtl; }
-.work-item:nth-child(even) .work-info { direction: ltr; }
+/* ===== Work ===== */
+.work-list { display:flex; flex-direction:column; gap:100px; max-width:900px; }
+.work-item { display:grid; grid-template-columns:1fr 280px; gap:60px; align-items:start; }
+.work-item:nth-child(even) { direction:rtl; }
+.work-item:nth-child(even) .work-info { direction:ltr; }
 .work-visual {
-  background: var(--emerald-light);
-  aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center;
-  position: relative; overflow: hidden;
-  transition: var(--transition);
+  aspect-ratio:4/3; background:var(--warm);
+  background-size:cover; background-position:center;
+  transition:transform 0.5s;
 }
-.work-visual:hover { transform: scale(1.02); }
-.work-visual .work-icon {
-  font-size: 64px; opacity: 0.3;
-  transition: var(--transition);
+.work-visual:hover { transform:scale(1.02); }
+.work-tag {
+  font-family:"Inter",sans-serif;
+  font-size:10px; letter-spacing:0.1em; text-transform:uppercase;
+  color:var(--gold); margin-bottom:16px; font-weight:600;
 }
-.work-visual:hover .work-icon { opacity: 0.5; transform: scale(1.1); }
-.work-visual .work-tag {
-  position: absolute; top: 24px; left: 24px;
-  font-family: "Inter", sans-serif;
-  font-size: 10px; letter-spacing: 0.12em; color: var(--emerald);
-  background: var(--white); padding: 6px 14px; font-weight: 600;
-  text-transform: uppercase;
+.work-info h3 { font-size:24px; font-weight:700; margin-bottom:12px; }
+.work-info .desc { font-size:15px; color:var(--muted); line-height:1.8; margin-bottom:24px; }
+.work-metrics { display:flex; gap:32px; }
+.work-metrics .num { font-size:28px; font-weight:700; color:var(--ink); line-height:1; }
+.work-metrics .lbl { font-size:11px; color:var(--muted); margin-top:4px; }
+
+@media (max-width:768px) {
+  .work-item,.work-item:nth-child(even) { grid-template-columns:1fr; gap:24px; direction:ltr; }
+  .work-list { gap:64px; }
+  .section { padding:80px 24px; }
+  .hero { padding:100px 24px 60px; }
+  .nav { padding:16px 24px; }
+  .nav-links { gap:16px; }
 }
-.work-number {
-  font-family: "Playfair Display", Georgia, serif; font-style: italic;
-  font-size: 100px; font-weight: 500; color: var(--emerald-light);
-  line-height: 1; margin-bottom: -20px; opacity: 0.6;
-}
-.work-info h3 { font-size: 28px; font-weight: 700; margin-bottom: 12px; }
-.work-info .work-category {
-  font-size: 11px; letter-spacing: 0.1em; color: var(--emerald);
-  margin-bottom: 20px; font-weight: 600;
-}
-.work-info .work-desc {
-  font-size: 15px; color: var(--gray); line-height: 1.8; margin-bottom: 28px;
-}
-.work-metrics { display: flex; gap: 40px; margin-bottom: 32px; }
-.metric-num {
-  font-family: "Inter", sans-serif;
-  font-size: 36px; font-weight: 700; color: var(--emerald); line-height: 1;
-}
-.metric-label {
-  font-family: "JetBrains Mono", "SF Mono", monospace;
-  font-size: 10px; color: var(--gray-light); margin-top: 4px;
-  letter-spacing: 0.04em;
-}
-.work-detail-link {
-  font-size: 13px; letter-spacing: 0.06em; color: var(--emerald);
-  text-decoration: none; font-weight: 600;
-  display: inline-flex; align-items: center; gap: 8px;
-  transition: var(--transition);
-}
-.work-detail-link:hover { gap: 14px; color: var(--emerald-dark); }
+
+/* ===== Photo Gallery ===== */
+.photo-strip { display:flex; gap:12px; overflow-x:auto; padding-bottom:20px; scroll-snap-type:x mandatory; }
+.photo-strip::-webkit-scrollbar { height:4px; }
+.photo-strip::-webkit-scrollbar-thumb { background:var(--warm-dark); border-radius:2px; }
+.photo-frame { flex-shrink:0; width:360px; scroll-snap-align:start; }
+.photo-frame img { width:100%; height:480px; object-fit:cover; display:block; transition:transform 0.5s; }
+.photo-frame:hover img { transform:scale(1.03); }
 
 /* ===== About ===== */
-.about { background: #fafafa; }
-.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
-.about-text p {
-  font-size: 15px; color: var(--gray); line-height: 2; margin-bottom: 20px;
-}
-.about-text p strong { color: var(--black); font-weight: 600; }
-.about-photo {
-  margin-bottom: 28px;
-}
-.about-photo img {
-  width: 160px; height: 200px; object-fit: cover;
-  border-radius: 6px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-}
-.about-skills h4 {
-  font-size: 13px; letter-spacing: 0.08em; margin-bottom: 20px; color: var(--black);
-}
-.tag-cloud { display: flex; flex-wrap: wrap; gap: 10px; }
+.about-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; max-width:1000px; align-items:start; }
+.about-text { font-size:16px; line-height:1.9; color:var(--muted); }
+.about-text strong { color:var(--ink); font-weight:600; }
+.about-photo img { width:100%; max-width:280px; object-fit:cover; display:block; }
+.tag-cloud { display:flex; flex-wrap:wrap; gap:8px; margin-top:24px; }
 .tag {
-  padding: 8px 18px; border: 1px solid #e0e0e0;
-  font-size: 13px; color: var(--gray); transition: var(--transition);
-  cursor: default;
+  font-size:11px; padding:6px 14px;
+  border:1px solid var(--warm-dark); color:var(--muted);
+  transition:all 0.3s;
 }
-.tag:hover {
-  border-color: var(--emerald); color: var(--emerald);
-  background: var(--emerald-light); transform: translateY(-2px);
-}
-.philosophy {
-  margin-top: 40px; padding: 28px 32px; border-left: 3px solid var(--emerald);
-  background: var(--white);
-}
-.philosophy p {
-  font-size: 15px; color: var(--black); font-style: italic; line-height: 1.8;
+.tag:hover { border-color:var(--gold); color:var(--gold); }
+
+@media (max-width:768px) {
+  .about-grid { grid-template-columns:1fr; gap:40px; }
 }
 
 /* ===== Timeline ===== */
-.timeline { position: relative; padding-left: 40px; }
-.timeline::before {
-  content: ''; position: absolute; left: 7px; top: 0; bottom: 0;
-  width: 1px; background: #e0e0e0;
+.timeline { max-width:700px; }
+.tl-item { display:grid; grid-template-columns:120px 1fr; gap:24px; padding:24px 0; border-bottom:1px solid var(--warm-dark); }
+.tl-date { font-family:"Inter",sans-serif; font-size:12px; color:var(--muted); letter-spacing:0.04em; padding-top:3px; }
+.tl-role { font-weight:700; font-size:17px; }
+.tl-company { font-size:13px; color:var(--gold); margin:2px 0 6px; font-weight:500; }
+.tl-text { font-size:14px; color:var(--muted); line-height:1.7; }
+
+@media (max-width:768px) {
+  .tl-item { grid-template-columns:1fr; gap:4px; }
 }
-.timeline-item { position: relative; margin-bottom: 48px; }
-.timeline-item::before {
-  content: ''; position: absolute; left: -40px; top: 8px;
-  width: 15px; height: 15px; border-radius: 50%;
-  background: var(--white); border: 3px solid var(--emerald);
-}
-.timeline-item:last-child::after {
-  content: ''; position: absolute; left: -37px; top: 26px;
-  width: 9px; height: 9px; border-radius: 50%; background: var(--emerald-light);
-}
-.timeline-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; }
-.timeline-role { font-size: 18px; font-weight: 700; }
-.timeline-company { font-size: 14px; color: var(--emerald); font-weight: 600; margin: 4px 0 8px; }
-.timeline-date { font-size: 12px; color: var(--gray-light); white-space: nowrap; }
-.timeline-content { font-size: 14px; color: var(--gray); line-height: 1.9; margin-top: 8px; }
 
 /* ===== Contact ===== */
-.contact-section { padding: 120px 60px 60px; text-align: center; scroll-snap-align: start; }
-.contact-section .section-title { margin-bottom: 12px; }
-.contact-invite { font-size: 16px; color: var(--gray); margin-bottom: 40px; }
-.contact-links { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+.contact-section { padding:120px 60px; text-align:center; }
+.contact-links { display:flex; justify-content:center; gap:32px; flex-wrap:wrap; margin-top:32px; }
 .contact-link {
-  display: flex; flex-direction: column; align-items: center; gap: 8px;
-  text-decoration: none; color: var(--gray); font-size: 13px;
-  transition: var(--transition);
+  font-size:13px; color:var(--muted); text-decoration:none;
+  transition:color 0.3s; display:flex; align-items:center; gap:8px;
 }
-.contact-link:hover { color: var(--emerald); transform: translateY(-4px); }
-.contact-link .icon-circle {
-  width: 52px; height: 52px; border-radius: 50%;
-  background: var(--emerald-light); display: flex; align-items: center; justify-content: center;
-  font-size: 20px; transition: var(--transition);
-}
-.contact-link:hover .icon-circle { background: var(--emerald); }
+.contact-link:hover { color:var(--gold); }
 
 /* ===== Footer ===== */
-.footer {
-  padding: 40px 60px; border-top: 1px solid #f0f0f0;
-  display: flex; justify-content: space-between; align-items: center;
-  font-size: 12px; color: var(--gray-light);
-}
-.footer a { color: var(--gray-light); text-decoration: none; transition: var(--transition); }
-.footer a:hover { color: var(--emerald); }
+.footer { padding:40px 60px; border-top:1px solid var(--warm-dark); text-align:center; font-size:11px; color:var(--muted); }
 
-/* ===== Photography Gallery ===== */
-.photo-section { padding: 100px 0 60px; background: #fafafa; scroll-snap-align: start; }
-.photo-gallery {
-  display: flex; gap: 20px; overflow-x: auto;
-  padding: 20px 60px 40px;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  cursor: grab;
-}
-.photo-gallery:active { cursor: grabbing; }
-.photo-gallery::-webkit-scrollbar { height: 6px; }
-.photo-gallery::-webkit-scrollbar-track { background: transparent; }
-.photo-gallery::-webkit-scrollbar-thumb { background: #d0d0d0; border-radius: 3px; }
-.photo-gallery::-webkit-scrollbar-thumb:hover { background: var(--emerald); }
-
-.photo-card {
-  flex-shrink: 0; width: 340px;
-  scroll-snap-align: start;
-  transition: transform 0.35s ease;
-  display: flex; flex-direction: column; gap: 12px;
-}
-.photo-card:hover { transform: translateY(-6px); }
-.photo-card-image {
-  width: 100%; height: 480px; overflow: hidden;
-  background: #e8e8e8;
-}
-.photo-card-image img {
-  width: 100%; height: 100%; object-fit: cover;
-  transition: transform 0.5s ease;
-}
-.photo-card:hover .photo-card-image img { transform: scale(1.04); }
-.photo-card-label {
-  font-size: 11px; letter-spacing: 0.06em; color: var(--gray-light);
-  padding: 0 4px;
-}
-/* Gallery drag hint */
-.photo-gallery-hint {
-  font-family: "JetBrains Mono", "SF Mono", monospace;
-  text-align: center; font-size: 10px; letter-spacing: 0.06em;
-  color: var(--gray-light); margin-top: 8px;
-  animation: hintPulse 2s ease-in-out infinite;
-}
-@keyframes hintPulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; }
-}
-
-@media (max-width: 768px) {
-  .photo-card { width: 260px; }
-  .photo-card-image { height: 360px; }
-  .photo-gallery { padding: 16px 24px 32px; }
-}
-
-/* ===== Fade-in Animation ===== */
-.fade-in {
-  opacity: 0; transform: translateY(30px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-.fade-in.visible { opacity: 1; transform: translateY(0); }
-
-/* ===== Responsive ===== */
-@media (max-width: 900px) {
-  .work-item, .work-item:nth-child(even) {
-    grid-template-columns: 1fr; gap: 32px; direction: ltr;
-  }
-  .works-grid { gap: 64px; }
-  .about-grid { grid-template-columns: 1fr; gap: 40px; }
-  .section { padding: 80px 24px; }
-  .hero { padding: 100px 24px 60px; }
-  .hero-scroll { left: 24px; }
-  .nav { padding: 16px 24px; }
-  .nav.scrolled { padding: 12px 24px; }
-  .nav-links { gap: 16px; }
-  .contact-section { padding: 80px 24px 40px; }
-  .footer { padding: 32px 24px; flex-direction: column; gap: 12px; text-align: center; }
-}
+/* ===== Animations ===== */
+.fade-in { opacity:0; transform:translateY(20px); transition:opacity 0.7s ease,transform 0.7s ease; }
+.fade-in.visible { opacity:1; transform:translateY(0); }
 </style>
 </head>
 <body>
 
-<!-- ==================== NAV ==================== -->
+<!-- Nav -->
 <nav class="nav" id="nav">
-  <a href="#" class="nav-logo">
-    <span class="nav-logo-mark"></span>
-    JOYCE CHOW
-  </a>
+  <a href="#" class="nav-logo">JOYCE CHOW</a>
   <ul class="nav-links">
     <li><a href="#work">Work</a></li>
-    <li><a href="#photography">Photo</a></li>
+    <li><a href="#photography">Photography</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
 
-<!-- ==================== HERO ==================== -->
+<!-- Hero -->
 <section class="hero" id="home">
-  <div class="hero-bg"></div>
-  <div class="hero-particles" id="heroParticles"></div>
-  <div class="hero-wash"></div>
   <div class="hero-content">
     <div class="hero-eyebrow">Brand Strategist &amp; Creative</div>
-    <h1>
-      链接<span class="highlight">技术</span>与<span class="highlight">市场</span>，<br>构建有温度的<span class="highlight">品牌叙事</span>
-    </h1>
-    <p class="subtitle">
-      3年B2B品牌策划经验，擅长以故事化传播驱动品牌增长。<br>
-      用创意的力量让品牌被看见。
-    </p>
-    <a href="#work" class="cta">
-      <span>查看精选作品</span> <span class="arrow">→</span>
-    </a>
+    <h1>链接技术与市场，<br>构建有温度的品牌叙事</h1>
+    <div class="subtitle">
+      <span class="tags">Brand Marketing &bull; Content Strategy &bull; Storytelling</span>
+      以内容连接技术与用户，<br>让复杂价值被理解，让品牌被记住。
+    </div>
+    <a href="#work" class="cta">查看精选作品 <span class="arrow">→</span></a>
   </div>
-  <div class="hero-scroll">
-    <span class="scroll-arrow">↓</span> SCROLL
-  </div>
-  <div class="hero-bridge"></div>
 </section>
 
-<!-- ==================== FEATURED WORK ==================== -->
+<!-- Work -->
 <section class="section" id="work">
-  <div class="section-label fade-in">Selected Work</div>
-  <h2 class="section-title fade-in">精选作品</h2>
-  <p class="section-desc fade-in">
-    每个案例都是策略、创意与执行的完整闭环。
-  </p>
+  <div class="section-num en">01</div>
+  <h2 class="section-title">Selected Work</h2>
+  <div class="work-list">
 
-  <div class="works-grid">
-
-    <!-- Case 1: 微光计划 -->
     <div class="work-item fade-in">
-      <div class="work-visual" style="background: url('images/work-micsig.png') center/cover no-repeat;">
-        <span class="work-tag">Brand Strategy</span>
-      </div>
       <div class="work-info">
-        <div class="work-number">01</div>
-        <div class="work-category">品牌策略 / Brand Strategy</div>
+        <div class="work-tag">Brand Strategy</div>
         <h3>「微光计划」营销企划</h3>
-        <p class="work-desc">
-          为深圳麦科信科技拳头产品「光隔离探头」策划千万级补贴营销活动。
-          通过"达人矩阵 + 线上直播 + 线下展会"立体打法，打开B2B科技产品的品牌声量。
-        </p>
+        <p class="desc">为深圳麦科信科技拳头产品策划千万级补贴营销活动。达人矩阵 + 直播 + 展会立体打法，打开B2B科技品牌声量。</p>
         <div class="work-metrics">
-          <div class="metric">
-            <div class="metric-num">3,000<span style="font-size:16px;">万</span></div>
-            <div class="metric-label">预计营收增长</div>
-          </div>
-          <div class="metric">
-            <div class="metric-num">10+</div>
-            <div class="metric-label">达人推广渠道</div>
-          </div>
+          <div><div class="num">3,000<span style="font-size:14px;">万</span></div><div class="lbl">预计营收增长</div></div>
+          <div><div class="num">10+</div><div class="lbl">达人推广渠道</div></div>
         </div>
-        <a href="#" class="work-detail-link">查看完整案例 <span class="arrow">→</span></a>
       </div>
+      <div class="work-visual" style="background-image:url('images/work-micsig.png')"></div>
     </div>
 
-    <!-- Case 2: 视频号矩阵 -->
     <div class="work-item fade-in">
-      <div class="work-visual" style="background: url('images/work-video.png') center/cover no-repeat;">
-        <span class="work-tag">Integrated Campaign</span>
-      </div>
       <div class="work-info">
-        <div class="work-number">02</div>
-        <div class="work-category">整合营销 / Integrated Campaign</div>
+        <div class="work-tag">Integrated Campaign</div>
         <h3>视频号矩阵 &amp; 故事化传播</h3>
-        <p class="work-desc">
-          以「故事化传播」为核心策略，从0搭建微信视频号+抖音矩阵。首创老板个人IP，
-          以真实故事引发行业共鸣，在ToB物流赛道实现差异化突围。
-        </p>
+        <p class="desc">以故事化传播为核心，从0搭建微信视频号 + 抖音矩阵。首创个人IP，在ToB物流赛道实现差异化突围。</p>
         <div class="work-metrics">
-          <div class="metric">
-            <div class="metric-num">5,000<span style="font-size:16px;">+</span></div>
-            <div class="metric-label">视频号粉丝（从300起）</div>
-          </div>
-          <div class="metric">
-            <div class="metric-num">80<span style="font-size:16px;">+/周</span></div>
-            <div class="metric-label">精准客户引流</div>
-          </div>
+          <div><div class="num">5,000<span style="font-size:14px;">+</span></div><div class="lbl">粉丝（从300起）</div></div>
+          <div><div class="num">80<span style="font-size:14px;">+/周</span></div><div class="lbl">精准客户引流</div></div>
         </div>
-        <a href="#" class="work-detail-link">查看完整案例 <span class="arrow">→</span></a>
       </div>
+      <div class="work-visual" style="background-image:url('images/work-video.png')"></div>
     </div>
 
-    <!-- Case 3: NOMI IP孵化 -->
     <div class="work-item fade-in">
-      <div class="work-visual" style="background: url('images/nomi/nomi-3.png') center/cover no-repeat;">
-        <span class="work-tag">Content &amp; Creative</span>
-      </div>
       <div class="work-info">
-        <div class="work-number">03</div>
-        <div class="work-category">内容创意 / Content &amp; Creative</div>
+        <div class="work-tag">Content &amp; Creative</div>
         <h3>NOMI 原创IP孵化</h3>
-        <p class="work-desc">
-          从0到1主导诺瓦物流吉祥物NOMI的全流程孵化：发起111人内部问卷调研，
-          数据分析驱动设计决策，最终打造「科幻+可爱」风格的3D小熊形象。
-          延伸开发四季动作、16款表情包、文创周边，并完成商标与专利注册。
-        </p>
+        <p class="desc">从0到1主导吉祥物NOMI孵化：111人问卷调研驱动设计，3D小熊形象，16款表情包，四季延展，商标专利注册。</p>
         <div class="work-metrics">
-          <div class="metric">
-            <div class="metric-num">111</div>
-            <div class="metric-label">问卷调研样本量</div>
-          </div>
-          <div class="metric">
-            <div class="metric-num">16+</div>
-            <div class="metric-label">表情包 &amp; 四季延展</div>
-          </div>
+          <div><div class="num">111</div><div class="lbl">问卷调研样本</div></div>
+          <div><div class="num">16+</div><div class="lbl">表情包 &amp; 延展</div></div>
         </div>
-        <a href="#" class="work-detail-link">查看完整案例 <span class="arrow">→</span></a>
       </div>
+      <div class="work-visual" style="background-image:url('images/nomi/nomi-3.png')"></div>
     </div>
 
-    <!-- Case 4: AI工作流 + Vibe Coding -->
     <div class="work-item fade-in">
-      <div class="work-visual" style="background: url('images/work-ai.png') center/cover no-repeat;">
-        <span class="work-tag">Innovation &amp; AI</span>
-      </div>
       <div class="work-info">
-        <div class="work-number">04</div>
-        <div class="work-category">AI应用 &amp; 技术落地 / Innovation &amp; AI</div>
+        <div class="work-tag">Innovation &amp; AI</div>
         <h3>AI创意工作流 &amp; Vibe Coding</h3>
-        <p class="work-desc">
-          擅长运用Claude Code等AI工具搭建自动化内容生产工作流，从创意选题到内容产出全链路提效。
-          具备Vibe Coding能力——通过自然语言驱动AI完成创意工具的开发与落地。
-          代表项目：<strong>「淘沙」AI相册一键排版美化工具</strong>、个人品牌网站、品牌官网搭建。
-        </p>
+        <p class="desc">运用Claude Code搭建AI自动化内容工作流，具Vibe Coding能力。代表项目：淘沙AI相册、品牌网站搭建。</p>
         <div class="work-metrics">
-          <div class="metric">
-            <div class="metric-num">3+</div>
-            <div class="metric-label">AI驱动项目落地</div>
-          </div>
-          <div class="metric">
-            <div class="metric-num">&lt;/&gt;</div>
-            <div class="metric-label">Vibe Coding能力</div>
-          </div>
+          <div><div class="num">3+</div><div class="lbl">AI项目落地</div></div>
+          <div><div class="num">&lt;/&gt;</div><div class="lbl">Vibe Coding</div></div>
         </div>
-        <a href="taosha.html" class="work-detail-link">体验淘沙AI相册 <span class="arrow">→</span></a>
       </div>
+      <div class="work-visual" style="background-image:url('images/work-ai.png')"></div>
     </div>
 
   </div>
 </section>
 
-<!-- ==================== ABOUT ==================== -->
-<section class="section about" id="about">
-  <div class="section-label fade-in">About Me</div>
-  <h2 class="section-title fade-in">关于我</h2>
+<!-- Photography -->
+<section class="section" id="photography">
+  <div class="section-num en">02</div>
+  <h2 class="section-title">Shadow &amp; Order</h2>
+  <div class="photo-strip fade-in" id="photoStrip">
+    <div class="photo-frame"><img src="images/photo-compressed/微信图片_20260615155533_25_11.jpg" alt=""></div>
+    <div class="photo-frame"><img src="images/photo-compressed/微信图片_20260615154447_18_11.jpg" alt=""></div>
+    <div class="photo-frame"><img src="images/photo-compressed/微信图片_20260615155536_26_11.jpg" alt=""></div>
+    <div class="photo-frame"><img src="images/photo-compressed/微信图片_20260615155539_28_11.jpg" alt=""></div>
+    <div class="photo-frame"><img src="images/photo-compressed/微信图片_20260615155541_30_11.jpg" alt=""></div>
+    <div class="photo-frame"><img src="images/photo-compressed/微信图片_20260615154435_13_11.jpg" alt=""></div>
+    <div class="photo-frame"><img src="images/photo-compressed/微信图片_20260615154438_14_11.jpg" alt=""></div>
+    <div class="photo-frame"><img src="images/photo-compressed/微信图片_20260615154441_15_11.jpg" alt=""></div>
+    <div class="photo-frame"><img src="images/photo-compressed/微信图片_20260615154443_16_11.jpg" alt=""></div>
+    <div class="photo-frame"><img src="images/photo-compressed/微信图片_20260615154444_17_11.jpg" alt=""></div>
+    <div class="photo-frame"><img src="images/photo-compressed/微信图片_20260615154448_19_11.jpg" alt=""></div>
+    <div class="photo-frame"><img src="images/photo-compressed/微信图片_20260615154449_20_11.jpg" alt=""></div>
+    <div class="photo-frame"><img src="images/photo-compressed/微信图片_20260615154450_21_11.jpg" alt=""></div>
+    <div class="photo-frame"><img src="images/photo-compressed/微信图片_20260615155528_23_11.jpg" alt=""></div>
+    <div class="photo-frame"><img src="images/photo-compressed/微信图片_20260615155530_24_11.jpg" alt=""></div>
+    <div class="photo-frame"><img src="images/photo-compressed/微信图片_20260615155537_27_11.jpg" alt=""></div>
+    <div class="photo-frame"><img src="images/photo-compressed/微信图片_20260615155540_29_11.jpg" alt=""></div>
+  </div>
+</section>
+
+<!-- About -->
+<section class="section" id="about">
+  <div class="section-num en">03</div>
+  <h2 class="section-title">About</h2>
   <div class="about-grid">
     <div class="about-text fade-in">
-      <p>
-        我是周蕾，<strong>3年品牌策划与市场推广经验</strong>，服务过B2B科技、物流供应链领域。
-        擅长以故事化传播为核心，打通<strong>品牌策略 → 内容创意 → 渠道运营 → 数据复盘</strong>的全链路。
-      </p>
-      <p>
-        好的品牌叙事不只是漂亮的文案——它是<strong>技术与市场之间的翻译官</strong>，
-        是让复杂的产品被理解、让冰冷的品牌有温度的桥梁。
-      </p>
-      <div class="philosophy">
-        <p>"品牌不是你说自己是什么，而是你在用户的生活中扮演了什么角色。我的工作，就是让这个角色真实、动人且不可替代。"</p>
-      </div>
+      <p>我是<strong>JOYCE CHOW</strong>，一名专注于B2B科技领域的品牌策略与内容创意人。</p>
+      <p style="margin-top:20px;">拥有3年以上品牌营销经验，服务过科技硬件、物流供应链领域。擅长以<strong>故事化内容</strong>为核心，打通品牌策略 → 内容创意 → 渠道运营 → 数据复盘的全链路。</p>
+      <p style="margin-top:20px;">我相信，好的品牌叙事是<strong>技术与市场之间的翻译官</strong>——让复杂的产品价值被理解，让品牌在用户心中留下温度。</p>
     </div>
-    <div class="about-skills fade-in">
-      <div class="about-photo">
-        <img src="images/profile-id.jpg" alt="周蕾">
-      </div>
-      <h4>核心能力</h4>
+    <div class="about-photo fade-in">
+      <img src="images/profile-id.jpg" alt="JOYCE CHOW">
       <div class="tag-cloud">
-        <span class="tag">品牌策略</span>
-        <span class="tag">故事化传播</span>
-        <span class="tag">达人矩阵搭建</span>
-        <span class="tag">社交媒体运营</span>
-        <span class="tag">IP孵化</span>
-        <span class="tag">整合营销</span>
-        <span class="tag">内容策划</span>
-        <span class="tag">视频制作</span>
-        <span class="tag">摄影</span>
-        <span class="tag">AI自动化工作流</span>
-        <span class="tag">数据分析</span>
-        <span class="tag">海外社媒运营</span>
-        <span class="tag">项目管理</span>
-        <span class="tag">文案创意</span>
+        <span class="tag">Brand Strategy</span><span class="tag">Content Marketing</span>
+        <span class="tag">Storytelling</span><span class="tag">B2B Branding</span>
+        <span class="tag">Integrated Campaign</span><span class="tag">IP Development</span>
+        <span class="tag">Video Production</span><span class="tag">Photography</span>
+        <span class="tag">AI Workflow</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ==================== EXPERIENCE ==================== -->
+<!-- Experience -->
 <section class="section" id="experience">
-  <div class="section-label fade-in">Experience</div>
-  <h2 class="section-title fade-in">工作经历</h2>
-
-  <div class="timeline fade-in" style="margin-bottom:60px;">
-    <div class="timeline-item">
-      <div class="timeline-header">
-        <span class="timeline-role">市场推广负责人</span>
-        <span class="timeline-date">2025.12 — 2026.04</span>
+  <div class="section-num en">04</div>
+  <h2 class="section-title">Experience</h2>
+  <div class="timeline">
+    <div class="tl-item fade-in">
+      <div class="tl-date en">2025 — 2026</div>
+      <div>
+        <div class="tl-role">市场推广负责人</div>
+        <div class="tl-company">深圳麦科信科技（Micsig）</div>
+        <div class="tl-text">主导「微光计划」千万级营销企划，新开拓10个达人推广渠道，全面负责品牌推广与市场营销</div>
       </div>
-      <div class="timeline-company">深圳麦科信科技有限公司（Micsig）</div>
-      <div class="timeline-content">全面负责品牌推广与市场营销，主导「微光计划」千万级营销企划，新开拓10个达人推广渠道</div>
     </div>
-    <div class="timeline-item">
-      <div class="timeline-header">
-        <span class="timeline-role">品牌策划</span>
-        <span class="timeline-date">2023.10 — 2025.11</span>
+    <div class="tl-item fade-in">
+      <div class="tl-date en">2023 — 2025</div>
+      <div>
+        <div class="tl-role">品牌策划</div>
+        <div class="tl-company">诺瓦物流管理（深圳）</div>
+        <div class="tl-text">视频号+抖音矩阵0→5000粉冷启动，10+场海内外展会全周期营销，首创故事化传播策略</div>
       </div>
-      <div class="timeline-company">诺瓦物流管理（深圳）有限公司</div>
-      <div class="timeline-content">主导视频号+抖音矩阵运营，首创故事化传播策略，0→5000粉冷启动，统筹10+场海内外展会营销</div>
     </div>
-    <div class="timeline-item">
-      <div class="timeline-header">
-        <span class="timeline-role">文案策划</span>
-        <span class="timeline-date">2023.03 — 2023.10</span>
+    <div class="tl-item fade-in">
+      <div class="tl-date en">2023</div>
+      <div>
+        <div class="tl-role">文案策划</div>
+        <div class="tl-company">银河电力集团</div>
+        <div class="tl-text">企业宣传片脚本撰写，LinkedIn/Facebook海外社媒运营，产品手册内容策划</div>
       </div>
-      <div class="timeline-company">银河电力集团股份有限公司</div>
-      <div class="timeline-content">独立完成企业宣传片脚本，运营LinkedIn/Facebook海外社媒，主导产品手册内容策划</div>
     </div>
-
-    <div class="timeline-item">
-      <div class="timeline-header">
-        <span class="timeline-role">广告文案（参赛获奖）</span>
-        <span class="timeline-date">2022</span>
+    <div class="tl-item fade-in">
+      <div class="tl-date en">2018 — 2022</div>
+      <div>
+        <div class="tl-role">厦门大学 · 新闻传播系</div>
+        <div class="tl-company">学院奖获奖 · 纪录片导演 · 青年媒体协会</div>
+        <div class="tl-text">利郎男装广告文案获学院奖优秀类；百年校庆志愿者纪录片导演；团委公众号运营及PS/PR课程教学</div>
       </div>
-      <div class="timeline-company">中国大学生广告艺术节 · 学院奖</div>
-      <div class="timeline-content">为利郎男装创作《欢迎来到，"利"体宇宙》系列广告文案，获学院奖广告文案优秀类奖项</div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="timeline-header">
-        <span class="timeline-role">导演 / 摄影</span>
-        <span class="timeline-date">2021.04 — 2021.06</span>
-      </div>
-      <div class="timeline-company">厦门大学百年校庆 · 志愿者纪录片</div>
-      <div class="timeline-content">受学校团委之托拍摄百年校庆志愿者纪录片，带领队员完成大纲撰写、脚本分镜、拍摄任务分配及后期剪辑包装全流程</div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="timeline-header">
-        <span class="timeline-role">摄影师 · 摄影摄像部</span>
-        <span class="timeline-date">2018.10 — 2019.11</span>
-      </div>
-      <div class="timeline-company">厦门大学 · 青年媒体协会</div>
-      <div class="timeline-content">运营团委微信公众号，负责文案编辑、排版与摄影；策划每周推文主题，采访校园人物；为社员开设PS、PR入门课程</div>
     </div>
   </div>
-
 </section>
 
-<!-- ==================== PHOTOGRAPHY GALLERY ==================== -->
-<section class="photo-section" id="photography">
-  <div class="section-label fade-in" style="padding-left:60px;">Shadow &amp; Order</div>
-  <h2 class="section-title fade-in" style="padding-left:60px;">光影秩序</h2>
-  <p class="section-desc fade-in" style="padding-left:60px; max-width:600px;">
-    在幽暗中凝视光线如何勾勒线条，在无序的自然中提炼几何的纯粹。摄影，是我对构图、色彩与空间感的一次直觉实验。我理想中的品牌人，其审美的触角应当延伸至生活的每一帧缝隙里。
-  </p>
-  <p class="section-desc fade-in" style="padding-left:60px; max-width:600px; font-size:13px; color:var(--gray-light); font-style:italic;">
-    "Observing how light shapes form in the dark, and refining pure geometry out of organic chaos. For me, photography is an intuitive experiment with composition, tone, and space. I believe that an ideal brand strategist's aesthetic perception should extend into every silent wrinkle of daily life."
-  </p>
-
-  <div class="photo-gallery fade-in" id="photoGallery">
-    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615155533_25_11.jpg" alt="Photo"></div><div class="photo-card-label">02</div></div>
-    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615154447_18_11.jpg" alt="Photo"></div><div class="photo-card-label">03</div></div>
-    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615155536_26_11.jpg" alt="Photo"></div><div class="photo-card-label">04</div></div>
-    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615155539_28_11.jpg" alt="Photo"></div><div class="photo-card-label">05</div></div>
-    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615155541_30_11.jpg" alt="Photo"></div><div class="photo-card-label">06</div></div>
-    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615154435_13_11.jpg" alt="Photo"></div><div class="photo-card-label">07</div></div>
-    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615154438_14_11.jpg" alt="Photo"></div><div class="photo-card-label">08</div></div>
-    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615154441_15_11.jpg" alt="Photo"></div><div class="photo-card-label">09</div></div>
-    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615154443_16_11.jpg" alt="Photo"></div><div class="photo-card-label">10</div></div>
-    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615154444_17_11.jpg" alt="Photo"></div><div class="photo-card-label">11</div></div>
-    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615154448_19_11.jpg" alt="Photo"></div><div class="photo-card-label">12</div></div>
-    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615154449_20_11.jpg" alt="Photo"></div><div class="photo-card-label">13</div></div>
-    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615154450_21_11.jpg" alt="Photo"></div><div class="photo-card-label">14</div></div>
-    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615155528_23_11.jpg" alt="Photo"></div><div class="photo-card-label">15</div></div>
-    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615155530_24_11.jpg" alt="Photo"></div><div class="photo-card-label">16</div></div>
-    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615155537_27_11.jpg" alt="Photo"></div><div class="photo-card-label">17</div></div>
-    <div class="photo-card"><div class="photo-card-image"><img src="images/photo-compressed/微信图片_20260615155540_29_11.jpg" alt="Photo"></div><div class="photo-card-label">18</div></div>
-  </div>
-  <div class="photo-gallery-hint">← 左右滑动浏览 →</div>
-</section>
-
-<!-- ==================== CONTACT ==================== -->
+<!-- Contact -->
 <section class="contact-section" id="contact">
-  <div class="section-label fade-in">Contact</div>
-  <h2 class="section-title fade-in">期待与你聊聊</h2>
-  <p class="contact-invite fade-in">
-    关于品牌的下一个可能，我始终充满好奇。<br>
-    无论是全职机会、项目合作，还是只是打个招呼——
-  </p>
-  <div class="contact-links fade-in">
-    <a href="mailto:joyzho@foxmail.com" class="contact-link">
-      <div class="icon-circle"><span>✉</span></div>
-      <span>Email</span>
-    </a>
-    <a href="#" class="contact-link">
-      <div class="icon-circle"><span>💬</span></div>
-      <span>微信</span>
-    </a>
-    <a href="https://pan.baidu.com/s/10uioa5ouSXhdVuF6-z8yog?pwd=nmsy" class="contact-link" target="_blank" rel="noopener">
-      <div class="icon-circle"><span>☁</span></div>
-      <span>作品集云盘</span>
-    </a>
-    <a href="taosha.html" class="contact-link">
-      <div class="icon-circle"><span>✦</span></div>
-      <span>淘沙AI相册</span>
-    </a>
+  <div class="section-num en">05</div>
+  <h2 class="section-title">Contact</h2>
+  <p style="color:var(--muted);max-width:400px;margin:0 auto 0;font-size:16px;">期待与你聊聊品牌的下一个可能。</p>
+  <div class="contact-links">
+    <a href="mailto:joyzho@foxmail.com" class="contact-link">Email</a>
+    <span style="color:var(--warm-dark);">/</span>
+    <a href="#" class="contact-link">WeChat</a>
+    <span style="color:var(--warm-dark);">/</span>
+    <a href="https://pan.baidu.com/s/10uioa5ouSXhdVuF6-z8yog?pwd=nmsy" target="_blank" rel="noopener" class="contact-link">Portfolio</a>
+    <span style="color:var(--warm-dark);">/</span>
+    <a href="taosha.html" class="contact-link">Taosha AI</a>
   </div>
 </section>
 
-<!-- ==================== FOOTER ==================== -->
-<footer class="footer">
-  <span>&copy; 2024 Joyce Chow. Crafted with care.</span>
-  <span><a href="taosha.html">淘沙AI相册</a> · <a href="简历-可编辑版.html">简历PDF</a></span>
-</footer>
+<footer class="footer en">&copy; 2024 JOYCE CHOW</footer>
 
-<!-- ==================== JS ==================== -->
 <script>
+// Nav hide on scroll
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
-  // Hide nav when scrolled past hero
   const heroH = document.querySelector('.hero').offsetHeight;
-  nav.classList.toggle('hidden', window.scrollY > heroH - 100);
+  nav.classList.toggle('hidden', window.scrollY > heroH - 80);
 });
 
-// Generate floating spring particles
-const particlesContainer = document.getElementById('heroParticles');
-if (particlesContainer) {
-  for (let i = 0; i < 40; i++) {
-    const p = document.createElement('div');
-    p.classList.add('hero-particle');
-    p.style.left = Math.random() * 100 + '%';
-    p.style.setProperty('--dur', (8 + Math.random() * 14) + 's');
-    p.style.setProperty('--delay', Math.random() * 8 + 's');
-    p.style.setProperty('--drift', (Math.random() - 0.5) * 60 + 'px');
-    p.style.width = (1.5 + Math.random() * 3) + 'px';
-    p.style.height = p.style.width;
-    particlesContainer.appendChild(p);
-  }
-}
-
-// Fade-in observer
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add('visible');
-  });
-}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-
-document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-// Gallery: wheel scroll → horizontal + drag to scroll
-const gallery = document.getElementById('photoGallery');
-if (gallery) {
-  // Wheel → horizontal scroll
-  gallery.addEventListener('wheel', (e) => {
-    e.preventDefault();
-    gallery.scrollBy({ left: e.deltaY * 1.8, behavior: 'smooth' });
-  }, { passive: false });
-
-  // Drag to scroll
-  let isDown = false, startX, scrollLeft;
-  gallery.addEventListener('mousedown', (e) => {
-    isDown = true; startX = e.pageX - gallery.offsetLeft; scrollLeft = gallery.scrollLeft;
-    gallery.style.scrollBehavior = 'auto';
-  });
-  gallery.addEventListener('mouseleave', () => { isDown = false; gallery.style.scrollBehavior = 'smooth'; });
-  gallery.addEventListener('mouseup', () => { isDown = false; gallery.style.scrollBehavior = 'smooth'; });
-  gallery.addEventListener('mousemove', (e) => {
-    if (!isDown) return;
-    e.preventDefault();
-    gallery.scrollLeft = scrollLeft - (e.pageX - gallery.offsetLeft - startX) * 1.8;
-  });
-}
-
-// Nav active indicator
-const sections = document.querySelectorAll('section[id]');
-const navLinks = document.querySelectorAll('.nav-links a');
-window.addEventListener('scroll', () => {
-  let current = '';
-  sections.forEach(section => {
-    if (window.scrollY >= section.offsetTop - 120) {
-      current = section.getAttribute('id');
-    }
-  });
-  navLinks.forEach(link => {
-    link.classList.toggle('active', link.getAttribute('href') === '#' + current);
-  });
-});
+// Fade-in
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold:0.1, rootMargin:'0px 0px -30px 0px' });
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
 
 // Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(link => {
   link.addEventListener('click', function(e) {
     e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) target.scrollIntoView({ behavior: 'smooth' });
+    const t = document.querySelector(this.getAttribute('href'));
+    if (t) t.scrollIntoView({ behavior:'smooth' });
   });
 });
+
+// Photo strip wheel scroll
+const strip = document.getElementById('photoStrip');
+if (strip) {
+  strip.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    strip.scrollBy({ left:e.deltaY*2, behavior:'smooth' });
+  }, { passive:false });
+}
 </script>
 </body>
 </html>
