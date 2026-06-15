@@ -32,7 +32,11 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
+  scroll-padding-top: 60px;
+}
 
 body {
   font-family: "Inter", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", -apple-system, sans-serif;
@@ -79,6 +83,7 @@ body {
 /* ===== Hero ===== */
 .hero {
   min-height: 100vh; display: flex; align-items: center;
+  scroll-snap-align: start;
   background: var(--black);
   color: #fff; position: relative; overflow: hidden;
   padding: 120px 60px 80px;
@@ -223,7 +228,7 @@ body {
 }
 
 /* ===== Section Common ===== */
-.section { padding: 120px 60px; }
+.section { padding: 120px 60px; scroll-snap-align: start; }
 .section-label {
   font-family: "Inter", sans-serif;
   font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
@@ -345,7 +350,7 @@ body {
 .timeline-content { font-size: 14px; color: var(--gray); line-height: 1.9; margin-top: 8px; }
 
 /* ===== Contact ===== */
-.contact-section { padding: 120px 60px 60px; text-align: center; }
+.contact-section { padding: 120px 60px 60px; text-align: center; scroll-snap-align: start; }
 .contact-section .section-title { margin-bottom: 12px; }
 .contact-invite { font-size: 16px; color: var(--gray); margin-bottom: 40px; }
 .contact-links { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
@@ -372,7 +377,7 @@ body {
 .footer a:hover { color: var(--emerald); }
 
 /* ===== Photography Gallery ===== */
-.photo-section { padding: 100px 0 60px; background: #fafafa; }
+.photo-section { padding: 100px 0 60px; background: #fafafa; scroll-snap-align: start; }
 .photo-gallery {
   display: flex; gap: 20px; overflow-x: auto;
   padding: 20px 60px 40px;
