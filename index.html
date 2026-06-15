@@ -452,46 +452,45 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
   });
 });
 
-// Photo strip wheel scroll + auto-scroll
+// Photo strip: wheel scroll + auto-drift
 const strip = document.getElementById('photoStrip');
-let autoScroll;
-
+let autoDrift, paused = false;
 if (strip) {
+  const startDrift = () => {
+    if (autoDrift) return;
+    autoDrift = requestAnimationFrame(function step() {
+      if (!paused) {
+        strip.scrollLeft += 0.4;
+        if (strip.scrollLeft >= strip.scrollWidth - strip.clientWidth - 5) {
+          strip.scrollLeft = 0;
+        }
+      }
+      autoDrift = requestAnimationFrame(step);
+    });
+  };
+  const stopDrift = () => { cancelAnimationFrame(autoDrift); autoDrift = null; };
+
+  // Wheel overrides drift
   strip.addEventListener('wheel', (e) => {
     e.preventDefault();
+    stopDrift();
     strip.scrollBy({ left:e.deltaY*2, behavior:'smooth' });
+    setTimeout(startDrift, 1500);
   }, { passive:false });
 
-  // Auto-scroll: start when section is visible
+  // Pause on hover
+  strip.addEventListener('mouseenter', () => { paused = true; });
+  strip.addEventListener('mouseleave', () => { paused = false; });
+
+  // Start when section is visible
   const photoSection = document.getElementById('photography');
   const obs2 = new IntersectionObserver((entries) => {
     entries.forEach(e => {
-      if (e.isIntersecting) {
-        autoScroll = setInterval(() => {
-          strip.scrollBy({ left:1 });
-          // Loop back to start when reaching the end
-          if (strip.scrollLeft >= strip.scrollWidth - strip.clientWidth - 10) {
-            strip.scrollTo({ left:0, behavior:'smooth' });
-          }
-        }, 40);
-      } else {
-        clearInterval(autoScroll);
-      }
+      if (e.isIntersecting) startDrift();
+      else stopDrift();
     });
   }, { threshold:0.3 });
   obs2.observe(photoSection);
-
-  // Pause on hover
-  strip.addEventListener('mouseenter', () => clearInterval(autoScroll));
-  strip.addEventListener('mouseleave', () => {
-    clearInterval(autoScroll);
-    autoScroll = setInterval(() => {
-      strip.scrollBy({ left:1 });
-      if (strip.scrollLeft >= strip.scrollWidth - strip.clientWidth - 10) {
-        strip.scrollTo({ left:0, behavior:'smooth' });
-      }
-    }, 40);
-  });
 }
 </script>
 </body>
