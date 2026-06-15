@@ -210,10 +210,11 @@ body {
 .contact-section { padding:120px 60px; text-align:center; }
 .contact-links { display:flex; justify-content:center; gap:32px; flex-wrap:wrap; margin-top:32px; }
 .contact-link {
-  font-size:13px; color:var(--muted); text-decoration:none;
-  transition:color 0.3s; display:flex; align-items:center; gap:8px;
+  font-size:14px; color:var(--ink); text-decoration:none; font-weight:500;
+  transition:all 0.3s; padding:4px 2px;
+  border-bottom:1.5px solid transparent;
 }
-.contact-link:hover { color:var(--gold); }
+.contact-link:hover { color:var(--gold); border-bottom-color:var(--gold); }
 
 /* ===== Footer ===== */
 .footer { padding:40px 60px; border-top:1px solid var(--warm-dark); text-align:center; font-size:11px; color:var(--muted); }
@@ -424,11 +425,11 @@ body {
   </p>
   <div class="contact-links">
     <a href="mailto:joyzho@foxmail.com" class="contact-link">Email</a>
-    <span style="color:var(--warm-dark);">/</span>
+    <span style="color:var(--warm-dark);margin:0 8px;">·</span>
     <a href="#" class="contact-link">WeChat</a>
-    <span style="color:var(--warm-dark);">/</span>
+    <span style="color:var(--warm-dark);margin:0 8px;">·</span>
     <a href="https://pan.baidu.com/s/10uioa5ouSXhdVuF6-z8yog?pwd=nmsy" target="_blank" rel="noopener" class="contact-link">Portfolio</a>
-    <span style="color:var(--warm-dark);">/</span>
+    <span style="color:var(--warm-dark);margin:0 8px;">·</span>
     <a href="taosha.html" class="contact-link">Taosha AI</a>
   </div>
 </section>
