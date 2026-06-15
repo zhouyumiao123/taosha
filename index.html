@@ -452,13 +452,46 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
   });
 });
 
-// Photo strip wheel scroll
+// Photo strip wheel scroll + auto-scroll
 const strip = document.getElementById('photoStrip');
+let autoScroll;
+
 if (strip) {
   strip.addEventListener('wheel', (e) => {
     e.preventDefault();
     strip.scrollBy({ left:e.deltaY*2, behavior:'smooth' });
   }, { passive:false });
+
+  // Auto-scroll: start when section is visible
+  const photoSection = document.getElementById('photography');
+  const obs2 = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        autoScroll = setInterval(() => {
+          strip.scrollBy({ left:1 });
+          // Loop back to start when reaching the end
+          if (strip.scrollLeft >= strip.scrollWidth - strip.clientWidth - 10) {
+            strip.scrollTo({ left:0, behavior:'smooth' });
+          }
+        }, 40);
+      } else {
+        clearInterval(autoScroll);
+      }
+    });
+  }, { threshold:0.3 });
+  obs2.observe(photoSection);
+
+  // Pause on hover
+  strip.addEventListener('mouseenter', () => clearInterval(autoScroll));
+  strip.addEventListener('mouseleave', () => {
+    clearInterval(autoScroll);
+    autoScroll = setInterval(() => {
+      strip.scrollBy({ left:1 });
+      if (strip.scrollLeft >= strip.scrollWidth - strip.clientWidth - 10) {
+        strip.scrollTo({ left:0, behavior:'smooth' });
+      }
+    }, 40);
+  });
 }
 </script>
 </body>
