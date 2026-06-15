@@ -248,23 +248,43 @@ body {
 .photo-frame:hover img { transform:scale(1.03); }
 
 /* ===== AI Native ===== */
-.ai-card {
-  display:flex; align-items:center; gap:10px; padding:16px 20px;
-  border:1px solid var(--warm-dark); font-size:14px; font-weight:500;
-  color:var(--ink); transition:all 0.35s;
-}
-.ai-card:hover { border-color:var(--gold); transform:translateY(-2px); }
-.ai-card-icon { color:var(--gold); font-size:8px; }
-.ai-metric { text-align:center; padding:24px 16px; border:1px solid var(--warm-dark); transition:all 0.35s; }
-.ai-metric:hover { border-color:var(--gold); }
-.am-num { font-size:28px; font-weight:700; color:var(--ink); line-height:1; }
-.am-lbl { font-size:11px; color:var(--muted); margin-top:6px; font-family:"Inter",sans-serif; letter-spacing:0.04em; }
-.ai-step { text-align:center; }
-.ai-year { font-family:"Inter",sans-serif; font-size:13px; font-weight:600; color:var(--ink); }
-.ai-label { font-size:11px; color:var(--muted); margin-top:2px; }
+.ai-section { background:var(--ink); color:#fff; padding:120px 60px; }
+.ai-section .section-num,
+.ai-section .section-title,
+.ai-section .section-title-cn { color:#fff; }
+.ai-section .section-num { color:var(--gold); }
+.ai-prose { max-width:560px; margin:0 auto 80px; font-size:17px; line-height:2; color:var(--warm-dark); text-align:center; }
+.ai-prose p { margin-bottom:16px; }
+.ai-prose strong { color:#fff; font-weight:600; }
+
+.ai-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; max-width:960px; margin:0 auto 80px; background:rgba(255,255,255,0.06); }
+.ai-card { padding:32px 28px; background:var(--ink); transition:background 0.4s; }
+.ai-card:hover { background:#1a1a1a; }
+.ai-card-num { font-family:"Inter",sans-serif; font-size:10px; color:var(--gold); letter-spacing:0.08em; margin-bottom:16px; }
+.ai-card h4 { font-size:15px; font-weight:600; color:#fff; margin-bottom:8px; }
+.ai-card p { font-size:13px; color:var(--muted); line-height:1.7; }
+
+.ai-metrics { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; max-width:960px; margin:0 auto 80px; background:rgba(255,255,255,0.06); }
+.ai-metric { text-align:center; padding:36px 20px; background:var(--ink); transition:background 0.4s; }
+.ai-metric:hover { background:#1a1a1a; }
+.am-num { font-size:32px; font-weight:700; color:#fff; line-height:1; }
+.am-sub { font-size:12px; color:var(--muted); margin-top:8px; line-height:1.6; }
+.am-sub span { display:block; }
+
+.ai-journey { max-width:600px; margin:0 auto 80px; }
+.ai-step-row { display:flex; align-items:baseline; gap:20px; padding:16px 0; border-bottom:1px solid rgba(255,255,255,0.08); }
+.ai-step-row:last-child { border-bottom:none; }
+.ai-jy { font-family:"Inter",sans-serif; font-size:13px; font-weight:600; color:var(--gold); min-width:48px; }
+.ai-jt { font-size:15px; color:#fff; }
+
+.ai-quote { max-width:560px; margin:0 auto 0; text-align:center; }
+.ai-quote p { font-size:20px; font-weight:500; line-height:1.8; color:#fff; font-style:italic; }
+.ai-quote .byline { font-size:13px; color:var(--gold); margin-top:24px; letter-spacing:0.06em; }
+
 @media (max-width:768px) {
-  .ai-grid { grid-template-columns:repeat(2,1fr) !important; }
-  .ai-metrics { grid-template-columns:repeat(2,1fr) !important; }
+  .ai-section { padding:80px 24px; }
+  .ai-grid { grid-template-columns:1fr; }
+  .ai-metrics { grid-template-columns:repeat(2,1fr); }
 }
 
 /* ===== About ===== */
@@ -520,51 +540,89 @@ body {
 </section>
 
 <!-- AI Native Marketer -->
-<section class="section" id="ai-native">
+<section class="ai-section section" id="ai-native">
   <div class="section-inner">
+
+  <!-- Part 1: Value Proposition -->
   <div class="section-num en">—</div>
-  <h2 class="section-title">AI Native Marketer</h2>
-  <p class="section-title-cn">AI原生营销人</p>
-  <p style="text-align:center;color:var(--muted);font-size:17px;max-width:600px;margin:0 auto 56px;line-height:1.8;">
-    融合品牌策略、故事化传播与AI协作，探索品牌营销的下一代可能。
-  </p>
+  <h2 class="section-title">AI时代的品牌营销人</h2>
+  <p class="section-title-cn">Brand Marketer in the AI Era</p>
 
-  <!-- Capability Grid -->
-  <div class="ai-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:900px;margin:0 auto 64px;">
-    <div class="ai-card fade-in"><span class="ai-card-icon">&#9670;</span><span>Brand Strategy</span></div>
-    <div class="ai-card fade-in"><span class="ai-card-icon">&#9670;</span><span>Content Systems</span></div>
-    <div class="ai-card fade-in"><span class="ai-card-icon">&#9670;</span><span>AI Workflow</span></div>
-    <div class="ai-card fade-in"><span class="ai-card-icon">&#9670;</span><span>Vibe Coding</span></div>
-    <div class="ai-card fade-in"><span class="ai-card-icon">&#9670;</span><span>Automation</span></div>
-    <div class="ai-card fade-in"><span class="ai-card-icon">&#9670;</span><span>Creative Production</span></div>
+  <div class="ai-prose fade-in">
+    <p>我相信，<strong>未来优秀的品牌营销人才</strong>，</p>
+    <p>不仅需要理解用户与市场，</p>
+    <p>也需要理解技术与AI。</p>
+    <p style="margin-top:24px;">我持续探索AI在品牌传播、<br>内容营销与创意生产中的应用，</p>
+    <p>让复杂价值被理解，<br>让品牌故事被看见。</p>
   </div>
 
-  <!-- Metrics Grid -->
-  <div class="ai-metrics" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:900px;margin:0 auto 64px;">
-    <div class="ai-metric fade-in"><div class="am-num">100+</div><div class="am-lbl">Prompt Library</div></div>
-    <div class="ai-metric fade-in"><div class="am-num">10+</div><div class="am-lbl">Marketing Workflows</div></div>
-    <div class="ai-metric fade-in"><div class="am-num">4</div><div class="am-lbl">AI Models Used Daily</div></div>
-    <div class="ai-metric fade-in"><div class="am-num">0 &rarr; 1</div><div class="am-lbl">AI-built Website</div></div>
+  <!-- Part 2: Capability Grid -->
+  <div class="ai-grid">
+    <div class="ai-card fade-in">
+      <div class="ai-card-num">01</div>
+      <h4>品牌战略</h4>
+      <p>利用AI辅助市场研究、竞品分析与品牌定位探索，提升战略思考效率。</p>
+    </div>
+    <div class="ai-card fade-in">
+      <div class="ai-card-num">02</div>
+      <h4>内容体系</h4>
+      <p>构建从选题、创作到分发的内容工作流，提高内容生产效率。</p>
+    </div>
+    <div class="ai-card fade-in">
+      <div class="ai-card-num">03</div>
+      <h4>AI工作流</h4>
+      <p>结合Claude、ChatGPT等工具，搭建营销场景下的协作流程。</p>
+    </div>
+    <div class="ai-card fade-in">
+      <div class="ai-card-num">04</div>
+      <h4>创意开发</h4>
+      <p>利用AI快速验证创意方向，缩短创意落地周期。</p>
+    </div>
+    <div class="ai-card fade-in">
+      <div class="ai-card-num">05</div>
+      <h4>自动化运营</h4>
+      <p>探索营销流程自动化，减少重复性工作。</p>
+    </div>
+    <div class="ai-card fade-in">
+      <div class="ai-card-num">06</div>
+      <h4>AI编程实践</h4>
+      <p>通过Claude Code完成个人网站开发，持续探索技术与营销的结合。</p>
+    </div>
   </div>
 
-  <!-- Journey -->
-  <div class="ai-journey" style="display:flex;justify-content:center;gap:32px;flex-wrap:wrap;max-width:900px;margin:0 auto 64px;">
-    <div class="ai-step fade-in"><div class="ai-year">2024</div><div class="ai-label">GPT</div></div>
-    <div class="ai-divider" style="color:var(--gold);">→</div>
-    <div class="ai-step fade-in"><div class="ai-year">2025</div><div class="ai-label">Workflow</div></div>
-    <div class="ai-divider" style="color:var(--gold);">→</div>
-    <div class="ai-step fade-in"><div class="ai-year">2025</div><div class="ai-label">Claude Code</div></div>
-    <div class="ai-divider" style="color:var(--gold);">→</div>
-    <div class="ai-step fade-in"><div class="ai-year">2026</div><div class="ai-label">Personal Website</div></div>
-    <div class="ai-divider" style="color:var(--gold);">→</div>
-    <div class="ai-step fade-in"><div class="ai-year">Now</div><div class="ai-label">AI Native Marketing</div></div>
+  <!-- Part 3: Metrics -->
+  <div class="ai-metrics">
+    <div class="ai-metric fade-in">
+      <div class="am-num">100+</div>
+      <div class="am-sub">营销场景提示词积累</div>
+    </div>
+    <div class="ai-metric fade-in">
+      <div class="am-num">10+</div>
+      <div class="am-sub">AI营销工作流实践</div>
+    </div>
+    <div class="ai-metric fade-in">
+      <div class="am-num">4</div>
+      <div class="am-sub"><span>日常协作AI模型</span><span>Claude · ChatGPT</span><span>Gemini · DeepSeek</span></div>
+    </div>
+    <div class="ai-metric fade-in">
+      <div class="am-num">0→1</div>
+      <div class="am-sub">个人网站开发实践</div>
+    </div>
   </div>
 
-  <!-- Quote -->
-  <div class="ai-quote fade-in" style="text-align:center;max-width:620px;margin:0 auto;">
-    <p style="font-size:20px;font-weight:500;line-height:1.7;color:var(--ink);font-style:italic;">
-      "AI 不会替代营销人。<br>会用 AI 的营销人，会替代不会用的。"
-    </p>
+  <!-- Part 4: Growth Timeline -->
+  <div class="ai-journey fade-in">
+    <div class="ai-step-row"><span class="ai-jy">2024</span><span class="ai-jt">开始使用AI辅助内容创作</span></div>
+    <div class="ai-step-row"><span class="ai-jy">2025</span><span class="ai-jt">建立品牌营销工作流</span></div>
+    <div class="ai-step-row"><span class="ai-jy">2025</span><span class="ai-jt">接触 Claude Code</span></div>
+    <div class="ai-step-row"><span class="ai-jy">2026</span><span class="ai-jt">独立完成个人网站开发</span></div>
+    <div class="ai-step-row"><span class="ai-jy">现在</span><span class="ai-jt">探索AI原生营销实践</span></div>
+  </div>
+
+  <!-- Part 5: Quote -->
+  <div class="ai-quote fade-in">
+    <p>"AI 不会取代品牌营销人。<br>但能够理解并使用AI的人，<br>正在重新定义品牌营销的工作方式。"</p>
+    <div class="byline">—— Joyce Chow</div>
   </div>
 
   </div>
