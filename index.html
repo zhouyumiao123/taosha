@@ -1,377 +1,567 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>周蕾 Joyce Chow | 创意作品集</title>
-    <meta name="description" content="周蕾 (Joyce Chow) 的个人作品集——文案策划、摄影、视频制作，用创意讲述有温度的故事。">
-    <meta property="og:title" content="周蕾 Joyce Chow | 创意作品集">
-    <meta property="og:description" content="文案 × 摄影 × 视频 · 用创意连接世界">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>周蕾 Joyce Chow | 链接技术与市场，构建有温度的品牌叙事</title>
+<meta name="description" content="周蕾 (Joyce Chow) — 品牌策划与市场推广。3年B2B/B2C经验，链接技术与市场，构建有温度的品牌叙事。">
+<meta property="og:title" content="周蕾 Joyce Chow | Portfolio">
+<meta property="og:description" content="品牌策略 · 整合营销 · 内容创意">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   Joyce Chow Portfolio — Emerald Edition
+   配色：白 + 深灰/黑 + 祖母绿 #0d7c6b
+   ============================================================ */
+
+:root {
+  --emerald: #0d7c6b;
+  --emerald-dark: #095a4e;
+  --emerald-light: #e8f5f1;
+  --emerald-glow: rgba(13, 124, 107, 0.12);
+  --black: #1a1a1a;
+  --gray: #666;
+  --gray-light: #999;
+  --white: #ffffff;
+  --transition: 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", -apple-system, sans-serif;
+  color: var(--black);
+  background: var(--white);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== Typography ===== */
+.en { font-family: "Playfair Display", Georgia, serif; font-style: italic; }
+
+/* ===== Nav ===== */
+.nav {
+  position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+  padding: 20px 40px;
+  display: flex; justify-content: space-between; align-items: center;
+  transition: background 0.4s, padding 0.4s, box-shadow 0.4s;
+  mix-blend-mode: difference;
+}
+.nav.scrolled {
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(20px);
+  padding: 14px 40px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+  mix-blend-mode: normal;
+}
+.nav.scrolled .nav-links a { color: var(--gray); }
+.nav.scrolled .nav-links a:hover { color: var(--emerald); }
+.nav.scrolled .nav-logo { color: var(--emerald); }
+.nav-logo {
+  font-size: 16px; font-weight: 700; letter-spacing: 0.06em;
+  text-decoration: none; color: #fff;
+}
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a {
+  font-size: 13px; text-decoration: none; color: rgba(255,255,255,0.85);
+  letter-spacing: 0.04em; transition: var(--transition);
+}
+.nav-links a:hover { color: #fff; }
+
+/* ===== Hero ===== */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  background: var(--black);
+  color: #fff; position: relative; overflow: hidden;
+  padding: 120px 60px 80px;
+}
+.hero::before {
+  content: ''; position: absolute; top: -30%; right: -15%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(13,124,107,0.25) 0%, transparent 70%);
+  border-radius: 50%; pointer-events: none;
+}
+.hero-content { max-width: 800px; position: relative; z-index: 1; }
+.hero-eyebrow {
+  font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--emerald); margin-bottom: 28px; font-weight: 600;
+}
+.hero h1 {
+  font-size: clamp(40px, 6vw, 72px); font-weight: 700;
+  line-height: 1.15; letter-spacing: 0.03em; margin-bottom: 24px;
+}
+.hero h1 .highlight {
+  color: var(--emerald);
+  background: linear-gradient(180deg, transparent 60%, rgba(13,124,107,0.3) 60%);
+  padding: 0 4px;
+}
+.hero .subtitle {
+  font-size: clamp(16px, 2vw, 20px); color: rgba(255,255,255,0.65);
+  line-height: 1.8; margin-bottom: 40px; max-width: 560px; font-weight: 300;
+}
+.hero .cta {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 14px 32px; border: 1.5px solid rgba(255,255,255,0.3);
+  color: #fff; text-decoration: none; font-size: 14px; letter-spacing: 0.06em;
+  transition: var(--transition); cursor: pointer;
+}
+.hero .cta:hover {
+  background: var(--emerald); border-color: var(--emerald);
+  transform: translateY(-2px);
+}
+.hero .cta .arrow { transition: transform 0.3s; }
+.hero .cta:hover .arrow { transform: translateX(4px); }
+.hero-scroll {
+  position: absolute; bottom: 40px; left: 60px;
+  font-size: 11px; letter-spacing: 0.1em; color: rgba(255,255,255,0.4);
+  animation: fadeBounce 2s ease-in-out infinite;
+}
+@keyframes fadeBounce {
+  0%, 100% { opacity: 0.3; transform: translateY(0); }
+  50% { opacity: 0.8; transform: translateY(8px); }
+}
+
+/* ===== Section Common ===== */
+.section { padding: 120px 60px; }
+.section-label {
+  font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--emerald); margin-bottom: 20px; font-weight: 600;
+}
+.section-title {
+  font-size: clamp(28px, 4vw, 42px); font-weight: 700;
+  letter-spacing: 0.02em; margin-bottom: 16px; color: var(--black);
+}
+.section-desc {
+  font-size: 16px; color: var(--gray); max-width: 520px; line-height: 1.8; margin-bottom: 60px;
+}
+
+/* ===== Featured Work ===== */
+.works-grid { display: flex; flex-direction: column; gap: 120px; }
+.work-item {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+}
+.work-item:nth-child(even) { direction: rtl; }
+.work-item:nth-child(even) .work-info { direction: ltr; }
+.work-visual {
+  background: var(--emerald-light);
+  aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  transition: var(--transition);
+}
+.work-visual:hover { transform: scale(1.02); }
+.work-visual .work-icon {
+  font-size: 64px; opacity: 0.3;
+  transition: var(--transition);
+}
+.work-visual:hover .work-icon { opacity: 0.5; transform: scale(1.1); }
+.work-visual .work-tag {
+  position: absolute; top: 24px; left: 24px;
+  font-size: 11px; letter-spacing: 0.1em; color: var(--emerald);
+  background: var(--white); padding: 6px 14px; font-weight: 600;
+}
+.work-number {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 100px; font-weight: 500; color: var(--emerald-light);
+  line-height: 1; margin-bottom: -20px; opacity: 0.6;
+}
+.work-info h3 { font-size: 28px; font-weight: 700; margin-bottom: 12px; }
+.work-info .work-category {
+  font-size: 11px; letter-spacing: 0.1em; color: var(--emerald);
+  margin-bottom: 20px; font-weight: 600;
+}
+.work-info .work-desc {
+  font-size: 15px; color: var(--gray); line-height: 1.8; margin-bottom: 28px;
+}
+.work-metrics { display: flex; gap: 40px; margin-bottom: 32px; }
+.metric-num {
+  font-size: 36px; font-weight: 700; color: var(--emerald); line-height: 1;
+}
+.metric-label { font-size: 12px; color: var(--gray-light); margin-top: 4px; }
+.work-detail-link {
+  font-size: 13px; letter-spacing: 0.06em; color: var(--emerald);
+  text-decoration: none; font-weight: 600;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: var(--transition);
+}
+.work-detail-link:hover { gap: 14px; color: var(--emerald-dark); }
+
+/* ===== About ===== */
+.about { background: #fafafa; }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+.about-text p {
+  font-size: 15px; color: var(--gray); line-height: 2; margin-bottom: 20px;
+}
+.about-text p strong { color: var(--black); font-weight: 600; }
+.about-skills h4 {
+  font-size: 13px; letter-spacing: 0.08em; margin-bottom: 20px; color: var(--black);
+}
+.tag-cloud { display: flex; flex-wrap: wrap; gap: 10px; }
+.tag {
+  padding: 8px 18px; border: 1px solid #e0e0e0;
+  font-size: 13px; color: var(--gray); transition: var(--transition);
+  cursor: default;
+}
+.tag:hover {
+  border-color: var(--emerald); color: var(--emerald);
+  background: var(--emerald-light); transform: translateY(-2px);
+}
+.philosophy {
+  margin-top: 40px; padding: 28px 32px; border-left: 3px solid var(--emerald);
+  background: var(--white);
+}
+.philosophy p {
+  font-size: 15px; color: var(--black); font-style: italic; line-height: 1.8;
+}
+
+/* ===== Timeline ===== */
+.timeline { position: relative; padding-left: 40px; }
+.timeline::before {
+  content: ''; position: absolute; left: 7px; top: 0; bottom: 0;
+  width: 1px; background: #e0e0e0;
+}
+.timeline-item { position: relative; margin-bottom: 48px; }
+.timeline-item::before {
+  content: ''; position: absolute; left: -40px; top: 8px;
+  width: 15px; height: 15px; border-radius: 50%;
+  background: var(--white); border: 3px solid var(--emerald);
+}
+.timeline-item:last-child::after {
+  content: ''; position: absolute; left: -37px; top: 26px;
+  width: 9px; height: 9px; border-radius: 50%; background: var(--emerald-light);
+}
+.timeline-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; }
+.timeline-role { font-size: 18px; font-weight: 700; }
+.timeline-company { font-size: 14px; color: var(--emerald); font-weight: 600; margin: 4px 0 8px; }
+.timeline-date { font-size: 12px; color: var(--gray-light); white-space: nowrap; }
+.timeline-content { font-size: 14px; color: var(--gray); line-height: 1.9; margin-top: 8px; }
+
+/* ===== Contact ===== */
+.contact-section { padding: 120px 60px 60px; text-align: center; }
+.contact-section .section-title { margin-bottom: 12px; }
+.contact-invite { font-size: 16px; color: var(--gray); margin-bottom: 40px; }
+.contact-links { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+.contact-link {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  text-decoration: none; color: var(--gray); font-size: 13px;
+  transition: var(--transition);
+}
+.contact-link:hover { color: var(--emerald); transform: translateY(-4px); }
+.contact-link .icon-circle {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: var(--emerald-light); display: flex; align-items: center; justify-content: center;
+  font-size: 20px; transition: var(--transition);
+}
+.contact-link:hover .icon-circle { background: var(--emerald); }
+
+/* ===== Footer ===== */
+.footer {
+  padding: 40px 60px; border-top: 1px solid #f0f0f0;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 12px; color: var(--gray-light);
+}
+.footer a { color: var(--gray-light); text-decoration: none; transition: var(--transition); }
+.footer a:hover { color: var(--emerald); }
+
+/* ===== Fade-in Animation ===== */
+.fade-in {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .work-item, .work-item:nth-child(even) {
+    grid-template-columns: 1fr; gap: 32px; direction: ltr;
+  }
+  .works-grid { gap: 64px; }
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .section { padding: 80px 24px; }
+  .hero { padding: 100px 24px 60px; }
+  .hero-scroll { left: 24px; }
+  .nav { padding: 16px 24px; }
+  .nav.scrolled { padding: 12px 24px; }
+  .nav-links { gap: 16px; }
+  .contact-section { padding: 80px 24px 40px; }
+  .footer { padding: 32px 24px; flex-direction: column; gap: 12px; text-align: center; }
+}
+</style>
 </head>
 <body>
 
-<!-- ==================== 导航栏 ==================== -->
-<nav class="navbar">
-    <div class="container">
-        <div class="nav-brand">Joyce Chow</div>
-        <ul class="nav-menu">
-            <li><a href="#home">首页</a></li>
-            <li><a href="#about">关于我</a></li>
-            <li><a href="#skills">技能</a></li>
-            <li><a href="#experience">经历</a></li>
-            <li><a href="#portfolio">作品集</a></li>
-            <li><a href="#education">教育</a></li>
-            <li><a href="#contact">联系</a></li>
-        </ul>
-        <div class="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </div>
+<!-- ==================== NAV ==================== -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo">JOYCE CHOW</a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
 </nav>
 
-<!-- ==================== 英雄区 ==================== -->
-<section id="home" class="hero">
-    <div class="hero-content">
-        <div class="hero-text">
-            <h1>周蕾 <span style="font-size:1.2rem;font-weight:400;">Joyce Chow</span></h1>
-            <p class="tagline">文案策划 · 摄影 · 视频制作</p>
-            <p class="subtitle">用文字雕刻思想，用镜头凝固时间，用影像讲述故事</p>
-            <div class="cta-buttons">
-                <a href="#portfolio" class="btn btn-primary">查看作品集</a>
-                <a href="#contact" class="btn btn-secondary">联系我</a>
-            </div>
-        </div>
-        <div class="hero-image">
-            <div class="profile-circle" style="background: url('images/profile-id.jpg') center/cover no-repeat; border: 4px solid white;"></div>
-        </div>
-    </div>
-    <div class="scroll-indicator">
-        <i class="fas fa-chevron-down"></i>
-    </div>
+<!-- ==================== HERO ==================== -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-eyebrow">Brand Strategist &amp; Creative</div>
+    <h1>
+      链接<span class="highlight">技术</span>与<span class="highlight">市场</span>，<br>构建有温度的<span class="highlight">品牌叙事</span>
+    </h1>
+    <p class="subtitle">
+      3年B2B/B2C品牌策划经验，擅长以故事化传播驱动品牌增长。<br>
+      从策略到执行，从内容到数据，用创意的力量让品牌被看见、被记住。
+    </p>
+    <a href="#work" class="cta">
+      查看精选作品 <span class="arrow">→</span>
+    </a>
+  </div>
+  <div class="hero-scroll">SCROLL ↓</div>
 </section>
 
-<!-- ==================== 关于我 ==================== -->
-<section id="about" class="about">
-    <div class="container">
-        <h2>关于我</h2>
-        <div class="about-content">
-            <div class="about-text">
-                <p>
-                    我是周蕾，一个相信「创意可以连接世界」的内容创作者。
-                    毕业于厦门大学，拥有文案策划、摄影和视频制作三重技能，
-                    致力于用多元的创意形式为品牌和产品赋予打动人心的力量。
-                </p>
-                <p>
-                    摄影于我，是对时间的凝固——正如我在随笔中写的：「摄影来源于生活，而生活本身就是一种艺术」。
-                    文案于我，是与受众的对话——曾经为利郎男装创作的广告文案获得了学院奖优秀类奖项。
-                    视频于我，是故事的延展——从微电影到纪录片，从宣传片到创意短片，每一种形式都是全新的探索。
-                </p>
-                <ul>
-                    <li>学院奖广告文案优秀类获得者</li>
-                    <li>福建省第六届大学生艺术节艺术作品类二等奖</li>
-                    <li>作品发表于《听潮》杂志等媒体</li>
-                    <li>拥有丰富的约拍和商业摄影经验</li>
-                </ul>
-            </div>
-            <div class="stats">
-                <div class="stat">
-                    <h3>3+</h3>
-                    <p>创意领域深耕</p>
-                </div>
-                <div class="stat">
-                    <h3>10+</h3>
-                    <p>视频作品</p>
-                </div>
-                <div class="stat">
-                    <h3>50+</h3>
-                    <p>摄影约拍</p>
-                </div>
-                <div class="stat">
-                    <h3>2</h3>
-                    <p>创意类奖项</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<!-- ==================== FEATURED WORK ==================== -->
+<section class="section" id="work">
+  <div class="section-label fade-in">Selected Work</div>
+  <h2 class="section-title fade-in">精选作品</h2>
+  <p class="section-desc fade-in">
+    每个案例都是策略、创意与执行的完整闭环。
+  </p>
 
-<!-- ==================== 专业技能 ==================== -->
-<section id="skills" class="skills">
-    <div class="container">
-        <h2>专业技能</h2>
-        <div class="skills-grid">
-            <div class="skill-category">
-                <h3>✍️ 文案策划</h3>
-                <ul>
-                    <li>广告文案创意与撰写</li>
-                    <li>品牌营销主题策划</li>
-                    <li>微信公众号内容运营</li>
-                    <li>长文案 / 短文案 / 热点文案</li>
-                    <li>纪录片策划与脚本写作</li>
-                </ul>
-            </div>
-            <div class="skill-category">
-                <h3>📷 摄影</h3>
-                <ul>
-                    <li>人像写真与约拍</li>
-                    <li>静物产品摄影</li>
-                    <li>风景与纪实摄影</li>
-                    <li>后期修图与调色</li>
-                    <li>新闻摄影</li>
-                </ul>
-            </div>
-            <div class="skill-category">
-                <h3>🎬 视频制作</h3>
-                <ul>
-                    <li>微电影拍摄与导演</li>
-                    <li>纪录片策划与制作</li>
-                    <li>宣传片拍摄</li>
-                    <li>视频剪辑与后期</li>
-                    <li>创意短片制作</li>
-                </ul>
-            </div>
-            <div class="skill-category">
-                <h3>🛠️ 工具掌握</h3>
-                <ul>
-                    <li>Adobe Photoshop / Lightroom</li>
-                    <li>Adobe Premiere Pro</li>
-                    <li>Canva / 设计工具</li>
-                    <li>微信公众号后台运营</li>
-                    <li>Office 办公套件</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
+  <div class="works-grid">
 
-<!-- ==================== 工作经历 ==================== -->
-<section id="experience" class="experience">
-    <div class="container">
-        <h2>工作经历</h2>
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-marker"></div>
-                <div class="timeline-content">
-                    <h3>内容运营 / 文案策划</h3>
-                    <div class="company">大象商机 · 微信公众号</div>
-                    <p><strong>实习期间</strong></p>
-                    <ul>
-                        <li>负责公众号日常内容策划、文案撰写与排版发布</li>
-                        <li>结合热点话题进行创意内容输出，提升粉丝互动率</li>
-                        <li>参与视频内容选题与脚本创作</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-marker"></div>
-                <div class="timeline-content">
-                    <h3>广告文案策划（参赛）</h3>
-                    <div class="company">学院奖 · 利郎男装命题</div>
-                    <p><strong>获奖作品：《欢迎来到，"利"体宇宙》</strong></p>
-                    <ul>
-                        <li>针对利郎「人生第一套职场装」主题创作系列广告文案</li>
-                        <li>以职场新人的成长历程为主线，唤起目标受众情感共鸣</li>
-                        <li>作品获得学院奖广告文案优秀类奖项</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-marker"></div>
-                <div class="timeline-content">
-                    <h3>自由摄影师</h3>
-                    <div class="company">个人摄影业务</div>
-                    <p><strong>持续运营中</strong></p>
-                    <ul>
-                        <li>承接人像写真、活动记录等约拍项目，累计服务 50+ 客户</li>
-                        <li>擅长捕捉有故事感的画面，注重自然光与情感表达</li>
-                        <li>涵盖人像、静物、风景等多种摄影类型</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ==================== 作品集 ==================== -->
-<section id="portfolio" class="portfolio">
-    <div class="container">
-        <h2>精选作品</h2>
-        <div class="portfolio-grid">
-            <div class="portfolio-item">
-                <div class="portfolio-image">
-                    <i class="fas fa-pen-fancy"></i>
-                </div>
-                <h3>利郎男装 · 广告文案</h3>
-                <p>为利郎「人生第一套职场装」营销主题创作的系列广告文案。以职场新人从校园到职场的成长故事为主线，包含平面短文案、长文案和春节热点文案，将品牌自然融入消费者的人生重要时刻。</p>
-                <ul class="results">
-                    <li>🏆 学院奖广告文案优秀类</li>
-                    <li>🏆 涵盖短文案/长文案/热点文案</li>
-                    <li>🏆 线上+线下多渠道投放策略</li>
-                </ul>
-            </div>
-            <div class="portfolio-item">
-                <div class="portfolio-image">
-                    <i class="fas fa-camera-retro"></i>
-                </div>
-                <h3>人像摄影作品</h3>
-                <p>持续接拍人像写真、情侣照、个人形象照等约拍项目。注重自然光线运用和真实情感的捕捉，每张照片都力求讲述一个独特的故事，而非简单的摆拍。</p>
-                <ul class="results">
-                    <li>📸 累计服务 50+ 客户</li>
-                    <li>📸 擅长自然光与氛围感人像</li>
-                    <li>📸 涵盖多种风格与场景</li>
-                </ul>
-            </div>
-            <div class="portfolio-item">
-                <div class="portfolio-image">
-                    <i class="fas fa-video"></i>
-                </div>
-                <h3>《你好沙坡尾》纪录片</h3>
-                <p>以厦门沙坡尾为背景创作的纪录短片，记录了这个老渔港在城市变迁中的面貌与人文故事。通过镜头语言展现传统与现代的交融，留住城市记忆中即将消逝的片段。</p>
-                <ul class="results">
-                    <li>🎬 独立策划/拍摄/剪辑</li>
-                    <li>🎬 人文纪录片类型</li>
-                    <li>🎬 厦门城市文化主题</li>
-                </ul>
-            </div>
-            <div class="portfolio-item">
-                <div class="portfolio-image">
-                    <i class="fas fa-film"></i>
-                </div>
-                <h3>《算不算》微电影</h3>
-                <p>原创微电影作品，从编剧到拍摄到后期全程参与。通过精心设计的情节和镜头语言，探索人与人之间微妙的情感关系，展现了扎实的叙事能力和视觉表达。</p>
-                <ul class="results">
-                    <li>🎬 原创编剧/导演作品</li>
-                    <li>🎬 完整微电影制作流程</li>
-                    <li>🎬 叙事与视觉双重探索</li>
-                </ul>
-            </div>
-            <div class="portfolio-item">
-                <div class="portfolio-image">
-                    <i class="fas fa-newspaper"></i>
-                </div>
-                <h3>《听潮》杂志发表</h3>
-                <p>文章发表于《听潮》杂志，内容聚焦于社会观察与文化思考。此外还撰写了多篇深度随笔，涵盖摄影艺术、科幻文学中的哲学思考、新闻伦理等多元主题。</p>
-                <ul class="results">
-                    <li>✍️ 杂志发表作品</li>
-                    <li>✍️ 多主题深度写作</li>
-                    <li>✍️ 文化观察与评论</li>
-                </ul>
-            </div>
-            <div class="portfolio-item">
-                <div class="portfolio-image">
-                    <i class="fas fa-bullhorn"></i>
-                </div>
-                <h3>金柄村拍胸舞宣传片</h3>
-                <p>为闽南传统民俗「拍胸舞」制作的文化宣传短片。深入金柄村，用镜头记录这一非物质文化遗产的独特魅力，助力传统文化在新时代的传播与传承。</p>
-                <ul class="results">
-                    <li>🎬 非遗文化宣传片</li>
-                    <li>🎬 实地采风拍摄</li>
-                    <li>🎬 传统文化传播</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ==================== 教育背景 ==================== -->
-<section id="education" class="education">
-    <div class="container">
-        <h2>教育背景</h2>
-        <div class="education-list">
-            <div class="education-item">
-                <h3>厦门大学</h3>
-                <div class="school">Xiamen University</div>
-                <div class="year">本科</div>
-                <p>新闻传播相关专业，主修新闻摄影、广告文案、纪录片策划等课程</p>
-            </div>
-            <div class="education-item">
-                <h3>学院奖 · 广告文案</h3>
-                <div class="cert">中国大学生广告艺术节</div>
-                <div class="year">获奖</div>
-                <p>作品《欢迎来到，"利"体宇宙》获广告文案优秀类奖项</p>
-            </div>
-            <div class="education-item">
-                <h3>福建省大学生艺术节</h3>
-                <div class="cert">第六届艺术作品类</div>
-                <div class="year">二等奖</div>
-                <p>艺术作品获得省级二等奖荣誉</p>
-            </div>
-            <div class="education-item">
-                <h3>英语能力</h3>
-                <div class="cert">CET-4</div>
-                <div class="year">已获证书</div>
-                <p>具备良好的英语阅读与书面表达能力</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ==================== 联系方式 ==================== -->
-<section id="contact" class="contact">
-    <div class="container">
-        <h2>联系我</h2>
-        <p class="contact-intro">
-            如果你对我的作品感兴趣，或者有文案策划、摄影、视频制作方面的合作需求，
-            欢迎通过以下方式与我联系。期待与你一起创造打动人心的作品！
+    <!-- Case 1: 微光计划 -->
+    <div class="work-item fade-in">
+      <div class="work-visual">
+        <span class="work-tag">Brand Strategy</span>
+        <div class="work-icon">✦</div>
+      </div>
+      <div class="work-info">
+        <div class="work-number">01</div>
+        <div class="work-category">品牌策略 / Brand Strategy</div>
+        <h3>「微光计划」营销企划</h3>
+        <p class="work-desc">
+          为深圳麦科信科技拳头产品「光隔离探头」策划千万级补贴营销活动。
+          通过"达人矩阵 + 线上直播 + 线下展会"立体打法，打开B2B科技产品的品牌声量。
         </p>
-        <div class="contact-methods">
-            <a href="mailto:joyce.chow@email.com" class="contact-method">
-                <i class="fas fa-envelope"></i>
-                <span>joyce.chow@email.com</span>
-            </a>
-            <a href="#" class="contact-method">
-                <i class="fab fa-weixin"></i>
-                <span>微信联系</span>
-            </a>
-            <a href="#" class="contact-method" target="_blank" rel="noopener">
-                <i class="fas fa-cloud"></i>
-                <span>百度网盘作品集</span>
-            </a>
-            <a href="#" class="contact-method">
-                <i class="fas fa-camera"></i>
-                <span>约拍咨询</span>
-            </a>
+        <div class="work-metrics">
+          <div class="metric">
+            <div class="metric-num">3,000<span style="font-size:16px;">万</span></div>
+            <div class="metric-label">预计营收增长</div>
+          </div>
+          <div class="metric">
+            <div class="metric-num">10+</div>
+            <div class="metric-label">达人推广渠道</div>
+          </div>
         </div>
-        <form class="contact-form">
-            <div class="form-group">
-                <input type="text" placeholder="您的姓名" required>
-            </div>
-            <div class="form-group">
-                <input type="email" placeholder="您的邮箱" required>
-            </div>
-            <div class="form-group">
-                <input type="text" placeholder="合作类型（文案/摄影/视频/其他）">
-            </div>
-            <div class="form-group">
-                <textarea rows="5" placeholder="请描述您的需求..."></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">发送信息</button>
-        </form>
+        <a href="#" class="work-detail-link">查看完整案例 <span class="arrow">→</span></a>
+      </div>
     </div>
+
+    <!-- Case 2: 视频号矩阵 -->
+    <div class="work-item fade-in">
+      <div class="work-visual">
+        <span class="work-tag">Integrated Campaign</span>
+        <div class="work-icon">◈</div>
+      </div>
+      <div class="work-info">
+        <div class="work-number">02</div>
+        <div class="work-category">整合营销 / Integrated Campaign</div>
+        <h3>视频号矩阵 &amp; 故事化传播</h3>
+        <p class="work-desc">
+          以「故事化传播」为核心策略，从0搭建微信视频号+抖音矩阵。首创老板个人IP，
+          以真实故事引发行业共鸣，在ToB物流赛道实现差异化突围。
+        </p>
+        <div class="work-metrics">
+          <div class="metric">
+            <div class="metric-num">5,000<span style="font-size:16px;">+</span></div>
+            <div class="metric-label">视频号粉丝（从300起）</div>
+          </div>
+          <div class="metric">
+            <div class="metric-num">80<span style="font-size:16px;">+/周</span></div>
+            <div class="metric-label">精准客户引流</div>
+          </div>
+        </div>
+        <a href="#" class="work-detail-link">查看完整案例 <span class="arrow">→</span></a>
+      </div>
+    </div>
+
+    <!-- Case 3: IP孵化+AI -->
+    <div class="work-item fade-in">
+      <div class="work-visual">
+        <span class="work-tag">Content &amp; Creative</span>
+        <div class="work-icon">⬡</div>
+      </div>
+      <div class="work-info">
+        <div class="work-number">03</div>
+        <div class="work-category">内容创意 / Content &amp; Creative</div>
+        <h3>原创IP孵化 &amp; AI工作流搭建</h3>
+        <p class="work-desc">
+          独立设计NOME吉祥物IP，围绕IP打造系列故事脚本与文创周边。
+          同时运用Claude Code等AI工具搭建自动化内容生产工作流，大幅提升创意产出效率。
+        </p>
+        <div class="work-metrics">
+          <div class="metric">
+            <div class="metric-num">1</div>
+            <div class="metric-label">原创IP从0到1</div>
+          </div>
+          <div class="metric">
+            <div class="metric-num">AI</div>
+            <div class="metric-label">自动化工作流赋能</div>
+          </div>
+        </div>
+        <a href="#" class="work-detail-link">查看完整案例 <span class="arrow">→</span></a>
+      </div>
+    </div>
+
+  </div>
 </section>
 
-<!-- ==================== 页脚 ==================== -->
-<footer class="footer">
-    <div class="container">
-        <p>&copy; 2024 周蕾 Joyce Chow. All Rights Reserved.</p>
-        <div class="social-links">
-            <a href="mailto:joyce.chow@email.com" title="邮箱">
-                <i class="fas fa-envelope"></i>
-            </a>
-            <a href="#" title="微信">
-                <i class="fab fa-weixin"></i>
-            </a>
-            <a href="#" title="百度网盘">
-                <i class="fas fa-cloud"></i>
-            </a>
-        </div>
+<!-- ==================== ABOUT ==================== -->
+<section class="section about" id="about">
+  <div class="section-label fade-in">About Me</div>
+  <h2 class="section-title fade-in">关于我</h2>
+  <div class="about-grid">
+    <div class="about-text fade-in">
+      <p>
+        我是周蕾，<strong>3年品牌策划与市场推广经验</strong>，服务过B2B科技、物流供应链领域。
+        擅长以故事化传播为核心，打通<strong>品牌策略 → 内容创意 → 渠道运营 → 数据复盘</strong>的全链路。
+      </p>
+      <p>
+        好的品牌叙事不只是漂亮的文案——它是<strong>技术与市场之间的翻译官</strong>，
+        是让复杂的产品被理解、让冰冷的品牌有温度的桥梁。
+      </p>
+      <div class="philosophy">
+        <p>"品牌不是你说自己是什么，而是你在用户的生活中扮演了什么角色。我的工作，就是让这个角色真实、动人且不可替代。"</p>
+      </div>
     </div>
+    <div class="about-skills fade-in">
+      <h4>核心能力</h4>
+      <div class="tag-cloud">
+        <span class="tag">品牌策略</span>
+        <span class="tag">故事化传播</span>
+        <span class="tag">达人矩阵搭建</span>
+        <span class="tag">社交媒体运营</span>
+        <span class="tag">IP孵化</span>
+        <span class="tag">整合营销</span>
+        <span class="tag">内容策划</span>
+        <span class="tag">视频制作</span>
+        <span class="tag">摄影</span>
+        <span class="tag">AI自动化工作流</span>
+        <span class="tag">数据分析</span>
+        <span class="tag">海外社媒运营</span>
+        <span class="tag">项目管理</span>
+        <span class="tag">文案创意</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== EXPERIENCE ==================== -->
+<section class="section" id="experience">
+  <div class="section-label fade-in">Experience &amp; Recognition</div>
+  <h2 class="section-title fade-in">经历与荣誉</h2>
+
+  <div class="timeline fade-in" style="margin-bottom:60px;">
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <span class="timeline-role">市场推广负责人</span>
+        <span class="timeline-date">2025.12 — 2026.04</span>
+      </div>
+      <div class="timeline-company">深圳麦科信科技有限公司（Micsig）</div>
+      <div class="timeline-content">全面负责品牌推广与市场营销，主导「微光计划」千万级营销企划，新开拓10个达人推广渠道</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <span class="timeline-role">品牌策划</span>
+        <span class="timeline-date">2023.10 — 2025.11</span>
+      </div>
+      <div class="timeline-company">诺瓦物流管理（深圳）有限公司</div>
+      <div class="timeline-content">主导视频号+抖音矩阵运营，首创故事化传播策略，0→5000粉冷启动，统筹10+场海内外展会营销</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <span class="timeline-role">文案策划</span>
+        <span class="timeline-date">2023.03 — 2023.10</span>
+      </div>
+      <div class="timeline-company">银河电力集团股份有限公司</div>
+      <div class="timeline-content">独立完成企业宣传片脚本，运营LinkedIn/Facebook海外社媒，主导产品手册内容策划</div>
+    </div>
+  </div>
+
+  <div class="section-label fade-in" style="margin-top:40px;">Honors</div>
+  <div class="tag-cloud fade-in">
+    <span class="tag">🏆 学院奖 · 广告文案优秀类</span>
+    <span class="tag">🏆 福建省大学生艺术节 · 二等奖</span>
+    <span class="tag">📰 《听潮》杂志发表</span>
+  </div>
+
+  <div style="margin-top:40px;">
+    <a href="简历-可编辑版.html" class="cta" style="color:var(--black);border-color:#e0e0e0;display:inline-flex;">
+      下载完整简历 PDF ↓
+    </a>
+  </div>
+</section>
+
+<!-- ==================== CONTACT ==================== -->
+<section class="contact-section" id="contact">
+  <div class="section-label fade-in">Contact</div>
+  <h2 class="section-title fade-in">期待与你聊聊</h2>
+  <p class="contact-invite fade-in">
+    关于品牌的下一个可能，我始终充满好奇。<br>
+    无论是全职机会、项目合作，还是只是打个招呼——
+  </p>
+  <div class="contact-links fade-in">
+    <a href="mailto:joyzho@foxmail.com" class="contact-link">
+      <div class="icon-circle"><span>✉</span></div>
+      <span>Email</span>
+    </a>
+    <a href="#" class="contact-link">
+      <div class="icon-circle"><span>💬</span></div>
+      <span>微信</span>
+    </a>
+    <a href="https://pan.baidu.com/s/10uioa5ouSXhdVuF6-z8yog?pwd=nmsy" class="contact-link" target="_blank" rel="noopener">
+      <div class="icon-circle"><span>☁</span></div>
+      <span>作品集云盘</span>
+    </a>
+    <a href="taosha.html" class="contact-link">
+      <div class="icon-circle"><span>✦</span></div>
+      <span>淘沙AI相册</span>
+    </a>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="footer">
+  <span>&copy; 2024 Joyce Chow. Crafted with care.</span>
+  <span><a href="taosha.html">淘沙AI相册</a> · <a href="简历-可编辑版.html">简历PDF</a></span>
 </footer>
 
-<script src="script.js"></script>
+<!-- ==================== JS ==================== -->
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
 </body>
 </html>
