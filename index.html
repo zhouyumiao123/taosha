@@ -22,7 +22,9 @@
   --emerald: #0d7c6b;
   --emerald-dark: #095a4e;
   --emerald-light: #e8f5f1;
-  --emerald-glow: rgba(13, 124, 107, 0.12);
+  --amber: #FFB300;
+  --amber-dark: #E5A100;
+  --carbon: #111111;
   --black: #1a1a1a;
   --gray: #666;
   --gray-light: #999;
@@ -70,14 +72,15 @@ body {
 .nav.scrolled .nav-logo { color: var(--emerald); }
 .nav-logo {
   display: flex; align-items: center; gap: 10px;
-  text-decoration: none; color: rgba(255,255,255,0.9);
+  text-decoration: none; color: var(--carbon);
   transition: color 0.4s;
 }
 .nav-logo-mark {
   width: 8px; height: 22px;
-  background: var(--emerald);
+  background: var(--amber);
   border-radius: 2px;
   flex-shrink: 0;
+  transition: background 0.4s;
 }
 .nav-logo-text {
   display: flex; flex-direction: column;
@@ -93,23 +96,26 @@ body {
   color: inherit; opacity: 0.6; text-transform: uppercase;
 }
 .nav.scrolled .nav-logo { color: var(--emerald); }
+.nav.scrolled .nav-logo-mark { background: var(--emerald); }
 .nav.scrolled .nav-logo-en { opacity: 0.5; }
 .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
 .nav-links a {
   font-family: "Inter", sans-serif;
   font-size: 12px; font-weight: 500; text-decoration: none;
-  color: rgba(255,255,255,0.75);
+  color: var(--carbon);
   letter-spacing: 0.06em; transition: color 0.3s;
   position: relative;
 }
 .nav-links a::after {
   content: ''; position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%);
-  width: 0; height: 1.5px; background: var(--emerald);
+  width: 0; height: 1.5px; background: var(--amber);
   transition: width 0.3s ease;
 }
-.nav-links a:hover { color: #fff; }
+.nav-links a:hover { color: #000; }
 .nav-links a:hover::after { width: 14px; }
-.nav.scrolled .nav-links a:hover::after { background: var(--emerald); }
+.nav.scrolled .nav-links a { color: var(--gray); }
+.nav.scrolled .nav-links a:hover { color: var(--emerald); }
+.nav.scrolled .nav-links a::after { background: var(--emerald); }
 .nav.scrolled .nav-links a.active::after { width: 14px; background: var(--emerald); }
 
 /* ===== Hero ===== */
@@ -156,11 +162,11 @@ body {
   100% { opacity: 0; transform: translateY(-10vh) translateX(var(--drift)) rotate(360deg); }
 }
 
-/* Subtle emerald light wash over photo */
+/* Subtle warm wash over photo */
 .hero-wash {
   position: absolute; inset: 0; pointer-events: none; z-index: 1;
-  background: radial-gradient(ellipse at 70% 30%, rgba(13,124,107,0.12) 0%, transparent 60%),
-              radial-gradient(ellipse at 30% 70%, rgba(10,160,120,0.06) 0%, transparent 50%);
+  background: radial-gradient(ellipse at 70% 30%, rgba(255,179,0,0.08) 0%, transparent 60%),
+              radial-gradient(ellipse at 30% 80%, rgba(0,0,0,0.15) 0%, transparent 50%);
 }
 
 /* Hero content */
@@ -169,7 +175,7 @@ body {
 /* Eyebrow */
 .hero-eyebrow {
   font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--emerald); margin-bottom: 28px; font-weight: 600;
+  color: var(--amber); margin-bottom: 28px; font-weight: 600;
   opacity: 0; transform: translateY(12px);
   animation: heroFadeIn 0.7s ease 0.1s forwards;
 }
@@ -183,67 +189,52 @@ body {
 }
 .hero h1 .highlight {
   position: relative; display: inline-block;
-  color: var(--emerald); padding: 0 2px;
+  color: var(--amber); padding: 0 2px;
 }
 .hero h1 .highlight::after {
   content: '';
   position: absolute; left: 0; bottom: 2px;
-  width: 0%; height: 10px;
-  background: rgba(13,124,107,0.35);
-  z-index: -1;
+  width: 0%; height: 1.5px;
+  background: var(--amber);
   animation: highlighterSwipe 1s ease 0.7s forwards;
 }
 @keyframes highlighterSwipe {
   0%   { width: 0%; left: 0; }
   100% { width: 100%; left: 0; }
 }
+.hero h1 {
+  text-shadow: 0 2px 12px rgba(0,0,0,0.18);
+}
 
 /* Subtitle */
 .hero .subtitle {
-  font-size: clamp(15px, 1.8vw, 18px); color: rgba(255,255,255,0.6);
-  line-height: 1.9; margin-bottom: 44px; max-width: 540px; font-weight: 300;
+  font-size: clamp(15px, 1.8vw, 18px); color: var(--carbon);
+  line-height: 1.9; margin-bottom: 44px; max-width: 540px; font-weight: 400;
   opacity: 0; transform: translateY(12px);
   animation: heroFadeIn 0.8s ease 0.45s forwards;
+  text-shadow: 0 1px 2px rgba(255,255,255,0.3);
 }
 
 /* CTA button — artistic */
 .hero .cta {
   display: inline-flex; align-items: center; gap: 12px;
   padding: 15px 36px;
-  border: 1.5px solid rgba(255,255,255,0.25);
+  background: var(--carbon); border: none;
   color: #fff; text-decoration: none; font-size: 14px; letter-spacing: 0.07em;
-  transition: all 0.4s ease; cursor: pointer;
-  position: relative; overflow: hidden;
+  transition: all 0.35s ease; cursor: pointer;
   opacity: 0; transform: translateY(12px);
   animation: heroFadeIn 0.8s ease 0.6s forwards;
 }
-.hero .cta::before {
-  content: '';
-  position: absolute; inset: -2px;
-  background: conic-gradient(from 0deg, transparent, var(--emerald), transparent);
-  border-radius: 2px; opacity: 0; transition: opacity 0.4s;
-  animation: borderSpin 4s linear infinite; z-index: -1;
-}
-.hero .cta:hover::before { opacity: 1; }
-.hero .cta::after {
-  content: '';
-  position: absolute; inset: 1px;
-  background: var(--black); z-index: -1;
-}
 .hero .cta:hover {
-  border-color: transparent;
+  background: #000;
   transform: translateY(-3px);
-  box-shadow: 0 8px 32px rgba(13,124,107,0.25);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
 }
 .hero .cta .arrow {
   display: inline-block; transition: transform 0.35s ease;
+  color: var(--amber);
 }
 .hero .cta:hover .arrow { transform: translateX(5px); }
-
-@keyframes borderSpin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
 
 /* Staggered fade-in keyframes */
 @keyframes heroFadeIn {
@@ -253,9 +244,10 @@ body {
 /* Scroll indicator */
 .hero-scroll {
   position: absolute; bottom: 40px; left: 60px;
-  font-size: 11px; letter-spacing: 0.12em; color: rgba(255,255,255,0.35);
+  font-size: 11px; letter-spacing: 0.12em; color: var(--carbon);
   display: flex; align-items: center; gap: 8px;
   cursor: default;
+  opacity: 0.6;
 }
 .hero-scroll .scroll-arrow {
   display: inline-block;
