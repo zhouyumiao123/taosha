@@ -160,17 +160,31 @@ body {
 .photo-frame:hover img { transform:scale(1.03); }
 
 /* ===== About ===== */
-.about-grid { display:grid; grid-template-columns:1fr 380px; gap:60px; max-width:1200px; margin:0 auto; align-items:start; }
-.about-text { font-size:18px; line-height:1.9; color:var(--muted); }
+.about-grid { display:flex; flex-direction:column; align-items:center; gap:32px; max-width:800px; margin:0 auto; }
+.about-text { font-size:18px; line-height:1.9; color:var(--muted); text-align:center; }
 .about-text strong { color:var(--ink); font-weight:600; }
-.about-photo img { width:100%; object-fit:cover; display:block; }
-.tag-cloud { display:flex; flex-wrap:wrap; gap:8px; margin-top:24px; }
+.about-photo img { width:120px; height:150px; object-fit:cover; border-radius:8px; display:block; margin:0 auto; }
+.tag-cloud { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:8px; }
 .tag {
-  font-size:11px; padding:6px 14px;
+  font-size:12px; padding:7px 16px;
   border:1px solid var(--warm-dark); color:var(--muted);
   transition:all 0.3s;
+  animation: tagFloat 4s ease-in-out infinite;
+  animation-delay: calc(var(--i, 0) * 0.3s);
 }
-.tag:hover { border-color:var(--gold); color:var(--gold); }
+.tag:nth-child(1) { --i:0; } .tag:nth-child(2) { --i:1; }
+.tag:nth-child(3) { --i:2; } .tag:nth-child(4) { --i:3; }
+.tag:nth-child(5) { --i:4; } .tag:nth-child(6) { --i:5; }
+.tag:nth-child(7) { --i:6; } .tag:nth-child(8) { --i:7; }
+.tag:hover {
+  border-color:var(--gold); color:var(--gold);
+  animation-play-state:paused;
+  transform:translateY(-4px);
+}
+@keyframes tagFloat {
+  0%, 100% { transform:translateY(0); }
+  50% { transform:translateY(-6px); }
+}
 
 @media (max-width:768px) {
   .about-grid { grid-template-columns:1fr; gap:40px; }
@@ -297,25 +311,25 @@ body {
 </section>
 
 <!-- About -->
-<section class="section" id="about">
-  <div class="section-inner">
+<section class="section" id="about" style="min-height:100vh;display:flex;align-items:center;">
+  <div class="section-inner" style="width:100%;">
   <div class="section-num en">02</div>
   <h2 class="section-title">About</h2>
   <p class="section-title-cn">关于</p>
-  <div class="about-grid">
-    <div class="about-text fade-in">
-      <p>我是<strong>JOYCE CHOW</strong>，一名专注于B2B科技领域的品牌策略与内容创意人。</p>
-      <p style="margin-top:20px;">拥有3年以上品牌营销经验，服务过科技硬件、物流供应链领域。擅长以<strong>故事化内容</strong>为核心，打通品牌策略 → 内容创意 → 渠道运营 → 数据复盘的全链路。</p>
-      <p style="margin-top:20px;">我相信，好的品牌叙事是<strong>技术与市场之间的翻译官</strong>——让复杂的产品价值被理解，让品牌在用户心中留下温度。</p>
-    </div>
-    <div class="about-photo fade-in">
+  <div class="about-grid fade-in">
+    <div class="about-photo">
       <img src="images/profile-id.jpg" alt="JOYCE CHOW">
-      <div class="tag-cloud">
-        <span class="tag">品牌策略</span><span class="tag">B2B品牌</span>
-        <span class="tag">内容营销</span><span class="tag">故事化传播</span>
-        <span class="tag">整合营销</span><span class="tag">视频制作</span>
-        <span class="tag">摄影</span><span class="tag">AI工作流</span>
-      </div>
+    </div>
+    <div class="about-text">
+      <p>我是<strong>JOYCE CHOW</strong>，一名专注于B2B科技领域的品牌策略与内容创意人。拥有3年以上品牌营销经验，服务过科技硬件、物流供应链领域。</p>
+      <p style="margin-top:16px;">擅长以<strong>故事化内容</strong>为核心，打通品牌策略 → 内容创意 → 渠道运营 → 数据复盘的全链路。</p>
+      <p style="margin-top:16px;">我相信，好的品牌叙事是<strong>技术与市场之间的翻译官</strong>——让复杂价值被理解，让品牌被记住。</p>
+    </div>
+    <div class="tag-cloud">
+      <span class="tag">品牌策略</span><span class="tag">B2B品牌</span>
+      <span class="tag">内容营销</span><span class="tag">故事化传播</span>
+      <span class="tag">整合营销</span><span class="tag">视频制作</span>
+      <span class="tag">摄影</span><span class="tag">AI工作流</span>
     </div>
   </div>
   </div>
