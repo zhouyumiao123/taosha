@@ -11,7 +11,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230d7c6b'/><text x='50' y='68' font-size='56' text-anchor='middle' fill='white' font-family='Georgia,serif' font-weight='bold'>J</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
    Joyce Chow Portfolio — Emerald Edition
@@ -35,7 +35,7 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", -apple-system, sans-serif;
+  font-family: "Inter", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", -apple-system, sans-serif;
   color: var(--black);
   background: var(--white);
   line-height: 1.7;
@@ -43,7 +43,9 @@ body {
 }
 
 /* ===== Typography ===== */
-.en { font-family: "Playfair Display", Georgia, serif; font-style: italic; }
+.en { font-family: "Inter", "PingFang SC", sans-serif; }
+.en-serif { font-family: "Playfair Display", Georgia, serif; font-style: italic; }
+.mono { font-family: "JetBrains Mono", "SF Mono", "Consolas", monospace; font-size: 0.92em; }
 
 /* ===== Nav ===== */
 .nav {
@@ -223,7 +225,8 @@ body {
 /* ===== Section Common ===== */
 .section { padding: 120px 60px; }
 .section-label {
-  font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+  font-family: "Inter", sans-serif;
+  font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
   color: var(--emerald); margin-bottom: 20px; font-weight: 600;
 }
 .section-title {
@@ -255,11 +258,13 @@ body {
 .work-visual:hover .work-icon { opacity: 0.5; transform: scale(1.1); }
 .work-visual .work-tag {
   position: absolute; top: 24px; left: 24px;
-  font-size: 11px; letter-spacing: 0.1em; color: var(--emerald);
+  font-family: "Inter", sans-serif;
+  font-size: 10px; letter-spacing: 0.12em; color: var(--emerald);
   background: var(--white); padding: 6px 14px; font-weight: 600;
+  text-transform: uppercase;
 }
 .work-number {
-  font-family: "Playfair Display", Georgia, serif;
+  font-family: "Playfair Display", Georgia, serif; font-style: italic;
   font-size: 100px; font-weight: 500; color: var(--emerald-light);
   line-height: 1; margin-bottom: -20px; opacity: 0.6;
 }
@@ -273,9 +278,14 @@ body {
 }
 .work-metrics { display: flex; gap: 40px; margin-bottom: 32px; }
 .metric-num {
+  font-family: "Inter", sans-serif;
   font-size: 36px; font-weight: 700; color: var(--emerald); line-height: 1;
 }
-.metric-label { font-size: 12px; color: var(--gray-light); margin-top: 4px; }
+.metric-label {
+  font-family: "JetBrains Mono", "SF Mono", monospace;
+  font-size: 10px; color: var(--gray-light); margin-top: 4px;
+  letter-spacing: 0.04em;
+}
 .work-detail-link {
   font-size: 13px; letter-spacing: 0.06em; color: var(--emerald);
   text-decoration: none; font-weight: 600;
@@ -398,7 +408,8 @@ body {
 }
 /* Gallery drag hint */
 .photo-gallery-hint {
-  text-align: center; font-size: 11px; letter-spacing: 0.08em;
+  font-family: "JetBrains Mono", "SF Mono", monospace;
+  text-align: center; font-size: 10px; letter-spacing: 0.06em;
   color: var(--gray-light); margin-top: 8px;
   animation: hintPulse 2s ease-in-out infinite;
 }
